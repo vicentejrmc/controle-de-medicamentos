@@ -49,6 +49,7 @@ namespace ControleDeMedicamentos.Compatilhado
             if (contextoArmazenado == null) return;
 
             this.Pacientes = contextoArmazenado.Pacientes;
+            this.Funcionario = contextoArmazenado.Funcionario;
         }
 
         public void Salvar()
