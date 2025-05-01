@@ -1,10 +1,6 @@
 ﻿using ControleDeMedicamentos.Compatilhado;
 using ControleDeMedicamentos.ModuloFuncionario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 
@@ -16,12 +12,14 @@ namespace ControleDeMedicamentos.Util
         private ContextoDados contexto;
         private IRepositorioFuncionario repositorioFuncionario;
         private IRepositorioPaciente repositorioPaciente;
+        private IRepositorioFornecedor repositorioFornecedor;
 
         public TelaPrincipal()
         {
             contexto = new ContextoDados(true);
             repositorioFuncionario = new RepositorioFuncionario(contexto);
-            this.repositorioPaciente = new RepositorioPaciente(contexto);
+            repositorioPaciente = new RepositorioPaciente(contexto);
+            repositorioFornecedor = new RepositorioFornecedor(contexto);
         }
         
         

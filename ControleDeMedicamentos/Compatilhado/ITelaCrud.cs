@@ -1,7 +1,6 @@
-﻿namespace ControleDeMedicamentos.Compatilhado;
-
-namespace ControleDeMedicamentos.Compatilhado
-{
+﻿
+namespace ControleDeMedicamentos.Compartilhado
+{ 
     public interface ITelaCrud
     {
         void InserirRegistro();
