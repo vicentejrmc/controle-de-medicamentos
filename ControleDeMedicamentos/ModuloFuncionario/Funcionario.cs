@@ -1,4 +1,4 @@
-﻿using ControleDeMedicamentos.Compatilhado;
+﻿using ControleDeMedicamentos.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.Linq;

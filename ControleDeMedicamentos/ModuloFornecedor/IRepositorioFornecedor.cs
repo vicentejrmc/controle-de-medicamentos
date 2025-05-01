@@ -1,4 +1,4 @@
-﻿using ControleDeMedicamentos.Compatilhado;
+﻿using ControleDeMedicamentos.Compartilhado;
 
 namespace ControleDeMedicamentos.ModuloFornecedor;
 

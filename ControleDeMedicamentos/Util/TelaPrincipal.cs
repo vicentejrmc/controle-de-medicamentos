@@ -1,6 +1,5 @@
-﻿using ControleDeMedicamentos.Compatilhado;
+﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFuncionario;
-using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 

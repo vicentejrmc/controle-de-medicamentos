@@ -1,6 +1,5 @@
-﻿using ControleDeMedicamentos.Compatilhado;
+﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.Util;
-using ControleDeMedicamentos.Compartilhado;
 namespace ControleDeMedicamentos.ModuloFornecedor;
 
 public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
