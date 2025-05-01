@@ -2,6 +2,7 @@
 using ControleDeMedicamentos.ModuloFuncionario;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
+using ControleDeMedicamentos.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.Util;
 
@@ -12,6 +13,7 @@ public class TelaPrincipal
     private IRepositorioFuncionario repositorioFuncionario;
     private IRepositorioPaciente repositorioPaciente;
     private IRepositorioFornecedor repositorioFornecedor;
+    private IRepositorioMedicamento repositorioMedicamento;
 
     public TelaPrincipal()
     {
@@ -19,6 +21,7 @@ public class TelaPrincipal
         repositorioFuncionario = new RepositorioFuncionario(contexto);
         repositorioPaciente = new RepositorioPaciente(contexto);
         repositorioFornecedor = new RepositorioFornecedor(contexto);
+        repositorioMedicamento = new RepositorioMedicamento(contexto);
     }
     
     
@@ -32,10 +35,10 @@ public class TelaPrincipal
 
         Console.WriteLine();
 
-        Console.WriteLine("1 - Gestão Fornecedor ");
-        Console.WriteLine("2 - Gestão Paciente ");
-        Console.WriteLine("3 - Não implementada");
-        Console.WriteLine("4 - Gestão Funcionarios");
+        Console.WriteLine("1 - Gestão de Fornecedor ");
+        Console.WriteLine("2 - Gestão de Paciente ");
+        Console.WriteLine("3 - Gestao de Medicamentos");
+        Console.WriteLine("4 - Gestão de Funcionarios");
 
         Console.WriteLine("S - Sair");
 
@@ -60,6 +63,9 @@ public class TelaPrincipal
 
         if (opcaoPrincipal == '2')
             return new TelaPaciente(repositorioPaciente);
+
+        if (opcaoPrincipal == '3')
+            return new TelaMedicamento(repositorioMedicamento);
 
         if (opcaoPrincipal == '4')
            return new TelaFuncionario(repositorioFuncionario);           

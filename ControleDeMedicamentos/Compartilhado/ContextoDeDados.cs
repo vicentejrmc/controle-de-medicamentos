@@ -3,15 +3,17 @@ using System.Text.Json;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloFuncionario;
+using ControleDeMedicamentos.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.Compartilhado;
 
 public class ContextoDados
 {
     public List<Fornecedor> Fornecedores { get; set; }
-
     public List<Paciente> Pacientes { get; set; }
     public List<Funcionario> Funcionario { get; set; }
+
+    public List<Medicamento> Medicamentos { get; set; }
 
     private string pastaArmazenamento = "C:\\ArquivosJson";
     private string arquivoArmazenamento = "dados-controle-de-medicamentos.json";
@@ -21,6 +23,7 @@ public class ContextoDados
         Fornecedores = new List<Fornecedor>();
         Pacientes = new List<Paciente>();
         Funcionario = new List<Funcionario>();
+        Medicamentos = new List<Medicamento>();
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -49,6 +52,7 @@ public class ContextoDados
         this.Fornecedores = contextoArmazenado.Fornecedores;
         this.Pacientes = contextoArmazenado.Pacientes;
         this.Funcionario = contextoArmazenado.Funcionario;
+        this.Medicamentos = contextoArmazenado.Medicamentos;
     }
 
     public void Salvar()

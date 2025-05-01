@@ -37,7 +37,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine();
 
         Console.Write("Escolha uma das opções: ");
-        char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!);
+        char operacaoEscolhida = Convert.ToChar(Console.ReadLine());
 
         return operacaoEscolhida;
     }

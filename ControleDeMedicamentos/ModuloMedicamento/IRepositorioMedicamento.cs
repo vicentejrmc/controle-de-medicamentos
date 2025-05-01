@@ -7,7 +7,5 @@ using System.Threading.Tasks;
 
 namespace ControleDeMedicamentos.ModuloMedicamento
 {
-    public interface IRepositorioMedicamento : IRepositorio<Medicamento>
-    {
-    }
+    public interface IRepositorioMedicamento : IRepositorio<Medicamento>;
 }
