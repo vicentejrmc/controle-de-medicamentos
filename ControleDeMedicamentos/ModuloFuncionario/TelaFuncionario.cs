@@ -79,12 +79,8 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Console.Write("Digite o telefone do funcionario: ");
         string telefone = Console.ReadLine()! ?? string.Empty;
 
-        Funcionario funcionario = new Funcionario
-        {
-            Nome = nome,
-            CPF = cpf,
-            Telefone = telefone
-        };
+        Funcionario funcionario = new Funcionario(nome, cpf, telefone);
+
 
         return funcionario;
     }
