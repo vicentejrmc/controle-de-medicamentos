@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ControleDeMedicamentos.ModuloFornecedor;
+using ControleDeMedicamentos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.Compatilhado
 {
@@ -13,12 +14,15 @@ namespace ControleDeMedicamentos.Compatilhado
     {
         public List<Fornecedor> Fornecedores { get; set; }
 
+        public List<Paciente> Pacientes { get; set; }
+
         private string pastaArmazenamento = "C:\\ArquivosJson";
         private string arquivoArmazenamento = "dados-controle-de-medicamentos.json";
 
         public ContextoDados()
         {
             Fornecedores = new List<Fornecedor>();
+            Pacientes = new List<Paciente>();
         }
 
         public ContextoDados(bool carregarDados) : this()
@@ -45,6 +49,7 @@ namespace ControleDeMedicamentos.Compatilhado
             if (contextoArmazenado == null) return;
 
             this.Fornecedores = contextoArmazenado.Fornecedores;
+            this.Pacientes = contextoArmazenado.Pacientes;
         }
 
         public void Salvar()

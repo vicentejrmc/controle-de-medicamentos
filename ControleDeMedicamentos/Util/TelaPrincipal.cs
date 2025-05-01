@@ -1,5 +1,6 @@
 ﻿using ControleDeMedicamentos.Compatilhado;
 using ControleDeMedicamentos.ModuloFornecedor;
+using ControleDeMedicamentos.ModuloPaciente;
 
 
 
@@ -10,6 +11,14 @@ namespace ControleDeMedicamentos.Util
         private char opcaoPrincipal;
         private IRepositorioFornecedor repositorioFornecedor;
         private ContextoDados contexto;
+        private IRepositorioPaciente repositorioPaciente;
+        private ContextoDados contexto;
+
+        public TelaPrincipal()
+        {
+            this.contexto = new ContextoDados(true);
+            this.repositorioPaciente = new RepositorioPaciente(contexto);
+        }
 
         public TelaPrincipal()
         {
@@ -26,8 +35,9 @@ namespace ControleDeMedicamentos.Util
 
             Console.WriteLine();
 
-            Console.WriteLine("1 - Fornecedor ");
-            Console.WriteLine("2 - Não implementada");
+            Console.WriteLine("1 - Gestão Fornecedor ");
+            Console.WriteLine("2 - Gestão Paciente ");
+            Console.WriteLine("3 - Não implementada");
             Console.WriteLine("S - Sair");
 
             Console.WriteLine();
@@ -48,6 +58,8 @@ namespace ControleDeMedicamentos.Util
 
             if (opcaoPrincipal == '1')
                 return new TelaFornecedor(repositorioFornecedor);
+            if (opcaoPrincipal == '2')
+                return new TelaPaciente(repositorioPaciente);
 
             //else if (opcaoPrincipal == '2')
             //    return Tela;
