@@ -1,7 +1,4 @@
-﻿namespace ControleDeMedicamentos.Compartilhado;
-
-namespace ControleDeMedicamentos.Compartilhado
-{ 
+﻿namespace ControleDeMedicamentos.Compartilhado; 
 public interface ITelaCrud
 {
     void CadastrarRegistro();
@@ -10,4 +7,4 @@ public interface ITelaCrud
     void ExcluirRegistro();
     char ApresentarMenu();
 }
-}
+

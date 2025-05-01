@@ -1,7 +1,4 @@
 ﻿namespace ControleDeMedicamentos.Compartilhado;
-
-namespace ControleDeMedicamentos.Compartilhado
-{
 public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
 {
     private List<T> registros = new List<T>();
@@ -85,5 +82,4 @@ public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
     {
         return registros;
     }
-}
 }
