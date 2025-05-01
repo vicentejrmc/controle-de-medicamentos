@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ControleDeMedicamentos.ModuloFornecedor;
+using ControleDeMedicamentos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.Util
 {
@@ -13,13 +15,16 @@ namespace ControleDeMedicamentos.Util
         public char opcaoPrincipal;
         private ContextoDados contexto;
         private IRepositorioFuncionario repositorioFuncionario;
+        private IRepositorioPaciente repositorioPaciente;
 
         public TelaPrincipal()
         {
             contexto = new ContextoDados(true);
             repositorioFuncionario = new RepositorioFuncionario(contexto);
+            this.repositorioPaciente = new RepositorioPaciente(contexto);
         }
-
+        
+        
         public void ApresentarMenuPrincipal()
         {
             Console.Clear();
@@ -30,9 +35,11 @@ namespace ControleDeMedicamentos.Util
 
             Console.WriteLine();
 
-            Console.WriteLine("1 - Não implementada ");
-            Console.WriteLine("2 - Não implementada");
-            Console.WriteLine("4 - Controle de Funcionarios");
+            Console.WriteLine("1 - Gestão Fornecedor ");
+            Console.WriteLine("2 - Gestão Paciente ");
+            Console.WriteLine("3 - Não implementada");
+            Console.WriteLine("4 - Gestão Funcionarios");
+
             Console.WriteLine("S - Sair");
 
             Console.WriteLine();
@@ -51,26 +58,26 @@ namespace ControleDeMedicamentos.Util
                 Environment.Exit(0);
             }
 
-            //if (opcaoPrincipal == '1')
-            //    return Tela;
+            if (opcaoPrincipal == '1')
+                return new TelaFornecedor(repositorioFornecedor);
 
-            //else if (opcaoPrincipal == '2')
-            //    return Tela;
+            if (opcaoPrincipal == '2')
+                return new TelaPaciente(repositorioPaciente);
 
-            else if (opcaoPrincipal == '4')
-               return new TelaFuncionario("Funcionario" , repositorioFuncionario);
+            if (opcaoPrincipal == '4')
+               return new TelaFuncionario("Funcionario" , repositorioFuncionario);           
 
             else
                 Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
 
-            return null;
+            return null!;
         }
 
         private void EscolherOpcao()
         {
             Console.Write("Escolha uma das opções: ");
 
-            opcaoPrincipal = Convert.ToChar(Console.ReadLine().ToUpper());
+            opcaoPrincipal = Convert.ToChar(Console.ReadLine()!.ToUpper());
         }
     }
 }

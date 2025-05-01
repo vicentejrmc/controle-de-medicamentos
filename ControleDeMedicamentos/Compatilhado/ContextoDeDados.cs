@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
+using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloFuncionario;
 
@@ -13,14 +13,17 @@ namespace ControleDeMedicamentos.Compatilhado
 {
     public class ContextoDados
     {
+        public List<Fornecedor> Fornecedores { get; set; }
+
         public List<Paciente> Pacientes { get; set; }
         public List<Funcionario> Funcionario { get; set; }
 
         private string pastaArmazenamento = "C:\\ArquivosJson";
-        private string arquivoArmazenamento = "dados.json";
+        private string arquivoArmazenamento = "dados-controle-de-medicamentos.json";
 
         public ContextoDados()
         {
+            Fornecedores = new List<Fornecedor>();
             Pacientes = new List<Paciente>();
             Funcionario = new List<Funcionario>();
         }
@@ -48,6 +51,7 @@ namespace ControleDeMedicamentos.Compatilhado
 
             if (contextoArmazenado == null) return;
 
+            this.Fornecedores = contextoArmazenado.Fornecedores;
             this.Pacientes = contextoArmazenado.Pacientes;
             this.Funcionario = contextoArmazenado.Funcionario;
         }

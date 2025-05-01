@@ -82,7 +82,7 @@ namespace ControleDeMedicamentos.Compatilhado
                     return entidade;
             }
 
-            return null;
+            return null!;
         }
 
         public List<T> SelecionarTodos()
