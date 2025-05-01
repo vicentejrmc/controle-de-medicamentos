@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compatilhado;
+using ControleDeMedicamentos.Util;
 
 namespace ControleDeMedicamentos;
 
