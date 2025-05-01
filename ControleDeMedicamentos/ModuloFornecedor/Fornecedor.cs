@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.ModuloFornecedor;
 
@@ -21,8 +22,27 @@ public class Fornecedor : EntidadeBase<Fornecedor>
 
     public override string Validar()
     {
-        string erro = "";
-        return erro;
+        string erros = "";
+
+        //if (string.IsNullOrEmpty(Nome))
+        //    erros += "Erro! O campo Nome é obrigatório.\n";
+
+        //if (Nome.Length < 3 || Nome.Length > 100)
+        //    erros += "Erro! O campo Nome deve ter entre 3 e 100 caracteres.\n";
+
+        //if (string.IsNullOrEmpty(CNPJ))
+        //    erros += "Erro! O campo CNPJ é obrigatório.\n";
+
+        //if (CNPJ.Length != 13)
+        //    erros += "Erro! O campo CNPJ deve ter exatamente 13 caracteres.\n";
+
+        //if (string.IsNullOrEmpty(Telefone))
+        //    erros += "Erro! O campo Telefone é obrigatório.\n";
+
+        //if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
+        //    erros += "Erro! O campo Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.\n";
+
+        return erros;
     }
 
     public override void AtualizarRegistro(Fornecedor resgitroEditado)
