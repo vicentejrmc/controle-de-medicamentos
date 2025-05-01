@@ -1,17 +1,16 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 
-namespace ControleDeMedicamentos.ModuloPaciente
+namespace ControleDeMedicamentos.ModuloPaciente;
+
+class RepositorioPaciente : RepositorioBasEmArquivo<Paciente>, IRepositorioPaciente
 {
-    class RepositorioPaciente : RepositorioBasEmArquivo<Paciente>, IRepositorioPaciente
+
+    public RepositorioPaciente(ContextoDados contexto) : base(contexto)
     {
 
-        public RepositorioPaciente(ContextoDados contexto) : base(contexto)
-        {
-
-        }
-        protected override List<Paciente> ObterRegistros()
-        {
-            return contexto.Pacientes;
-        }
+    }
+    protected override List<Paciente> ObterRegistros()
+    {
+        return contexto.Pacientes;
     }
 }

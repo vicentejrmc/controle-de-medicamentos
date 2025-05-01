@@ -2,6 +2,4 @@
 
 namespace ControleDeMedicamentos.ModuloFornecedor;
 
-public interface IRepositorioFornecedor : IRepositorio<Fornecedor>
-{
-}
+public interface IRepositorioFornecedor : IRepositorio<Fornecedor>;
