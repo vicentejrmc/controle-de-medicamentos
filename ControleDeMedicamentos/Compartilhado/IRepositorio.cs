@@ -11,4 +11,3 @@ public interface IRepositorio<T> where T : EntidadeBase<T>
 
     public List<T> SelecionarTodos();
 }
-

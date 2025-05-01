@@ -7,4 +7,3 @@ public interface ITelaCrud
     void ExcluirRegistro();
     char ApresentarMenu();
 }
-
