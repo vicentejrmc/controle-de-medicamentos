@@ -4,13 +4,16 @@ namespace ControleDeMedicamentos.ModuloFuncionario
 {
     public class Funcionario : EntidadeBase<Funcionario>
     {
-        public Funcionario()
-        {
-        }
-
         public string? Nome { get; set; }
         public string? CPF { get; set; }
         public string? Telefone { get; set; }
+
+        public Funcionario(string? nome, string? cPF, string? telefone)
+        {
+            Nome = nome;
+            CPF = cPF;
+            Telefone = telefone;
+        }
 
         public override void AtualizarRegistro(Funcionario resgitroEditado)
         {
