@@ -2,29 +2,21 @@
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 
-
-
 namespace ControleDeMedicamentos.Util
 {
     public class TelaPrincipal
     {
         private char opcaoPrincipal;
+        private ContextoDados contexto;
         private IRepositorioFornecedor repositorioFornecedor;
-        private ContextoDados contexto;
         private IRepositorioPaciente repositorioPaciente;
-        private ContextoDados contexto;
 
         public TelaPrincipal()
         {
             this.contexto = new ContextoDados(true);
             this.repositorioPaciente = new RepositorioPaciente(contexto);
         }
-
-        public TelaPrincipal()
-        {
-            this.contexto = new ContextoDados(true);
-            this.repositorioFornecedor = new RepositorioFornecedor(contexto);
-        }
+        
         public void ApresentarMenuPrincipal()
         {
             Console.Clear();
@@ -58,14 +50,9 @@ namespace ControleDeMedicamentos.Util
 
             if (opcaoPrincipal == '1')
                 return new TelaFornecedor(repositorioFornecedor);
+
             if (opcaoPrincipal == '2')
                 return new TelaPaciente(repositorioPaciente);
-
-            //else if (opcaoPrincipal == '2')
-            //    return Tela;
-
-            //else if (opcaoPrincipal == '3')
-            //    return Tela;
 
             else
                 Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
