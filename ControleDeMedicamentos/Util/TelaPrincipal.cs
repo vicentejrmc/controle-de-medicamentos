@@ -1,16 +1,21 @@
 ﻿using ControleDeMedicamentos.Compatilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ControleDeMedicamentos.ModuloFornecedor;
+
+
 
 namespace ControleDeMedicamentos.Util
 {
     public class TelaPrincipal
     {
-        public char opcaoPrincipal;
+        private char opcaoPrincipal;
+        private IRepositorioFornecedor repositorioFornecedor;
+        private ContextoDados contexto;
 
+        public TelaPrincipal()
+        {
+            this.contexto = new ContextoDados(true);
+            this.repositorioFornecedor = new RepositorioFornecedor(contexto);
+        }
         public void ApresentarMenuPrincipal()
         {
             Console.Clear();
@@ -21,7 +26,7 @@ namespace ControleDeMedicamentos.Util
 
             Console.WriteLine();
 
-            Console.WriteLine("1 - Não implementada ");
+            Console.WriteLine("1 - Fornecedor ");
             Console.WriteLine("2 - Não implementada");
             Console.WriteLine("S - Sair");
 
@@ -41,8 +46,8 @@ namespace ControleDeMedicamentos.Util
                 Environment.Exit(0);
             }
 
-            //if (opcaoPrincipal == '1')
-            //    return Tela;
+            if (opcaoPrincipal == '1')
+                return new TelaFornecedor(repositorioFornecedor);
 
             //else if (opcaoPrincipal == '2')
             //    return Tela;
@@ -53,14 +58,14 @@ namespace ControleDeMedicamentos.Util
             else
                 Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
 
-            return null;
+            return null!;
         }
 
         private void EscolherOpcao()
         {
             Console.Write("Escolha uma das opções: ");
 
-            opcaoPrincipal = Convert.ToChar(Console.ReadLine().ToUpper());
+            opcaoPrincipal = Convert.ToChar(Console.ReadLine()!.ToUpper());
         }
     }
 }

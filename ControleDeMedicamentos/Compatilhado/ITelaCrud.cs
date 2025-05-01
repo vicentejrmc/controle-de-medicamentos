@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ControleDeMedicamentos.Compatilhado;
 
-namespace ControleDeMedicamentos.Compatilhado
+public interface ITelaCrud
 {
-    public interface ITelaCrud
-    {
-        void InserirRegistro();
-        void VisualizarRegistros();
-        void EditarRegistro();
-        void ExcluirRegistro();
-        char ApresentarMenu();
-    }
+    void InserirRegistro();
+    void VisualizarRegistros(bool titulo);
+    void EditarRegistro();
+    void ExcluirRegistro();
+    char ApresentarMenu();
 }
