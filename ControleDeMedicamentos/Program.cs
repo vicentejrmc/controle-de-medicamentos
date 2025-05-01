@@ -22,7 +22,7 @@ public class Program
 
             switch (opcaoEscolhida)
             {
-                case '1': telaSelecionada.InserirRegistro(); break;
+                case '1': telaSelecionada.CadastrarRegistro(); break;
                 case '2': telaSelecionada.EditarRegistro(); break;
                 case '3': telaSelecionada.ExcluirRegistro(); break;
                 case '4': telaSelecionada.VisualizarRegistros(true); break;

@@ -2,7 +2,7 @@
 
 public interface ITelaCrud
 {
-    void InserirRegistro();
+    void CadastrarRegistro();
     void VisualizarRegistros(bool exibirTitulo);
     void EditarRegistro();
     void ExcluirRegistro();

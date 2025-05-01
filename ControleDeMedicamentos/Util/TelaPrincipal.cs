@@ -62,7 +62,7 @@ public class TelaPrincipal
             return new TelaPaciente(repositorioPaciente);
 
         if (opcaoPrincipal == '4')
-           return new TelaFuncionario("Funcionario" , repositorioFuncionario);           
+           return new TelaFuncionario(repositorioFuncionario);           
 
         else
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);

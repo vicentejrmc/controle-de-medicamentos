@@ -42,7 +42,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         return operacaoEscolhida;
     }
 
-    public virtual void InserirRegistro()
+    public virtual void CadastrarRegistro()
     {
         ExibirCabecalho();
 
@@ -61,7 +61,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         {
             Notificador.ExibirMensagem(erros, ConsoleColor.Red);
 
-            InserirRegistro();
+            CadastrarRegistro();
 
             return;
         }

@@ -7,7 +7,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
 {
     public IRepositorioFuncionario repositorioFuncionario;
 
-    public TelaFuncionario(string nomeEntidade, IRepositorioFuncionario repositorioFuncionario) : base(nomeEntidade, repositorioFuncionario)
+    public TelaFuncionario(IRepositorioFuncionario repositorioFuncionario) : base("Funcionario", repositorioFuncionario)
     {
         this.repositorioFuncionario = repositorioFuncionario;
     }
@@ -20,7 +20,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Console.WriteLine("\n--------------------------------------------");
     }
 
-    public override void InserirRegistro()
+    public override void CadastrarRegistro()
     {
         ExibirCabecalho();
 
