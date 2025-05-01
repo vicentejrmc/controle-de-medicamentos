@@ -21,7 +21,7 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
         Console.WriteLine("Digite o CNPJ do fornecedor");
         string cnpj = Console.ReadLine()!.Trim();
 
-        Fornecedor novoFornecedor = new Fornecedor(nome, telefone, cnpj);
+        Fornecedor novoFornecedor = new Fornecedor(nome, cnpj, telefone);
 
         return novoFornecedor;
     }
