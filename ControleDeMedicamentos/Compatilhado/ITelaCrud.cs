@@ -9,7 +9,7 @@ namespace ControleDeMedicamentos.Compatilhado
     public interface ITelaCrud
     {
         void InserirRegistro();
-        void VisualizarRegistros();
+        void VisualizarRegistros(bool titulo);
         void EditarRegistro();
         void ExcluirRegistro();
         char ApresentarMenu();
