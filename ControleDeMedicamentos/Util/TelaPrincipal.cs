@@ -16,7 +16,7 @@ namespace ControleDeMedicamentos.Util
             Console.Clear();
 
             Console.WriteLine("----------------------------------------");
-            Console.WriteLine("|            Titulo Projeto            |");
+            Console.WriteLine("|      Controle de Medicamentos        |");
             Console.WriteLine("----------------------------------------");
 
             Console.WriteLine();
