@@ -7,12 +7,14 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using ControleDeMedicamentos.ModuloPaciente;
+using ControleDeMedicamentos.ModuloFuncionario;
 
 namespace ControleDeMedicamentos.Compatilhado
 {
     public class ContextoDados
     {
         public List<Paciente> Pacientes { get; set; }
+        public List<Funcionario> Funcionario { get; set; }
 
         private string pastaArmazenamento = "C:\\ArquivosJson";
         private string arquivoArmazenamento = "dados.json";
@@ -20,6 +22,7 @@ namespace ControleDeMedicamentos.Compatilhado
         public ContextoDados()
         {
             Pacientes = new List<Paciente>();
+            Funcionario = new List<Funcionario>();
         }
 
         public ContextoDados(bool carregarDados) : this()

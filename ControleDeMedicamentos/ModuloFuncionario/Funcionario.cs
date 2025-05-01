@@ -1,0 +1,53 @@
+﻿using ControleDeMedicamentos.Compatilhado;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ControleDeMedicamentos.ModuloFuncionario
+{
+    public class Funcionario : EntidadeBase<Funcionario>
+    {
+        public Funcionario()
+        {
+        }
+
+        public string? Nome { get; set; }
+        public string? CPF { get; set; }
+        public string? Telefone { get; set; }
+
+        public override void AtualizarRegistro(Funcionario resgitroEditado)
+        {
+            Nome = resgitroEditado.Nome;
+            CPF = resgitroEditado.CPF;
+            Telefone = resgitroEditado.Telefone;
+        }
+
+        public override string Validar()
+        {
+           string erros = "";
+
+            //if (string.IsNullOrEmpty(Nome))
+            //    erros += "Erro! O campo Nome é obrigatório.\n";
+
+            //if(Nome.Length < 3 || Nome.Length > 100)
+            //    erros += "Erro! O campo Nome deve ter entre 3 e 100 caracteres.\n";
+
+            //if (string.IsNullOrEmpty(CPF))
+            //    erros += "Erro! O campo CPF é obrigatório.\n";
+
+            //if (!Regex.IsMatch(CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            //    erros += "Erro! O campo CPF deve estar no formato XXX.XXX.XXX-XX.\n";
+
+            //if (string.IsNullOrEmpty(Telefone))
+            //    erros += "Erro! O campo Telefone é obrigatório.\n";
+
+            //if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
+            //    erros += "Erro! O campo Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.\n";
+
+            return erros;
+        }
+    }
+}

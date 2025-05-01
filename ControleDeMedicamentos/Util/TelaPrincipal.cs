@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compatilhado;
+using ControleDeMedicamentos.ModuloFuncionario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,14 @@ namespace ControleDeMedicamentos.Util
     public class TelaPrincipal
     {
         public char opcaoPrincipal;
+        private ContextoDados contexto;
+        private IRepositorioFuncionario repositorioFuncionario;
+
+        public TelaPrincipal()
+        {
+            contexto = new ContextoDados(true);
+            repositorioFuncionario = new RepositorioFuncionario(contexto);
+        }
 
         public void ApresentarMenuPrincipal()
         {
@@ -23,6 +32,7 @@ namespace ControleDeMedicamentos.Util
 
             Console.WriteLine("1 - Não implementada ");
             Console.WriteLine("2 - Não implementada");
+            Console.WriteLine("4 - Controle de Funcionarios");
             Console.WriteLine("S - Sair");
 
             Console.WriteLine();
@@ -47,8 +57,8 @@ namespace ControleDeMedicamentos.Util
             //else if (opcaoPrincipal == '2')
             //    return Tela;
 
-            //else if (opcaoPrincipal == '3')
-            //    return Tela;
+            else if (opcaoPrincipal == '4')
+               return new TelaFuncionario("Funcionario" , repositorioFuncionario);
 
             else
                 Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
