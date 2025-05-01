@@ -1,11 +1,5 @@
 ﻿using ControleDeMedicamentos.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ControleDeMedicamentos.Compatilhado
+namespace ControleDeMedicamentos.Compartilhado
 {
     public abstract class TelaBase<T> where T : EntidadeBase<T>
     {
