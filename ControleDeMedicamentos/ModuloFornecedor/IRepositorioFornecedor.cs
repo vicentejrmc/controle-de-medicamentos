@@ -1,7 +1,5 @@
-﻿using ControleDeMedicamentos.Compatilhado;
+﻿using ControleDeMedicamentos.Compartilhado;
 
 namespace ControleDeMedicamentos.ModuloFornecedor;
 
-public interface IRepositorioFornecedor : IRepositorio<Fornecedor>
-{
-}
+public interface IRepositorioFornecedor : IRepositorio<Fornecedor>;
