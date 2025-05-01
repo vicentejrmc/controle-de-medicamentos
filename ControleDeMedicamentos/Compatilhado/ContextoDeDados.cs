@@ -5,19 +5,21 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
+using ControleDeMedicamentos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.Compatilhado
 {
     public class ContextoDados
     {
-
+        public List<Paciente> Pacientes { get; set; }
 
         private string pastaArmazenamento = "C:\\ArquivosJson";
         private string arquivoArmazenamento = "dados.json";
 
         public ContextoDados()
         {
-
+            Pacientes = new List<Paciente>();
         }
 
         public ContextoDados(bool carregarDados) : this()
@@ -43,6 +45,7 @@ namespace ControleDeMedicamentos.Compatilhado
 
             if (contextoArmazenado == null) return;
 
+            this.Pacientes = contextoArmazenado.Pacientes;
         }
 
         public void Salvar()
