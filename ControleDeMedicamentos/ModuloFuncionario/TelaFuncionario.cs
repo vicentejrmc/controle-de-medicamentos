@@ -88,6 +88,15 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Console.Write("Digite o telefone do funcionario: ");
         string telefone = Console.ReadLine()! ?? string.Empty;
 
+        List<Funcionario> funcionarios = repositorioFuncionario.SelecionarTodos();
+        foreach (var f in funcionarios)
+        {
+            if (f.CPF == cpf)
+            {
+                Notificador.ExibirMensagem("Erro! CPF já cadastrado.", ConsoleColor.Red);
+                return null!;
+            }
+        }
         Funcionario funcionario = new Funcionario(nome, cpf, telefone);
 
         return funcionario;
