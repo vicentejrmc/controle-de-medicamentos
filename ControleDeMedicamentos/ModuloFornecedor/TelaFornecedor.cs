@@ -13,15 +13,15 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
     public override Fornecedor ObterDados()
     {
         Console.Write("Digite o nome do Fornecedor: ");
-        string nome = Console.ReadLine()!.Trim();
+        string nome = Console.ReadLine()! ?? string.Empty;
 
         Console.Write("Digite o telefone do fornecedor: ");
-        string telefone = Console.ReadLine()!.Trim();
+        string telefone = Console.ReadLine()! ?? string.Empty;
 
-        Console.Write("Digite o CNPJ do fornecedor");
-        string cnpj = Console.ReadLine()!.Trim();
+        Console.WriteLine("Digite o CNPJ do fornecedor");
+        string cnpj = Console.ReadLine()! ?? string.Empty;
 
-        Fornecedor novoFornecedor = new Fornecedor(nome, cnpj, telefone);
+        Fornecedor novoFornecedor = new Fornecedor(nome, telefone, cnpj);
 
         return novoFornecedor;
     }

@@ -10,6 +10,4 @@ public interface IRepositorio<T> where T : EntidadeBase<T>
     public T SelecionarRegistroPorId(int idRegistro);
 
     public List<T> SelecionarTodos();
-
 }
-
