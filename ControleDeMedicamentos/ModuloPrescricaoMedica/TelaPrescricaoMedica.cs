@@ -109,7 +109,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         {
             Console.WriteLine(
                 "{0, -10} | {1, -20} | {2, -20}",
-                p.Id, p.Data.ToString(), p.CRMMEdico
+                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMEdico
             );
             Console.Write("Medicamentos da prescrição: {");
 
