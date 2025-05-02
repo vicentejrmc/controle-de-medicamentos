@@ -1,9 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
-using ControleDeMedicamentos.ModuloFuncionario;
 
+namespace ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
-namespace ControleDeMedicamentos.ModuloRequisicaoEntrada
-{
-    public interface IRepositorioRequisicaoEntrada : IRepositorio<RequisicaoEntrada>;
-
-}
+public interface IRepositorioRequisicaoEntrada : IRepositorio<RequisicaoEntrada>;

@@ -1,5 +1,4 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
-using ControleDeMedicamentos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ModuloPrescricaoMedica;
 

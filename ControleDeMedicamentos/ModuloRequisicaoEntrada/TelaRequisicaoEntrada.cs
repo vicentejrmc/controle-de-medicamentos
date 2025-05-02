@@ -1,137 +1,135 @@
-﻿
-using ControleDeMedicamentos.Compartilhado;
+﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloFuncionario;
 using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.Util;
 
-namespace ControleDeMedicamentos.ModuloRequisicaoEntrada
+namespace ControleDeMedicamentos.ModuloRequisicaoEntrada;
+
+public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
 {
-    public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
+    IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada;
+    IRepositorioFuncionario repositorioFuncionario;
+    IRepositorioMedicamento repositorioMedicamento;
+    IRepositorioFornecedor repositorioFornecedor;
+
+    public TelaRequisicaoEntrada(IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada, IRepositorioMedicamento repositorioMedicamento, 
+        IRepositorioFuncionario repositorioFuncionario, IRepositorioFornecedor repositorioFornecedor) : base("Requisição", repositorioRequisicaoEntrada)
     {
-        IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada;
-        IRepositorioFuncionario repositorioFuncionario;
-        IRepositorioMedicamento repositorioMedicamento;
-        IRepositorioFornecedor repositorioFornecedor;
+        this.repositorioRequisicaoEntrada = repositorioRequisicaoEntrada;
+        this.repositorioFuncionario = repositorioFuncionario;
+        this.repositorioMedicamento = repositorioMedicamento;
+        this.repositorioFornecedor = repositorioFornecedor;
+    }
 
-        public TelaRequisicaoEntrada(IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada, IRepositorioMedicamento repositorioMedicamento, 
-            IRepositorioFuncionario repositorioFuncionario, IRepositorioFornecedor repositorioFornecedor) : base("Requisição", repositorioRequisicaoEntrada)
+    protected void ExibirCabecalho()
+    {
+        Console.Clear();
+        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine("Controle de Requisições de Entrada");
+        Console.WriteLine("\n--------------------------------------------");
+    }
+
+    public void ApresentarMenuRequisicaoEntrada()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("1 - Cadastrar Requisição de Entrada");
+        Console.WriteLine("2 - Visualizar Requisições de Entrada");
+        Console.WriteLine();
+        Console.WriteLine("S - Sair");
+
+        Console.Write("Escolha uma das Opções: ");
+        char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
+
+        if (operacaoEscolhida == '1')
+            CadastrarRegistro();
+
+       if (operacaoEscolhida == '2')
+            VisualizarRegistros(false);
+
+    }
+
+    public override void CadastrarRegistro()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("Cadastrando Requisição de Entrada");
+        Console.WriteLine("\n--------------------------------------------");
+        
+        RequisicaoEntrada novaRequisicao = ObterDados();
+        
+        string erros = novaRequisicao.Validar();
+       
+        if (erros.Length > 0)
         {
-            this.repositorioRequisicaoEntrada = repositorioRequisicaoEntrada;
-            this.repositorioFuncionario = repositorioFuncionario;
-            this.repositorioMedicamento = repositorioMedicamento;
-            this.repositorioFornecedor = repositorioFornecedor;
+            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+            return;
         }
 
-        protected void ExibirCabecalho()
+        Medicamento medicamento = novaRequisicao.Medicamento;
+
+        medicamento.AdicionarEstoque(novaRequisicao.Quantidade);
+
+        repositorioRequisicaoEntrada.CadastrarRegistro(novaRequisicao);
+
+        Notificador.ExibirMensagem("Requisição cadastrada com sucesso!", ConsoleColor.Green);
+    }
+
+    public override RequisicaoEntrada ObterDados()
+    {
+        Console.Write("Digite a data da requisição (dd/MM/yyyy): ");
+        DateTime data = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+
+        TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
+        telaMedicamento.VisualizarRegistros(false);
+
+        Console.Write("Selecione o Id do Medicamento: ");
+        int idMedicamento = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+
+        Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
+        if (medicamento == null)
         {
-            Console.Clear();
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("Controle de Requisições de Entrada");
-            Console.WriteLine("\n--------------------------------------------");
+            Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
+            return null;
         }
 
-        public void ApresentarMenuRequisicaoEntrada()
+        TelaFuncionario telaFuncionario = new TelaFuncionario(repositorioFuncionario);
+        telaFuncionario.VisualizarRegistros(false);
+
+        Console.Write("Selecione o Id do Funcionario: ");
+        int idFuncionario = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        
+        Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
+        
+        if (funcionario == null)
         {
-            ExibirCabecalho();
-
-            Console.WriteLine("1 - Cadastrar Requisição de Entrada");
-            Console.WriteLine("2 - Visualizar Requisições de Entrada");
-            Console.WriteLine();
-            Console.WriteLine("S - Sair");
-
-            Console.Write("Escolha uma das Opções: ");
-            char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
-
-            if (operacaoEscolhida == '1')
-                CadastrarRegistro();
-
-           if (operacaoEscolhida == '2')
-                VisualizarRegistros(false);
-
+            Notificador.ExibirMensagem("Funcionario não encontrado!", ConsoleColor.Red);
+            return null;
         }
 
-        public override void CadastrarRegistro()
+        Console.Write("Digite a quantidade: ");
+        int quantidade = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+
+        return new RequisicaoEntrada(data, medicamento, funcionario, quantidade);
+    }
+
+    public override void VisualizarRegistros(bool exibirTitulo)
+    {
+        ExibirCabecalho();
+        Console.WriteLine("Visualizando Requisições de Entrada");
+        Console.WriteLine("--------------------------------------------\n");
+
+        List<RequisicaoEntrada> requisicoes = repositorioRequisicaoEntrada.SelecionarTodos();
+
+        Console.WriteLine("{0, -10} | {1, -15} | {2, -20} | {3, -20} | {4, -10}"
+            ,"ID", "Data", "Medicamento", "Funcionario", "Quantidade");
+
+        foreach (RequisicaoEntrada req in requisicoes)
         {
-            ExibirCabecalho();
-            Console.WriteLine("Cadastrando Requisição de Entrada");
-            Console.WriteLine("\n--------------------------------------------");
-            
-            RequisicaoEntrada novaRequisicao = ObterDados();
-            
-            string erros = novaRequisicao.Validar();
-           
-            if (erros.Length > 0)
-            {
-                Notificador.ExibirMensagem(erros, ConsoleColor.Red);
-                return;
-            }
-
-            Medicamento medicamento = novaRequisicao.Medicamento;
-
-            medicamento.AdicionarEstoque(novaRequisicao.Quantidade);
-
-            repositorioRequisicaoEntrada.CadastrarRegistro(novaRequisicao);
-
-            Notificador.ExibirMensagem("Requisição cadastrada com sucesso!", ConsoleColor.Green);
+            Console.WriteLine("{0, -10} | {1, -15} | {2, -20} | {3, -20} | {4, -10}",
+                req.Id, req.Data.ToString("dd/MM/yyyy"), req.Medicamento.NomeMedicamento, req.Funcionario.Nome, req.Quantidade);
         }
 
-        public override RequisicaoEntrada ObterDados()
-        {
-            Console.Write("Digite a data da requisição (dd/MM/yyyy): ");
-            DateTime data = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
-
-            TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-            telaMedicamento.VisualizarRegistros(false);
-
-            Console.Write("Selecione o Id do Medicamento: ");
-            int idMedicamento = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
-
-            Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
-            if (medicamento == null)
-            {
-                Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
-                return null;
-            }
-
-            TelaFuncionario telaFuncionario = new TelaFuncionario(repositorioFuncionario);
-            telaFuncionario.VisualizarRegistros(false);
-
-            Console.Write("Selecione o Id do Funcionario: ");
-            int idFuncionario = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
-            
-            Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
-            
-            if (funcionario == null)
-            {
-                Notificador.ExibirMensagem("Funcionario não encontrado!", ConsoleColor.Red);
-                return null;
-            }
-
-            Console.Write("Digite a quantidade: ");
-            int quantidade = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
-
-            return new RequisicaoEntrada(data, medicamento, funcionario, quantidade);
-        }
-
-        public override void VisualizarRegistros(bool exibirTitulo)
-        {
-            ExibirCabecalho();
-            Console.WriteLine("Visualizando Requisições de Entrada");
-            Console.WriteLine("--------------------------------------------\n");
-
-            List<RequisicaoEntrada> requisicoes = repositorioRequisicaoEntrada.SelecionarTodos();
-
-            Console.WriteLine("{0, -10} | {1, -15} | {2, -20} | {3, -20} | {4, -10}"
-                ,"ID", "Data", "Medicamento", "Funcionario", "Quantidade");
-
-            foreach (RequisicaoEntrada req in requisicoes)
-            {
-                Console.WriteLine("{0, -10} | {1, -15} | {2, -20} | {3, -20} | {4, -10}",
-                    req.Id, req.Data.ToString("dd/MM/yyyy"), req.Medicamento.NomeMedicamento, req.Funcionario.Nome, req.Quantidade);
-            }
-
-            Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);
-        }
+        Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);
     }
 }
