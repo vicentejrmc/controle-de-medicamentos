@@ -14,7 +14,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
     IRepositorioFornecedor repositorioFornecedor;
 
     public TelaRequisicaoEntrada(IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada, IRepositorioMedicamento repositorioMedicamento, 
-        IRepositorioFuncionario repositorioFuncionario, IRepositorioFornecedor repositorioFornecedor) : base("Requisição", repositorioRequisicaoEntrada)
+        IRepositorioFuncionario repositorioFuncionario, IRepositorioFornecedor repositorioFornecedor) : base("Requisição de Entrada", repositorioRequisicaoEntrada)
     {
         this.repositorioRequisicaoEntrada = repositorioRequisicaoEntrada;
         this.repositorioFuncionario = repositorioFuncionario;
