@@ -8,7 +8,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         public string NomeMedicamento { get; set; }
         public string Descrição { get; set; }
         public Fornecedor Fornecedor { get; set; }
-        public int QtdEstoque { get; set; }
+        public int Quantidade { get; set; }
 
         public Medicamento()
         {
@@ -18,7 +18,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         {
             NomeMedicamento = nomeMedicamento;
             Descrição = descricao;
-            QtdEstoque = quantidade;
+            Quantidade = quantidade;
             Fornecedor = fornecedor;
         }
 
@@ -44,7 +44,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
             if (Descrição.Length < 5 || Descrição.Length > 255)
                 erros += "Erro! O campo Descrição do Medicamento deve ter entre 3 e 100 caracteres\n";
 
-            if (QtdEstoque < 0)
+            if (Quantidade < 0)
                 erros += "Erro! O campo Qtd Estoque do Medicamento não pode ser < 0\n";
 
             if (Fornecedor == null)
@@ -56,7 +56,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         public void AdicionarEstoque(int quantidade)
         {
             if (quantidade > 0)
-                QtdEstoque += quantidade;
+                Quantidade += quantidade;
         }
     }
 }

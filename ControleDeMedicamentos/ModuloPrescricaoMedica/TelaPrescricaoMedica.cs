@@ -55,7 +55,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 i--;
                 continue;
             }
-            if (medicamento.QtdEstoque == 0)
+            if (medicamento.Quantidade == 0)
             {
                 Notificador.ExibirMensagem("Medicamento sem estoque!", ConsoleColor.Red);
                 i--;
@@ -82,7 +82,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         foreach (Medicamento med in medicamentos)
         {
             Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
-               med.Id, med.NomeMedicamento, med.QtdEstoque, med.Fornecedor.Nome, med.Descrição);
+               med.Id, med.NomeMedicamento, med.Quantidade, med.Fornecedor.Nome, med.Descrição);
         }
 
         Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);

@@ -29,8 +29,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
         if (repositorioFornecedor.SelecionarTodos().Count == 0)
         {
-            Notificador.ExibirMensagem("Erro! Você precisa cadastrar um 'Fornecedor' antes de cadastrar um 'Medicamento'.", ConsoleColor.Red);
-            return;
+            Notificador.ExibirMensagem("Erro! Você precisa cadastrar um 'Fornecedor' antes de cadastrar um 'Medicamento'.", ConsoleColor.Red); return;
         }
 
         Medicamento novoMedicamento = ObterDados();
@@ -39,9 +38,28 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
         if (ehValido.Length > 0)
         {
-            Notificador.ExibirMensagem(ehValido, ConsoleColor.Red);
+            Notificador.ExibirMensagem(ehValido, ConsoleColor.Red); return;
+        }
 
-            return;
+        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
+        foreach (Medicamento med in medicamentos)
+        {
+            if (med.NomeMedicamento == novoMedicamento.NomeMedicamento)
+            {
+                Notificador.ExibirMensagem("Medicamento já cadastrado!", ConsoleColor.Black);
+
+                Console.Write($"Deseja adicionar {novoMedicamento.Quantidade} ao estoque? S/N: ");
+                string resposta = Console.ReadLine()!.ToUpper() ?? string.Empty;
+
+                if (resposta == "S")
+                {
+                    med.AdicionarEstoque(novoMedicamento.Quantidade);
+                    repositorioMedicamento.EditarRegistro(med.Id, med);
+                    Notificador.ExibirMensagem("Medicamento atualizado com sucesso!", ConsoleColor.Green);
+                }
+                else
+                    Notificador.ExibirMensagem("Cadastro cancelado!", ConsoleColor.Yellow); return;
+            }
         }
 
         repositorioMedicamento.CadastrarRegistro(novoMedicamento);
@@ -172,14 +190,14 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
         foreach (Medicamento med in medicamentos)
         {
-            if (med.QtdEstoque < 20)
+            if (med.Quantidade < 20)
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-            if (med.QtdEstoque == 0)
+            if (med.Quantidade == 0)
                 Console.ForegroundColor = ConsoleColor.Red;
 
             Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
-               med.Id, med.NomeMedicamento, med.QtdEstoque, med.Fornecedor.Nome, med.Descrição);
+               med.Id, med.NomeMedicamento, med.Quantidade, med.Fornecedor.Nome, med.Descrição);
         }
 
         Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);
