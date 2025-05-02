@@ -10,7 +10,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
     public IRepositorioPrescricaoMedica repositorioPrescricaoMedica;
     public IRepositorioMedicamento repositorioMedicamento;
 
-    public TelaPrescricaoMedica(IRepositorioMedicamento repositorioMedicamento, IRepositorioPrescricaoMedica repositorioPrescricaoMedica) : base("PrescricaoMedica", repositorioPrescricaoMedica)
+    public TelaPrescricaoMedica(IRepositorioMedicamento repositorioMedicamento, IRepositorioPrescricaoMedica repositorioPrescricaoMedica) : base("Prescrição Médica", repositorioPrescricaoMedica)
     {
         this.repositorioMedicamento = repositorioMedicamento;
         this.repositorioPrescricaoMedica = repositorioPrescricaoMedica;
@@ -18,20 +18,21 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
     public override PrescricaoMedica ObterDados()
     {
-        Console.Write("Digite o CRM do Medico: ");
+        Console.Write("Digite o CRM do Médico: ");
         string crm = Console.ReadLine()! ?? string.Empty;
 
         Console.Write("Digite a data(dd/MM/yyyy): ");
         DateTime data = DateTime.Parse(Console.ReadLine()! ?? string.Empty);
 
-        Console.WriteLine("Quantos MedicamentosDaPrescricao diferentes sao?");
+        Console.Write("Quantos Medicamentos da prescriçõo diferentes teram? ");
         int quantidadeMedicamentos = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
 
+        List<Medicamento> medicamentosSelecionados = new List<Medicamento>();
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
 
-        if (quantidadeMedicamentos < medicamentos.Count)
+        if (quantidadeMedicamentos > medicamentos.Count)
         {
-            Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é insuficiente para uma prescrição médcia de {quantidadeMedicamentos}.", ConsoleColor.Red);
+            Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é insuficiente para uma prescrição médica de {quantidadeMedicamentos}.", ConsoleColor.Red);
             return null!;
         }
 
@@ -57,6 +58,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 i--;
                 continue;
             }
+            medicamentosSelecionados.Add(medicamento);
         }
 
         if (medicamentos.Count == 0)
@@ -65,14 +67,14 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             return null!;
         }
 
-        PrescricaoMedica prescricaoMedica = new PrescricaoMedica(data, medicamentos, crm);
+        PrescricaoMedica prescricaoMedica = new PrescricaoMedica(data, medicamentosSelecionados, crm);
 
         return prescricaoMedica;
     }
     public void VisualizarMedicamentos()
     {
         ExibirCabecalho();
-        Console.WriteLine("Visualizando MedicamentosDaPrescricao");
+        Console.WriteLine("Visualizando Medicamentos da prescriçõo");
         Console.WriteLine("\n--------------------------------------------");
 
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
@@ -93,7 +95,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
     {
         Console.WriteLine();
 
-        Console.WriteLine("Visualizando Fornecedores...");
+        Console.WriteLine("Visualizando Prescrição Médicas...");
         Console.WriteLine("--------------------------------------------");
 
         Console.WriteLine();
@@ -110,7 +112,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 "{0, -10} | {1, -20} | {2, -20}",
                 p.Id, p.Data.ToString(), p.CRMMEdico
             );
-            Console.Write("MedicamentosDaPrescricao: ");
+            Console.Write("Medicamentos da prescrição: ");
             int i = 0;
             foreach (var m in p.MedicamentosDaPrescricao)
             {
