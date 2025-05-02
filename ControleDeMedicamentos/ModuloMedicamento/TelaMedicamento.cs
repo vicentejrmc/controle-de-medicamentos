@@ -159,13 +159,13 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
             List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
 
-            Console.WriteLine("{0, -20} | {1, -10} | {2, -20} | {3, -30}", 
-                "Nome", "Quantidade", "Fornecedor", "Descrição");
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}", 
+                "ID", "Nome", "Quantidade", "Fornecedor", "Descrição");
 
             foreach (Medicamento med in medicamentos)
             {
-                Console.WriteLine("{0, -20} | {1, -10} | {2, -20} | {3, -30}",
-                    med.NomeMedicamento, med.QtdEstoque, med.Fornecedor.Nome, med.Descrição);
+                Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
+                   med.Id, med.NomeMedicamento, med.QtdEstoque, med.Fornecedor.Nome, med.Descrição);
             }
 
             Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);

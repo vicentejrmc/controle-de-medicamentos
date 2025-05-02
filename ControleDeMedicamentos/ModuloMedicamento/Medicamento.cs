@@ -50,5 +50,11 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
             return ehValido;
         }
+
+        public void AdicionarEstoque(int quantidade)
+        {
+            if (quantidade > 0)
+                QtdEstoque += quantidade;
+        }
     }
 }

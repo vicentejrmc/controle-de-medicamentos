@@ -3,6 +3,7 @@ using ControleDeMedicamentos.ModuloFuncionario;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloMedicamento;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
 namespace ControleDeMedicamentos.Util;
 
@@ -14,6 +15,7 @@ public class TelaPrincipal
     private IRepositorioPaciente repositorioPaciente;
     private IRepositorioFornecedor repositorioFornecedor;
     private IRepositorioMedicamento repositorioMedicamento;
+    private IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada;
 
     public TelaPrincipal()
     {
@@ -22,6 +24,7 @@ public class TelaPrincipal
         repositorioPaciente = new RepositorioPaciente(contexto);
         repositorioFornecedor = new RepositorioFornecedor(contexto);
         repositorioMedicamento = new RepositorioMedicamento(contexto);
+        repositorioRequisicaoEntrada = new RepositorioRequisicaoEntrada(contexto);
     }
     
     
@@ -39,7 +42,8 @@ public class TelaPrincipal
         Console.WriteLine("2 - Gestão de Paciente ");
         Console.WriteLine("3 - Gestao de Medicamentos");
         Console.WriteLine("4 - Gestão de Funcionarios");
-
+        Console.WriteLine("5 - Requisição de Entrada");
+        Console.WriteLine();
         Console.WriteLine("S - Sair");
 
         Console.WriteLine();
@@ -68,7 +72,10 @@ public class TelaPrincipal
             return new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
 
         if (opcaoPrincipal == '4')
-           return new TelaFuncionario(repositorioFuncionario);           
+           return new TelaFuncionario(repositorioFuncionario);
+
+        if (opcaoPrincipal == '5')
+            return new TelaRequisicaoEntrada(repositorioRequisicaoEntrada, repositorioMedicamento, repositorioFuncionario, repositorioFornecedor);
 
         else
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);

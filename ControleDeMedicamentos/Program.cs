@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.Util;
 
 namespace ControleDeMedicamentos;
@@ -17,6 +18,12 @@ public class Program
             ITelaCrud telaSelecionada = telaPrincipal.ObterTela();
 
             if(telaSelecionada == null) return; // Temporario Caso "Opção invalida / null" sistema irá fechar.
+
+            if (telaSelecionada is TelaRequisicaoEntrada)
+            {
+                TelaRequisicaoEntrada telaRequisicaoEntrada = (TelaRequisicaoEntrada)telaSelecionada;
+                telaRequisicaoEntrada.ApresentarMenuRequisicaoEntrada();
+            }
 
             char opcaoEscolhida = telaSelecionada.ApresentarMenu();
 
