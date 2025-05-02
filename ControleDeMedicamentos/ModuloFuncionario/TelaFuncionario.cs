@@ -81,7 +81,6 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
 
         Funcionario funcionario = new Funcionario(nome, cpf, telefone);
 
-
         return funcionario;
     }
 

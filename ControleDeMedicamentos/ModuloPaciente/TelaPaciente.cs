@@ -22,7 +22,9 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 
         Console.Write("Digite o cartão do SUS do Paciente: ");
         string cartao = Console.ReadLine() ?? string.Empty;
+
         Paciente paciente = new Paciente(nome, telefone, cartao);
+
         return paciente;
     }
 
