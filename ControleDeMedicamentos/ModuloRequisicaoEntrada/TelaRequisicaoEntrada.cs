@@ -55,7 +55,14 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         ExibirCabecalho();
         Console.WriteLine("Cadastrando Requisição de Entrada");
         Console.WriteLine("\n--------------------------------------------");
-        
+
+        List<Medicamento> med = repositorioMedicamento.SelecionarTodos();
+        if (med.Count == 0)
+        {
+            Notificador.ExibirMensagem("Erro! Ainda não há Medicamentos Cadastrados.", ConsoleColor.Red);
+            return;
+        }
+
         RequisicaoEntrada novaRequisicao = ObterDados();
         
         string erros = novaRequisicao.Validar();
@@ -77,8 +84,8 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
 
     public override RequisicaoEntrada ObterDados()
     {
-        Console.Write("Digite a data da requisição (dd/MM/yyyy): ");
-        DateTime data = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+        Console.Write("Digite a data da requisição | dd/MM/yyyy |: ");
+        DateTime data = Convert.ToDateTime(Console.ReadLine()! ?? string.Empty);
 
         TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
         telaMedicamento.VisualizarRegistros(false);

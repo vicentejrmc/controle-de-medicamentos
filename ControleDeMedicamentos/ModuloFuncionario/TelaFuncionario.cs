@@ -82,10 +82,12 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Console.Write("Digite o nome do funcionario: ");
         string nome = Console.ReadLine()! ?? string.Empty;
 
-        Console.Write("Digite o CPF do funcionario: ");
+        Console.WriteLine("Digite o CPF. XXX.XXX.XXX-XX |");
+        Console.Write("CPF: ");
         string cpf = Console.ReadLine()! ?? string.Empty;
 
-        Console.Write("Digite o telefone do funcionario: ");
+        Console.WriteLine("Digite o telefone. XX XXXX-XXXX ou XX XXXXX-XXXX |");
+        Console.Write("Telefone: ");
         string telefone = Console.ReadLine()! ?? string.Empty;
 
         Funcionario funcionario = new Funcionario(nome, cpf, telefone);

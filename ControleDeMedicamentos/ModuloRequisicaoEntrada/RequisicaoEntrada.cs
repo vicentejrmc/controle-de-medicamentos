@@ -35,10 +35,9 @@ public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
         if (Data == null)
             erros += "Erro! O campo Data é obrigatório.\n";
 
-        if(DateTime.Now > Data)
-            erros += "Erro! A data não pode ser menor que a data atual.\n";
-
-        if (!Regex.IsMatch(Data.ToString(), @"^\d{2}/\.\d{2}/\.\d{4}$"))
+        string dataFormatada = Data.ToString("dd/MM/yyyy");
+        Regex regex = new Regex(@"^\d{2}/\d{2}/\d{4}$");
+        if (!regex.IsMatch(dataFormatada))
             erros += "Erro! O campo Data deve estar no formato dd/MM/yyyy.\n";
 
         if (Medicamento == null)

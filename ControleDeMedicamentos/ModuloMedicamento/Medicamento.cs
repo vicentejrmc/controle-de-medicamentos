@@ -32,20 +32,23 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         {
             string erros = "";
 
-            //if (string.IsNullOrWhiteSpace(NomeMedicamento))
-            //    ehValido += "Erro! O campo Nome do Medicamento é obrigatório\n";
+            if (string.IsNullOrWhiteSpace(NomeMedicamento))
+                erros += "Erro! O campo Nome do Medicamento é obrigatório\n";
 
-            //if(NomeMedicamento.Length < 3 || NomeMedicamento.Length > 100)
-            //    ehValido += "Erro! O campo Nome do Medicamento deve ter entre 3 e 100 caracteres\n";
+            if (NomeMedicamento.Length < 3 || NomeMedicamento.Length > 100)
+                erros += "Erro! O campo Nome do Medicamento deve ter entre 3 e 100 caracteres\n";
 
-            //if (string.IsNullOrWhiteSpace(Descrição))
-            //    ehValido += "Erro! O campo Descrição do Medicamento é obrigatório\n";
+            if (string.IsNullOrWhiteSpace(Descrição))
+                erros += "Erro! O campo Descrição do Medicamento é obrigatório\n";
 
-            //if (Descrição.Length < 5 || Descrição.Length > 255)
-            //    ehValido += "Erro! O campo Descrição do Medicamento deve ter entre 3 e 100 caracteres\n";
+            if (Descrição.Length < 5 || Descrição.Length > 255)
+                erros += "Erro! O campo Descrição do Medicamento deve ter entre 3 e 100 caracteres\n";
 
-            //if (QtdEstoque < 0)
-            //    ehValido += "Erro! O campo Qtd Estoque do Medicamento não pode ser < 0\n";
+            if (QtdEstoque < 0)
+                erros += "Erro! O campo Qtd Estoque do Medicamento não pode ser < 0\n";
+
+            if (Fornecedor == null)
+                erros += "Erro! O campo Fornecedor do Medicamento é obrigatório\n";
 
             return erros;
         }

@@ -148,8 +148,10 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
     public override void VisualizarRegistros(bool exibirTitulo)
     {
-        ExibirCabecalho();
-        Console.WriteLine("Visualizando MedicamentosDaPrescricao");
+        if (exibirTitulo)
+            ExibirCabecalho();
+
+        Console.WriteLine("Visualizando Medicamentos");
         Console.WriteLine("\n--------------------------------------------");
 
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
