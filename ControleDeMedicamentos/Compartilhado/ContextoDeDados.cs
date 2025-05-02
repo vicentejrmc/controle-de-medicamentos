@@ -13,7 +13,7 @@ public class ContextoDados
 {
     public List<Fornecedor> Fornecedores { get; set; }
     public List<Paciente> Pacientes { get; set; }
-    public List<Funcionario> Funcionario { get; set; }
+    public List<Funcionario> Funcionarios { get; set; }
     public List<Medicamento> Medicamentos { get; set; }
     public List<RequisicaoEntrada> RequisicaoEntradas { get; set; }
     public List<PrescricaoMedica> PrescricoesMedicas { get; set; }
@@ -25,7 +25,7 @@ public class ContextoDados
     {
         Fornecedores = new List<Fornecedor>();
         Pacientes = new List<Paciente>();
-        Funcionario = new List<Funcionario>();
+        Funcionarios = new List<Funcionario>();
         Medicamentos = new List<Medicamento>();
         RequisicaoEntradas = new List<RequisicaoEntrada>();
         PrescricoesMedicas = new List<PrescricaoMedica>();
@@ -56,7 +56,7 @@ public class ContextoDados
 
         this.Fornecedores = contextoArmazenado.Fornecedores;
         this.Pacientes = contextoArmazenado.Pacientes;
-        this.Funcionario = contextoArmazenado.Funcionario;
+        this.Funcionarios = contextoArmazenado.Funcionarios;
         this.Medicamentos = contextoArmazenado.Medicamentos;
         this.RequisicaoEntradas = contextoArmazenado.RequisicaoEntradas;
         this.PrescricoesMedicas = contextoArmazenado.PrescricoesMedicas;

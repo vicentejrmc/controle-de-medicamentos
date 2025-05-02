@@ -10,6 +10,6 @@ public class RepositorioFuncionario : RepositorioBasEmArquivo<Funcionario>, IRep
 
     protected override List<Funcionario> ObterRegistros()
     {
-        return contexto.Funcionario;
+        return contexto.Funcionarios;
     }
 }

@@ -10,12 +10,16 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         public Fornecedor Fornecedor { get; set; }
         public int QtdEstoque { get; set; }
 
-        public Medicamento(string nomeMedicamento, string descricao, Fornecedor fornecedor, int quantidade)
+        public Medicamento()
+        {
+            Fornecedor = new Fornecedor();
+        }
+        public Medicamento(string nomeMedicamento, string descricao, Fornecedor fornecedor, int quantidade) : this()
         {
             NomeMedicamento = nomeMedicamento;
             Descrição = descricao;
-            Fornecedor = fornecedor;
             QtdEstoque = quantidade;
+            Fornecedor = fornecedor;
         }
 
         public override void AtualizarRegistro(Medicamento resgitroEditado)
@@ -26,7 +30,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
         public override string Validar()
         {
-            string ehValido = "";
+            string erros = "";
 
             //if (string.IsNullOrWhiteSpace(NomeMedicamento))
             //    ehValido += "Erro! O campo Nome do Medicamento é obrigatório\n";
@@ -43,7 +47,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
             //if (QtdEstoque < 0)
             //    ehValido += "Erro! O campo Qtd Estoque do Medicamento não pode ser < 0\n";
 
-            return ehValido;
+            return erros;
         }
 
         public void AdicionarEstoque(int quantidade)
