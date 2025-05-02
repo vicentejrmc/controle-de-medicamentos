@@ -42,7 +42,7 @@ public class TelaPrincipal
 
         Console.WriteLine("1 - Gestão de Fornecedor ");
         Console.WriteLine("2 - Gestão de Paciente ");
-        Console.WriteLine("3 - Gestao de MedicamentosDaPrescricao");
+        Console.WriteLine("3 - Gestao de Medicamentos");
         Console.WriteLine("4 - Gestão de Funcionarios");
         Console.WriteLine("5 - Requisição de Entrada");
         Console.WriteLine("6 - Gestão de Prescrições Médicas");
