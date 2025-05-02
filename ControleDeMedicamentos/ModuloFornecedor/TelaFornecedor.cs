@@ -21,6 +21,16 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
         Console.Write("Digite o CNPJ do fornecedor");
         string cnpj = Console.ReadLine()! ?? string.Empty;
 
+        List<Fornecedor> Fornecedores = repositorioFornecedor.SelecionarTodos();
+        foreach(var f in Fornecedores)
+        {
+            if (f.CNPJ == cnpj)
+            {
+                Notificador.ExibirMensagem("Erro! CNPJ já cadastrado.", ConsoleColor.Red);
+                return null!;
+            }
+        }
+
         Fornecedor novoFornecedor = new Fornecedor(nome, telefone, cnpj);
 
         return novoFornecedor;
