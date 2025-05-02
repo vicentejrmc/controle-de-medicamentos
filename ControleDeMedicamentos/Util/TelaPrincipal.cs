@@ -4,6 +4,7 @@ using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
+using ControleDeMedicamentos.ModuloPrescricaoMedica;
 
 namespace ControleDeMedicamentos.Util;
 
@@ -16,6 +17,7 @@ public class TelaPrincipal
     private IRepositorioFornecedor repositorioFornecedor;
     private IRepositorioMedicamento repositorioMedicamento;
     private IRepositorioRequisicaoEntrada repositorioRequisicaoEntrada;
+    private IRepositorioPrescricaoMedica repositorioPrescricaoMedica;
 
     public TelaPrincipal()
     {
@@ -25,24 +27,25 @@ public class TelaPrincipal
         repositorioFornecedor = new RepositorioFornecedor(contexto);
         repositorioMedicamento = new RepositorioMedicamento(contexto);
         repositorioRequisicaoEntrada = new RepositorioRequisicaoEntrada(contexto);
+        repositorioPrescricaoMedica = new RepositorioPrescricaoMedica(contexto);
     }
-    
     
     public void ApresentarMenuPrincipal()
     {
         Console.Clear();
 
         Console.WriteLine("----------------------------------------");
-        Console.WriteLine("|      Controle de Medicamentos        |");
+        Console.WriteLine("|      Controle de MedicamentosDaPrescricao        |");
         Console.WriteLine("----------------------------------------");
 
         Console.WriteLine();
 
         Console.WriteLine("1 - Gestão de Fornecedor ");
         Console.WriteLine("2 - Gestão de Paciente ");
-        Console.WriteLine("3 - Gestao de Medicamentos");
+        Console.WriteLine("3 - Gestao de MedicamentosDaPrescricao");
         Console.WriteLine("4 - Gestão de Funcionarios");
         Console.WriteLine("5 - Requisição de Entrada");
+        Console.WriteLine("6 - Gestão de Prescrições Médicas");
         Console.WriteLine();
         Console.WriteLine("S - Sair");
 
@@ -76,6 +79,9 @@ public class TelaPrincipal
 
         if (opcaoPrincipal == '5')
             return new TelaRequisicaoEntrada(repositorioRequisicaoEntrada, repositorioMedicamento, repositorioFuncionario, repositorioFornecedor);
+
+        if (opcaoPrincipal == '6')
+            return new TelaPrescricaoMedica(repositorioMedicamento, repositorioPrescricaoMedica);
 
         else
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);

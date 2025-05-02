@@ -24,7 +24,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         {
             Console.Clear();
             Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("Controle de Medicamentos");
+            Console.WriteLine("Controle de MedicamentosDaPrescricao");
             Console.WriteLine("\n--------------------------------------------");
         }
 
@@ -58,7 +58,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         {
             ExibirCabecalho();
 
-            Console.WriteLine("Editando Medicamentos");
+            Console.WriteLine("Editando MedicamentosDaPrescricao");
             Console.WriteLine("\n--------------------------------------------");
 
             VisualizarRegistros(false);
@@ -92,7 +92,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         {
             ExibirCabecalho();
 
-            Console.WriteLine("Excluindo Medicamentos");
+            Console.WriteLine("Excluindo MedicamentosDaPrescricao");
             Console.WriteLine("\n--------------------------------------------");
 
             VisualizarRegistros(false);
@@ -154,7 +154,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         public override void VisualizarRegistros(bool exibirTitulo)
         {
             ExibirCabecalho();
-            Console.WriteLine("Visualizando Medicamentos");
+            Console.WriteLine("Visualizando MedicamentosDaPrescricao");
             Console.WriteLine("\n--------------------------------------------");
 
             List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();

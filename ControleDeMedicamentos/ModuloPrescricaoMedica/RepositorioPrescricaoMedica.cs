@@ -11,6 +11,6 @@ public class RepositorioPrescricaoMedica : RepositorioBasEmArquivo<PrescricaoMed
 
     protected override List<PrescricaoMedica> ObterRegistros()
     {
-        throw new NotImplementedException();
+        return contexto.PrescricoesMedicas;
     }
 }

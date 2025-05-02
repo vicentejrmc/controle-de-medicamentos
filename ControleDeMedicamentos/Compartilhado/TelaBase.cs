@@ -37,7 +37,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine();
 
         Console.Write("Escolha uma das opções: ");
-        char operacaoEscolhida = Convert.ToChar(Console.ReadLine());
+        char operacaoEscolhida = Console.ReadLine()!.ToUpper()[0];
 
         return operacaoEscolhida;
     }
@@ -54,6 +54,8 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine();
 
         T novoRegistro = ObterDados();
+
+        if (novoRegistro == null)return;
 
         string erros = novoRegistro.Validar();
 
