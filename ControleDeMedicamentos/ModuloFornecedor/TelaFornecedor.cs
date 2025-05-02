@@ -18,7 +18,7 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
         Console.Write("Digite o telefone do fornecedor: ");
         string telefone = Console.ReadLine()! ?? string.Empty;
 
-        Console.Write("Digite o CNPJ do fornecedor");
+        Console.Write("Digite o CNPJ do fornecedor: ");
         string cnpj = Console.ReadLine()! ?? string.Empty;
 
         List<Fornecedor> Fornecedores = repositorioFornecedor.SelecionarTodos();

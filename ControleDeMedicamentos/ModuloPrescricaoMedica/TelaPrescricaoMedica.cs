@@ -62,6 +62,11 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é maior que 5, o máximo permitido.", ConsoleColor.Red);
             return null!;
         }
+        if(quantidadeMedicamentos < 1)
+        {
+            Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é menor que 1, o mínimo permitido.", ConsoleColor.Red);
+            return null!;
+        }
 
         for (int i = 0; i < quantidadeMedicamentos; i++)
         {
@@ -114,10 +119,11 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico
             );
             Console.Write("Medicamentos da prescrição: {");
-
+            int i = 0;
             foreach (var m in p.MedicamentosDaPrescricao)
             {
-                if (m.Id < p.MedicamentosDaPrescricao.Count && p.MedicamentosDaPrescricao.Count > 1)
+                i++;
+                if (i < p.MedicamentosDaPrescricao.Count && p.MedicamentosDaPrescricao.Count > 1)
                 {
                     Console.Write(m.NomeMedicamento + ", ");
                     continue;

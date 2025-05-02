@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.Util;
 
@@ -23,6 +24,13 @@ public class Program
             {
                 TelaRequisicaoEntrada telaRequisicaoEntrada = (TelaRequisicaoEntrada)telaSelecionada;
                 telaRequisicaoEntrada.ApresentarMenuRequisicaoEntrada();
+                continue;
+            }
+            if(telaSelecionada is TelaPrescricaoMedica)
+            {
+                TelaPrescricaoMedica telaPrescricaoMedica = (TelaPrescricaoMedica)telaSelecionada;
+                telaPrescricaoMedica.ApresentarMenuPrescricaoMedica();
+                continue;
             }
 
             char opcaoEscolhida = telaSelecionada.ApresentarMenu();
