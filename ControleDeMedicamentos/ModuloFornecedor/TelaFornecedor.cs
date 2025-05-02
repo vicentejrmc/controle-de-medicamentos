@@ -31,7 +31,7 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
             }
         }
 
-        Fornecedor novoFornecedor = new Fornecedor(nome, telefone, cnpj);
+        Fornecedor novoFornecedor = new Fornecedor(nome, cnpj, telefone);
 
         return novoFornecedor;
     }

@@ -64,7 +64,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         }
 
         RequisicaoEntrada novaRequisicao = ObterDados();
-        
+        if (novaRequisicao == null) return;
         string erros = novaRequisicao.Validar();
        
         if (erros.Length > 0)

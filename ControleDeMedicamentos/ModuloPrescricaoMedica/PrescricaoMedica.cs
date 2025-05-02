@@ -39,7 +39,7 @@ public class PrescricaoMedica : EntidadeBase<PrescricaoMedica>
         if (Data == null)
             erros += "Erro! O campo Data é obrigatório.\n";
 
-        else if (!Regex.IsMatch(Data.ToString(), @"^\d{2}/\.\d{2}/\.\d{4}$"))
+        else if (!Regex.IsMatch(Data.ToString("dd/MM/yyyy"), @"^\d{2}/\d{2}/\d{4}$"))
             erros += "Erro! O campo Data deve estar no formato dd/MM/yyyy.\n";
 
         if (MedicamentosDaPrescricao == null || MedicamentosDaPrescricao.Count == 0)
