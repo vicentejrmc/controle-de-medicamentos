@@ -36,6 +36,15 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
             return;
         }
 
+        foreach (Funcionario funcionario in repositorioFuncionario.SelecionarTodos()) // Validação de CPF
+        {
+            if (funcionario.CPF == novoFuncionario.CPF)
+            {
+                Notificador.ExibirMensagem("Erro! CPF já cadastrado.", ConsoleColor.Red);
+                return;
+            }
+        }
+
         repositorioFuncionario.CadastrarRegistro(novoFuncionario);
 
         Notificador.ExibirMensagem("Funcionario cadastrado com sucesso!", ConsoleColor.Green);

@@ -35,7 +35,7 @@ public class TelaPrincipal
         Console.Clear();
 
         Console.WriteLine("----------------------------------------");
-        Console.WriteLine("|      Controle de MedicamentosDaPrescricao        |");
+        Console.WriteLine("|      Controle de Medicamentos        |");
         Console.WriteLine("----------------------------------------");
 
         Console.WriteLine();
