@@ -34,6 +34,11 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é insuficiente para uma prescrição médica de {quantidadeMedicamentos}.", ConsoleColor.Red);
             return null!;
         }
+        if(quantidadeMedicamentos > 5)
+        {
+            Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é maior que 5, o máximo permitido.", ConsoleColor.Red);
+            return null!;
+        }
 
         for (int i = 0; i < quantidadeMedicamentos; i++)
         {
@@ -41,13 +46,6 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
             Console.Write("Digite o id do Medicamento: ");
             int idMedicamento = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
-
-            if (idMedicamento == 0)
-            {
-                Notificador.ExibirMensagem("Erro! O id do medicamento não pode ser 0.", ConsoleColor.Red);
-                i--;
-                continue;
-            }
 
             Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
 
@@ -57,13 +55,13 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 i--;
                 continue;
             }
-            medicamentosSelecionados.Add(medicamento);
-        }
-
-        if (medicamentos.Count == 0)
-        {
-            Notificador.ExibirMensagem("Nenhum medicamento foi selecionado!", ConsoleColor.Red);
-            return null!;
+            if (medicamento.QtdEstoque == 0)
+            {
+                Notificador.ExibirMensagem("Medicamento sem estoque!", ConsoleColor.Red);
+                i--;
+                continue;
+            }
+                medicamentosSelecionados.Add(medicamento);
         }
 
         PrescricaoMedica prescricaoMedica = new PrescricaoMedica(data, medicamentosSelecionados, crm);
@@ -109,7 +107,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         {
             Console.WriteLine(
                 "{0, -10} | {1, -20} | {2, -20}",
-                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMEdico
+                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico
             );
             Console.Write("Medicamentos da prescrição: {");
 

@@ -35,7 +35,7 @@ public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
         if (Data == null)
             erros += "Erro! O campo Data é obrigatório.\n";
 
-        if(DateTime.Now > Data)
+        else if(DateTime.Now > Data)
             erros += "Erro! A data não pode ser menor que a data atual.\n";
 
         if (!Regex.IsMatch(Data.ToString(), @"^\d{2}/\.\d{2}/\.\d{4}$"))

@@ -78,7 +78,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
     public override RequisicaoEntrada ObterDados()
     {
         Console.Write("Digite a data da requisição (dd/MM/yyyy): ");
-        DateTime data = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+        DateTime data = DateTime.ParseExact(Console.ReadLine()!, "dd/MM/yyyy", null);
 
         TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
         telaMedicamento.VisualizarRegistros(false);
@@ -90,7 +90,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         if (medicamento == null)
         {
             Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
-            return null;
+            return null!;
         }
 
         TelaFuncionario telaFuncionario = new TelaFuncionario(repositorioFuncionario);
