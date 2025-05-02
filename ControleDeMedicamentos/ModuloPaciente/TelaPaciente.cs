@@ -23,6 +23,16 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
         Console.Write("Digite o cartão do SUS do Paciente: ");
         string cartao = Console.ReadLine() ?? string.Empty;
 
+        List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
+        foreach (var p in pacientes)
+        {
+            if (p.CartaoSUS == cartao)
+            {
+                Notificador.ExibirMensagem("Erro! Cartão SUS já cadastrado.", ConsoleColor.Red);
+                return null!;
+            }
+        }
+
         Paciente paciente = new Paciente(nome, telefone, cartao);
 
         return paciente;

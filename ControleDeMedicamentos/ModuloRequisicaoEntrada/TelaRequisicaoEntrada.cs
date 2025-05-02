@@ -97,7 +97,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         if (medicamento == null)
         {
             Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
-            return null;
+            return null!;
         }
 
         TelaFuncionario telaFuncionario = new TelaFuncionario(repositorioFuncionario);
