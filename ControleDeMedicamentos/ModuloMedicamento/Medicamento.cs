@@ -35,13 +35,13 @@ namespace ControleDeMedicamentos.ModuloMedicamento
             if (string.IsNullOrWhiteSpace(NomeMedicamento))
                 erros += "Erro! O campo Nome do Medicamento é obrigatório\n";
 
-            if (NomeMedicamento.Length < 3 || NomeMedicamento.Length > 100)
+            else if (NomeMedicamento.Length < 3 || NomeMedicamento.Length > 100)
                 erros += "Erro! O campo Nome do Medicamento deve ter entre 3 e 100 caracteres\n";
 
             if (string.IsNullOrWhiteSpace(Descrição))
                 erros += "Erro! O campo Descrição do Medicamento é obrigatório\n";
 
-            if (Descrição.Length < 5 || Descrição.Length > 255)
+            else if (Descrição.Length < 5 || Descrição.Length > 255)
                 erros += "Erro! O campo Descrição do Medicamento deve ter entre 3 e 100 caracteres\n";
 
             if (Quantidade < 0)

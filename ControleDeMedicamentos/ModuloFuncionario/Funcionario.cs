@@ -30,19 +30,19 @@ namespace ControleDeMedicamentos.ModuloFuncionario
             if (string.IsNullOrEmpty(Nome))
                 erros += "Erro! O campo Nome é obrigatório.\n";
 
-            if (Nome.Length < 3 || Nome.Length > 100)
+            else if (Nome!.Length < 3 || Nome.Length > 100)
                 erros += "Erro! O campo Nome deve ter entre 3 e 100 caracteres.\n";
 
             if (string.IsNullOrEmpty(CPF))
                 erros += "Erro! O campo CPF é obrigatório.\n";
 
-            if (!Regex.IsMatch(CPF.ToString(), @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            else if (!Regex.IsMatch(CPF!.ToString(), @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
                 erros += "Erro! O campo CPF deve estar no formato XXX.XXX.XXX-XX.\n";
 
             if (string.IsNullOrEmpty(Telefone))
                 erros += "Erro! O campo Telefone é obrigatório.\n";
 
-            if (!Regex.IsMatch(Telefone.ToString(), @"^\d{2}\ \d{4,5}-\d{4}$"))
+            else if (!Regex.IsMatch(Telefone!.ToString(), @"^\d{2}\ \d{4,5}-\d{4}$"))
                 erros += "Erro! O campo Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.\n";
 
             return erros;
