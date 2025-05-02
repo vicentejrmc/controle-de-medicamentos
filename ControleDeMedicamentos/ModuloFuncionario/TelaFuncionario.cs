@@ -88,7 +88,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
     public override void VisualizarRegistros(bool exibirTitulo)
     {
         if (exibirTitulo)
-            ExibirCabecalho();
+        ExibirCabecalho();
 
         Console.WriteLine("Visualizando Funcionarios...");
         Console.WriteLine("----------------------------------------");

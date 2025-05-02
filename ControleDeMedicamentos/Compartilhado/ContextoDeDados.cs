@@ -12,7 +12,6 @@ public class ContextoDados
     public List<Fornecedor> Fornecedores { get; set; }
     public List<Paciente> Pacientes { get; set; }
     public List<Funcionario> Funcionario { get; set; }
-
     public List<Medicamento> Medicamentos { get; set; }
 
     private string pastaArmazenamento = "C:\\ArquivosJson";
