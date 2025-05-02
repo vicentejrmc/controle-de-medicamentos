@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.Util;
 
@@ -8,11 +9,33 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 {
     public IRepositorioPrescricaoMedica repositorioPrescricaoMedica;
     public IRepositorioMedicamento repositorioMedicamento;
+    private IRepositorioFornecedor repositorioFornecedor;
 
     public TelaPrescricaoMedica(IRepositorioMedicamento repositorioMedicamento, IRepositorioPrescricaoMedica repositorioPrescricaoMedica) : base("Prescrição Médica", repositorioPrescricaoMedica)
     {
         this.repositorioMedicamento = repositorioMedicamento;
         this.repositorioPrescricaoMedica = repositorioPrescricaoMedica;
+    }
+
+    public void ApresentarMenuPrescricaoMedica()
+    {
+        Console.Clear();
+        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine("Controle de Prescrições Médicas");
+        Console.WriteLine("--------------------------------------------\n");
+
+        Console.WriteLine("1 - Cadastrar Prescrição Médica");
+        Console.WriteLine("2 - Visualizar Prescrições Médicas");
+        Console.WriteLine();
+        Console.WriteLine("S - Sair");
+        Console.WriteLine();
+
+        Console.Write("Escolha uma das opções: ");
+        char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
+        if (operacaoEscolhida == '1')
+            CadastrarRegistro();
+        else if (operacaoEscolhida == '2')
+            VisualizarRegistros(false);
     }
 
     public override PrescricaoMedica ObterDados()
@@ -42,7 +65,8 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
         for (int i = 0; i < quantidadeMedicamentos; i++)
         {
-            VisualizarMedicamentos();
+            TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
+            telaMedicamento.VisualizarRegistros(false);
 
             Console.Write("Digite o id do Medicamento: ");
             int idMedicamento = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
@@ -68,26 +92,6 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
         return prescricaoMedica;
     }
-    public void VisualizarMedicamentos()
-    {
-        ExibirCabecalho();
-        Console.WriteLine("Visualizando Medicamentos da prescriçõo");
-        Console.WriteLine("\n--------------------------------------------");
-
-        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
-
-        Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
-            "ID", "Nome", "Quantidade", "Fornecedor", "Descrição");
-
-        foreach (Medicamento med in medicamentos)
-        {
-            Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
-               med.Id, med.NomeMedicamento, med.Quantidade, med.Fornecedor.Nome, med.Descrição);
-        }
-
-        Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);
-    }
-
     public override void VisualizarRegistros(bool exibirTitulo)
     {
         Console.WriteLine();
