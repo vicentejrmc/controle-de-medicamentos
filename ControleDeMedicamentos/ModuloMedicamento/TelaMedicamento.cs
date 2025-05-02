@@ -155,17 +155,33 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         Console.WriteLine("\n--------------------------------------------");
 
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
+        if (medicamentos.Count == 0)
+        {
+            Notificador.ExibirMensagem("Nenhum Medicamento cadastrado!", ConsoleColor.Red);
+            return;
+        }
+
+        Console.Write("Medicamentos com menos de 20 unidades: ");
+        Notificador.ExibirCorDeFonte("EM FALTA", ConsoleColor.DarkYellow);
+        Console.Write("Medicamentos com 0 unidades: ");
+        Notificador.ExibirCorDeFonte("SEM ESTOQUE", ConsoleColor.Red);
+        Console.WriteLine();
 
         Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}", 
             "ID", "Nome", "Quantidade", "Fornecedor", "Descrição");
 
         foreach (Medicamento med in medicamentos)
         {
+            if (med.QtdEstoque < 20)
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+            if (med.QtdEstoque == 0)
+                Console.ForegroundColor = ConsoleColor.Red;
+
             Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
                med.Id, med.NomeMedicamento, med.QtdEstoque, med.Fornecedor.Nome, med.Descrição);
         }
 
         Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);
-
     }
 }
