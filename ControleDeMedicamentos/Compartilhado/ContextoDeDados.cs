@@ -6,6 +6,7 @@ using ControleDeMedicamentos.ModuloFuncionario;
 using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
+using ControleDeMedicamentos.ModuloRequisicaoSaida;
 
 namespace ControleDeMedicamentos.Compartilhado;
 
@@ -17,6 +18,7 @@ public class ContextoDados
     public List<Medicamento> Medicamentos { get; set; }
     public List<RequisicaoEntrada> RequisicaoEntradas { get; set; }
     public List<PrescricaoMedica> PrescricoesMedicas { get; set; }
+    public List<RequisicaoSaida> RequisicaoSaidas { get; set; }
 
     private string pastaArmazenamento = "C:\\ArquivosJson";
     private string arquivoArmazenamento = "dados-controle-de-medicamentos.json";
@@ -29,6 +31,7 @@ public class ContextoDados
         Medicamentos = new List<Medicamento>();
         RequisicaoEntradas = new List<RequisicaoEntrada>();
         PrescricoesMedicas = new List<PrescricaoMedica>();
+        RequisicaoSaidas = new List<RequisicaoSaida>();
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -60,6 +63,7 @@ public class ContextoDados
         this.Medicamentos = contextoArmazenado.Medicamentos;
         this.RequisicaoEntradas = contextoArmazenado.RequisicaoEntradas;
         this.PrescricoesMedicas = contextoArmazenado.PrescricoesMedicas;
+        this.RequisicaoSaidas = contextoArmazenado.RequisicaoSaidas;
     }
 
     public void Salvar()

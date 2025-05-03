@@ -44,7 +44,11 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         string crm = Console.ReadLine()! ?? string.Empty;
 
         Console.Write("Digite a data(dd/MM/yyyy): ");
-        DateTime data = DateTime.Parse(Console.ReadLine()! ?? string.Empty);
+        if (!(DateTime.TryParse(Console.ReadLine(), out DateTime data)))
+        {
+            Notificador.ExibirMensagem("Data Inválida, Retornando...", ConsoleColor.Red);
+            return null;
+        }
 
         Console.Write("Quantos Medicamentos da prescriçõo diferentes teram? ");
         int quantidadeMedicamentos = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);

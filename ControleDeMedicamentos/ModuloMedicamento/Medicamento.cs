@@ -55,8 +55,11 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
         public void AdicionarEstoque(int quantidade)
         {
-            if (quantidade > 0)
                 Quantidade += quantidade;
+        }
+        public void RemoverEstoque(int quantidade)
+        {
+                Quantidade -= quantidade;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
+using ControleDeMedicamentos.ModuloRequisicaoSaida;
 using ControleDeMedicamentos.Util;
 
 namespace ControleDeMedicamentos;
@@ -30,6 +31,12 @@ public class Program
             {
                 TelaPrescricaoMedica telaPrescricaoMedica = (TelaPrescricaoMedica)telaSelecionada;
                 telaPrescricaoMedica.ApresentarMenuPrescricaoMedica();
+                continue;
+            }
+            if(telaSelecionada is TelaRequisicaoSaida)
+            {
+                TelaRequisicaoSaida telaRequisicaoSaida = (TelaRequisicaoSaida)telaSelecionada;
+                telaRequisicaoSaida.ApresentarMenuSaida();
                 continue;
             }
 

@@ -10,6 +10,6 @@ public class RepositorioRequisicaoSaida : RepositorioBasEmArquivo<RequisicaoSaid
 
     protected override List<RequisicaoSaida> ObterRegistros()
     {
-        throw new NotImplementedException();
+        return contexto.RequisicaoSaidas;
     }
 }
