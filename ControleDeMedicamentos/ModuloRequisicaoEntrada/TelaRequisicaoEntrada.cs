@@ -34,12 +34,11 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
     {
         ExibirCabecalho();
 
-        Console.WriteLine("1 - Cadastrar Requisição de Entrada");
-        Console.WriteLine("2 - Visualizar Requisições de Entrada");
-        Console.WriteLine();
-        Console.WriteLine("S - Sair");
+        Console.WriteLine("[1] Cadastrar Requisição de Entrada.");
+        Console.WriteLine("[2] Visualizar Requisições de Entrada.");
+        Console.WriteLine("[S] Voltar");
 
-        Console.Write("Escolha uma das Opções: ");
+        Console.Write("\nEscolha uma das Opções: ");
         char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
 
         if (operacaoEscolhida == '1')

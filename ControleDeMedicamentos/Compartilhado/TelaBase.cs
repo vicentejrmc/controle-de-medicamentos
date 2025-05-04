@@ -27,16 +27,13 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
         Console.WriteLine();
 
-        Console.WriteLine($"1 - Cadastrar {nomeEntidade}");
-        Console.WriteLine($"2 - Editar {nomeEntidade}");
-        Console.WriteLine($"3 - Excluir {nomeEntidade}");
-        Console.WriteLine($"4 - Visualizar {nomeEntidade}s");
+        Console.WriteLine($"[1] Cadastrar {nomeEntidade}");
+        Console.WriteLine($"[2] Editar {nomeEntidade}");
+        Console.WriteLine($"[3] Excluir {nomeEntidade}");
+        Console.WriteLine($"[4] Visualizar {nomeEntidade}s");
+        Console.WriteLine("[S] Voltar");
 
-        Console.WriteLine("S - Voltar");
-
-        Console.WriteLine();
-
-        Console.Write("Escolha uma das opções: ");
+        Console.Write("\nEscolha uma das opções: ");
         char operacaoEscolhida = Console.ReadLine()!.ToUpper()[0];
 
         return operacaoEscolhida;
@@ -85,7 +82,8 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         VisualizarRegistros(false);
 
         Console.Write("Digite o ID do registro que deseja selecionar: ");
-        int idRegistro = Convert.ToInt32(Console.ReadLine());
+        int idRegistro = Convertor.ConverterStringParaInt();
+        if (idRegistro == 0) return;
 
         Console.WriteLine();
 
@@ -115,11 +113,12 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         VisualizarRegistros(false);
 
         Console.Write("Digite o ID do registro que deseja selecionar: ");
-        int idFabricante = Convert.ToInt32(Console.ReadLine());
+        int idRegistro = Convertor.ConverterStringParaInt();
+        if (idRegistro == 0) return;
 
         Console.WriteLine();
 
-        bool conseguiuExcluir = repositorio.ExcluirRegistro(idFabricante);
+        bool conseguiuExcluir = repositorio.ExcluirRegistro(idRegistro);
 
         if (!conseguiuExcluir)
         {

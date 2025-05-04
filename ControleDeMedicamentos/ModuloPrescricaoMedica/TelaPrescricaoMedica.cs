@@ -24,16 +24,16 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         Console.WriteLine("Controle de Prescrições Médicas");
         Console.WriteLine("--------------------------------------------\n");
 
-        Console.WriteLine("1 - Cadastrar Prescrição Médica");
-        Console.WriteLine("2 - Visualizar Prescrições Médicas");
-        Console.WriteLine();
-        Console.WriteLine("S - Sair");
-        Console.WriteLine();
+        Console.WriteLine("[1] Cadastrar Prescrição Médica.");
+        Console.WriteLine("[2] Visualizar Prescrições Médicas.");
+        Console.WriteLine("[S] Voltar");
 
-        Console.Write("Escolha uma das opções: ");
+        Console.Write("\nEscolha uma das opções: ");
         char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
+       
         if (operacaoEscolhida == '1')
             CadastrarRegistro();
+        
         else if (operacaoEscolhida == '2')
             VisualizarRegistros(false);
     }

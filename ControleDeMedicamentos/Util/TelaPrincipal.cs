@@ -39,23 +39,20 @@ public class TelaPrincipal
 
         Console.WriteLine("----------------------------------------");
         Console.WriteLine("|      Controle de Medicamentos        |");
-        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("----------------------------------------\n");
 
-        Console.WriteLine();
+        Console.WriteLine("[1] Gestão de Fornecedores ");
+        Console.WriteLine("[2] Gestão de Pacientes ");
+        Console.WriteLine("[3] Gestao de Medicamentos");
+        Console.WriteLine("[4] Gestão de Funcionarios");
+        Console.WriteLine("[5] Requisição de Entrada");
+        Console.WriteLine("[6] Prescrições Médicas");
+        Console.WriteLine("[7] Requisições de Saída");
+        Console.WriteLine("[S] Sair...");
 
-        Console.WriteLine("1 - Gestão de Fornecedor ");
-        Console.WriteLine("2 - Gestão de Paciente ");
-        Console.WriteLine("3 - Gestao de Medicamentos");
-        Console.WriteLine("4 - Gestão de Funcionarios");
-        Console.WriteLine("5 - Requisição de Entrada");
-        Console.WriteLine("6 - Gestão de Prescrições Médicas");
-        Console.WriteLine("7 - Requisições de Entrada");
-        Console.WriteLine();
-        Console.WriteLine("S - Sair");
+        Console.Write("\nEscolha uma das opções: ");
 
-        Console.WriteLine();
-
-        EscolherOpcao();
+        opcaoPrincipal = Convert.ToChar(Console.ReadLine()!.ToUpper());
     }
 
     public ITelaCrud ObterTela()
@@ -64,7 +61,7 @@ public class TelaPrincipal
         {
             Console.WriteLine("\n---------------------");
             Console.WriteLine("Saindo do Sistema....");
-            Console.WriteLine("---------------------");
+            Console.WriteLine("-----------------------");
             Thread.Sleep(1500); ;
             Environment.Exit(0);
         }
@@ -94,12 +91,5 @@ public class TelaPrincipal
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
 
         return null!;
-    }
-
-    private void EscolherOpcao()
-    {
-        Console.Write("Escolha uma das opções: ");
-
-        opcaoPrincipal = Convert.ToChar(Console.ReadLine()!.ToUpper());
     }
 }

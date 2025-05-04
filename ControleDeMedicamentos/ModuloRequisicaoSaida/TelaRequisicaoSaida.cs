@@ -29,15 +29,12 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
 
         Console.WriteLine();
 
-        Console.WriteLine($"1 - Cadastrar requisição de saída");
-        Console.WriteLine($"2 - Visualizar requisições de saída");
-        Console.WriteLine($"3 - Visualizar requisições por paciente");
+        Console.WriteLine($"[1] Cadastrar requisição de saída");
+        Console.WriteLine($"[2] Visualizar requisições de saída");
+        Console.WriteLine($"[3] Visualizar requisições por paciente");
+        Console.WriteLine("[S] Voltar");
 
-        Console.WriteLine("S - Voltar");
-
-        Console.WriteLine();
-
-        Console.Write("Escolha uma das opções: ");
+        Console.Write("\nEscolha uma das opções: ");
         char operacaoEscolhida = Console.ReadLine()!.ToUpper()[0];
         Opcoes(operacaoEscolhida);
 
@@ -48,8 +45,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         if (opcao == '1') CadastrarRegistro();
         else if (opcao == '2') VisualizarRegistros(true, repositorioRequisicaoSaida.SelecionarTodos());
         else if (opcao == '3') VisualizarRegistrosPorPaciente();
-
     }
+
     public override RequisicaoSaida ObterDados()
     {
         Console.Write("Digite a data da Solicitação(dd/mm/aaaa): ");
