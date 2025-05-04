@@ -32,15 +32,6 @@ public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
     {
         string erros = "";
 
-        string dataFormatada = Data.ToString("dd/MM/yyyy");
-        Regex regex = new Regex(@"^\d{2}/\d{2}/\d{4}$");
-
-        if (Data == null)
-            erros += "Erro! O campo Data é obrigatório.\n";
-
-        else if (!regex.IsMatch(dataFormatada))
-            erros += "Erro! O campo Data deve estar no formato dd/MM/yyyy.\n";
-
         if (Medicamento == null)
             erros += "Erro! O campo Medicamento é obrigatório.\n";
 
