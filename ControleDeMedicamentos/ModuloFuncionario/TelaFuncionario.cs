@@ -59,7 +59,8 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         VisualizarRegistros(false);
 
         Console.Write("Digite o id do funcionario que deseja editar: ");
-        int idFuncionario = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idFuncionario = Convertor.ConverterStringParaInt();
+        if (idFuncionario == 0) return;
 
         Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
 
@@ -130,7 +131,8 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         VisualizarRegistros(false);
 
         Console.Write("Digite o id do funcionario que deseja excluir: ");
-        int idFuncionario = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idFuncionario = Convertor.ConverterStringParaInt();
+        if (idFuncionario == 0) return;
 
         Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
         

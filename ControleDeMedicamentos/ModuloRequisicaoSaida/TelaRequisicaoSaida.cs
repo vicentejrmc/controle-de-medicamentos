@@ -43,7 +43,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
 
 
     }
-
     public void Opcoes(char opcao)
     {
         if (opcao == '1') CadastrarRegistro();
@@ -54,12 +53,15 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
     public override RequisicaoSaida ObterDados()
     {
         Console.Write("Digite a data da Solicitação(dd/mm/aaaa): ");
-        DateTime data = DateTime.Parse(Console.ReadLine()!);
+        string datastring = Console.ReadLine()!;
+        DateTime? data = Convertor.ConverterStringParaDate(datastring);
+        if (data == null) return null;
         Console.WriteLine();
         TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
         telaPaciente.VisualizarRegistros(false);
         Console.WriteLine("Digite o Id do Paciente que deseja fazer uma requisição: ");
-        int idPaciente = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idPaciente = Convertor.ConverterStringParaInt();
+        if (idPaciente == 0) return null;
         Console.WriteLine();
 
         Paciente paciente = repositorioPaciente.SelecionarRegistroPorId(idPaciente);
@@ -72,7 +74,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         TelaPrescricaoMedica telaPrescricaoMedica = new TelaPrescricaoMedica(repositorioMedicamento, repositorioPrescricaoMedica);
         telaPrescricaoMedica.VisualizarRegistros(false);
         Console.WriteLine("Digite o Id da Prescrição Médica: ");
-        int idPrescricao = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idPrescricao = Convertor.ConverterStringParaInt();
+        if (idPrescricao == 0) return null;
         Console.WriteLine();
         PrescricaoMedica prescricao = repositorioPrescricaoMedica.SelecionarRegistroPorId(idPrescricao);
 
@@ -88,7 +91,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             Medicamento m = prescricao.MedicamentosDaPrescricao[i];
             Console.WriteLine($"A quantidade em Estoque de {m.NomeMedicamento} é de {m.Quantidade}");
             Console.Write($"Digite a quantidade de medicamentos que você deseja: ");
-            int quantidade = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+            int quantidade = Convertor.ConverterStringParaInt();
+            if (quantidade == 0) return null;
             if (quantidade > m.Quantidade)
             {
                 Notificador.ExibirMensagem("Não há medicamentos suficientes desse remédio", ConsoleColor.Red);
@@ -123,35 +127,40 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         {
             Console.WriteLine(
             "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
-            r.Id, r.Data, repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
+            r.Id, r.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
             );
             Console.WriteLine();
-            Console.WriteLine("Deseja ver essa requisição em detalhes(s/n)? ");
-            string opcao = Console.ReadLine()!.ToUpper();
-            Console.WriteLine();
-            if (opcao == "S")
-            {
-                    Console.WriteLine(
-                "{0, -10} | {1, -10}",
-                "Medicamento", "Quantidade" 
-                );
-                int posicao = 0;
-                foreach (var d in r.MedicamentosRequisitados)
-                {
-                    
-                    Console.WriteLine(
-                    "{0, -10} | {1, -10}",
-                    r.medicamentosstring[posicao], r.QuantidadeDeMedicamentos[posicao]
-                    );
-                    posicao += 1;
-                }
-            }
-            Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
+            
+            
         }
+        Console.Write("Deseja ver alguma requisição em detalhes(s/n)? ");
+        string opcao = Console.ReadLine()!.ToUpper();
+        Console.WriteLine();
+        if (opcao == "S")
+        {
+            Console.Write("Digite o id da Requisição que deseja ver em detalhes: ");
+            int id = Convertor.ConverterStringParaInt();
+            if (id == 0) return;
+            Console.WriteLine();
+            Console.WriteLine(
+            "{0, -12} | {1, -10}",
+            "Medicamento", "Quantidade"
+            );
+            int posicao = 0;
+            RequisicaoSaida r = repositorioRequisicaoSaida.SelecionarRegistroPorId(id);
+            foreach (var d in r.MedicamentosRequisitados)
+            {
 
-        
+                Console.WriteLine(
+                "{0, -12} | {1, -10}",
+                r.medicamentosstring[posicao], r.QuantidadeDeMedicamentos[posicao]
+                );
+                posicao += 1;
+            }
+        }
+            Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
+
     }
-
     public void VisualizarRegistrosPorPaciente()
     {
         ExibirCabecalho();
@@ -160,7 +169,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
         telaPaciente.VisualizarRegistros(false);
         Console.Write("Digite o Id do Paciente: ");
-        int idPaciente = int.Parse(Console.ReadLine()!);
+        int idPaciente = Convertor.ConverterStringParaInt();
+        if (idPaciente == 0) return;
 
         Paciente paciente = repositorioPaciente.SelecionarRegistroPorId(idPaciente);
         if (paciente == null) return;
@@ -178,7 +188,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
 
         VisualizarRegistros(false, requisicaoSaidas);
     }
-
     public override void VisualizarRegistros(bool exibirTitulo)
     {
         throw new NotImplementedException();

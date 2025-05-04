@@ -85,13 +85,16 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
     public override RequisicaoEntrada ObterDados()
     {
         Console.Write("Digite a data da requisição | dd/MM/yyyy |: ");
-        DateTime data = Convert.ToDateTime(Console.ReadLine()! ?? string.Empty);
+        string datastring = Console.ReadLine()!;
+        DateTime? data = Convertor.ConverterStringParaDate(datastring);
+        if (data == null) return null;
 
         TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
         telaMedicamento.VisualizarRegistros(false);
 
         Console.Write("Selecione o Id do Medicamento: ");
-        int idMedicamento = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idMedicamento = Convertor.ConverterStringParaInt();
+        if (idMedicamento == 0) return null;
 
         Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
         if (medicamento == null)
@@ -104,8 +107,9 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         telaFuncionario.VisualizarRegistros(false);
 
         Console.Write("Selecione o Id do Funcionario: ");
-        int idFuncionario = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
-        
+        int idFuncionario = Convertor.ConverterStringParaInt();
+        if (idFuncionario == 0) return null;
+
         Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
         
         if (funcionario == null)
@@ -115,7 +119,8 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         }
 
         Console.Write("Digite a quantidade: ");
-        int quantidade = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int quantidade = Convertor.ConverterStringParaInt();
+        if (quantidade == 0) return null;
 
         return new RequisicaoEntrada(data, medicamento, funcionario, quantidade);
     }

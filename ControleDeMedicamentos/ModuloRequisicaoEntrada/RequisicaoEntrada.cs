@@ -12,9 +12,9 @@ public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
     public Funcionario Funcionario { get; set; }
     public int Quantidade { get; set; }
 
-    public RequisicaoEntrada(DateTime data, Medicamento medicamento, Funcionario funcionario, int quantidade)
+    public RequisicaoEntrada(DateTime? data, Medicamento medicamento, Funcionario funcionario, int quantidade)
     {
-        Data = data;
+        Data = (DateTime)data!;
         Medicamento = medicamento;
         Funcionario = funcionario;
         Quantidade = quantidade;

@@ -44,14 +44,13 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         string crm = Console.ReadLine()! ?? string.Empty;
 
         Console.Write("Digite a data(dd/MM/yyyy): ");
-        if (!(DateTime.TryParse(Console.ReadLine(), out DateTime data)))
-        {
-            Notificador.ExibirMensagem("Data Inválida, Retornando...", ConsoleColor.Red);
-            return null;
-        }
+        string datastring = Console.ReadLine()!;
+        DateTime? data = Convertor.ConverterStringParaDate(datastring);
+        if (data == null) return null;
 
         Console.Write("Quantos Medicamentos da prescriçõo diferentes teram? ");
-        int quantidadeMedicamentos = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int quantidadeMedicamentos = Convertor.ConverterStringParaInt();
+        if (quantidadeMedicamentos == 0) return null;
 
         List<Medicamento> medicamentosSelecionados = new List<Medicamento>();
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarTodos();
@@ -78,7 +77,8 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             telaMedicamento.VisualizarRegistros(false);
 
             Console.Write("Digite o id do Medicamento: ");
-            int idMedicamento = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+            int idMedicamento = Convertor.ConverterStringParaInt();
+            if (idMedicamento == 0) return null;
 
             Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
 

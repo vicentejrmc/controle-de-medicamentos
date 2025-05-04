@@ -19,9 +19,9 @@ public class RequisicaoSaida : EntidadeBase<RequisicaoSaida>
         AdicionarNomeMedicamentos();
         QuantidadeDeMedicamentos = new List<int>();
     }
-    public RequisicaoSaida(DateTime data, int pacienteId, int prescricaoMedicaId, List<int> QuantidadeDeMedicamentos, List<Medicamento> MedicamentosRequisitados) : this()
+    public RequisicaoSaida(DateTime? Data, int pacienteId, int prescricaoMedicaId, List<int> QuantidadeDeMedicamentos, List<Medicamento> MedicamentosRequisitados) : this()
     {
-        this.Data = Data;
+        this.Data = (DateTime)Data!;
         this.pacienteId = pacienteId;
         this.prescricaoMedicaId = prescricaoMedicaId;
         this.QuantidadeDeMedicamentos = QuantidadeDeMedicamentos;

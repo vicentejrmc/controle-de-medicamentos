@@ -77,7 +77,8 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         VisualizarRegistros(false);
 
         Console.Write("Digite o id do Medicamento que deseja editar: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idSelecionado = Convertor.ConverterStringParaInt();
+        if (idSelecionado == 0) return;
 
         Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idSelecionado);
 
@@ -111,7 +112,8 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         VisualizarRegistros(false);
 
         Console.Write("Digite o id do Medicamento que deseja excluir: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+        int idSelecionado = Convertor.ConverterStringParaInt();
+        if (idSelecionado == 0) return;
 
         Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idSelecionado);
 
@@ -149,7 +151,8 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         telaFornecedor.VisualizarRegistros(false);
 
         Console.Write("Selecione o Id do Fornecedor: ");
-        int idFornecedor = Convert.ToInt32(Console.ReadLine()!);
+        int idFornecedor = Convertor.ConverterStringParaInt();
+        if (idFornecedor == 0) return null;
 
         repositorioFornecedor.SelecionarRegistroPorId(idFornecedor);
 
