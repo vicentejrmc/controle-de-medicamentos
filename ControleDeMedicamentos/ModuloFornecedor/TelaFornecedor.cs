@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.Util;
 namespace ControleDeMedicamentos.ModuloFornecedor;
 
@@ -10,6 +11,42 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
         this.repositorioFornecedor = repositorioFornecedor;
     }
 
+    public override void CadastrarRegistro()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine();
+
+        Console.WriteLine($"Cadastrando {nomeEntidade}...");
+        Console.WriteLine("--------------------------------------------");
+
+        Console.WriteLine();
+        Fornecedor novoRegistro = ObterDados();
+
+        foreach (var item in repositorioFornecedor.SelecionarTodos())
+        {
+            if (item.CNPJ == novoRegistro.CNPJ)
+            {
+                Notificador.ExibirMensagem("o CNPJ digitado já existe, tente novamente", ConsoleColor.Red);
+                CadastrarRegistro();
+            }
+        }
+        if (novoRegistro == null) return;
+
+        string erros = novoRegistro.Validar();
+
+        if (erros.Length > 0)
+        {
+            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+
+            CadastrarRegistro();
+            return;
+        }
+
+        repositorioFornecedor.CadastrarRegistro(novoRegistro);
+
+        Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
+    }
     public override Fornecedor ObterDados()
     {
         Console.Write("Digite o nome do Fornecedor: ");
