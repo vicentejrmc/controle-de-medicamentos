@@ -125,6 +125,15 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
         Console.WriteLine();
 
+        Console.WriteLine("Você tem certeza que deseja excluir o Registro? (S/N)");
+        string resposta = Console.ReadLine()! ?? string.Empty;
+
+        if (resposta.ToUpper() != "S")
+        {
+            Notificador.ExibirMensagem("Exclusão cancelada!", ConsoleColor.Yellow);
+            return;
+        }
+
         bool conseguiuExcluir = repositorio.ExcluirRegistro(idRegistro);
 
         if (!conseguiuExcluir)
@@ -132,17 +141,6 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
             Notificador.ExibirMensagem("Houve um erro durante a exclusão do registro...", ConsoleColor.Red);
 
             return;
-        }
-        else
-        {
-            Console.WriteLine("Você tem certeza que deseja excluir o Registro? (S/N)");
-            string resposta = Console.ReadLine()! ?? string.Empty;
-
-            if (resposta.ToUpper() != "S")
-            {
-                Notificador.ExibirMensagem("Exclusão cancelada!", ConsoleColor.Yellow);
-                return;
-            }
         }
 
         Notificador.ExibirMensagem("O registro foi excluído com sucesso!", ConsoleColor.Green);
