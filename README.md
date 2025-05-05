@@ -5,6 +5,9 @@
 ## Introdução
 
 - O projeto Controle de Medicamentos tem como finalidade gerenciar o estoque, o cadastro e a distribuição de medicamentos em instituições de saúde, promovendo segurança, agilidade e conformidade com normas sanitárias.
+- O sistema é desenvolvido em C# utilizando o .NET 8.0, com uma interface de linha de comando (CLI) para facilitar a interação do usuário.
+- O projeto é uma solução básica para o gerenciamento de medicamentos, abrangendo desde o cadastro de funcionários e pacientes até a prescrição médica e controle de estoque.
+- O sistema é modular, permitindo a adição de novas funcionalidades e melhorias conforme necessário.
 
 ---
 ## Tecnologias
@@ -52,3 +55,5 @@ Calculdora.ConsoleApp.exe
 ## Requisitos
 
 - .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto.
+
+- Visual Studio 2022 ou superior (opcional, para desenvolvimento).

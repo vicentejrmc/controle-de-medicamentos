@@ -100,13 +100,4 @@ public class TelaPrincipal
 
         return null!;
     }
-
-    public static void OutroMetodo(char input)
-    {
-        char valor = (input == '\0') ? ' ' : input;
-       
-
-
-        Console.WriteLine($"O char (ou default) é: {valor}");
-    }
 }

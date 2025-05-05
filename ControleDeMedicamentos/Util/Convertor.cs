@@ -3,7 +3,6 @@ namespace ControleDeMedicamentos.Util
 {
     public static class Convertor
     {
-
         public static int ConverterStringParaInt()
         {
             int numero = 0;

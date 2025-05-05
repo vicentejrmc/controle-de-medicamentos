@@ -11,7 +11,6 @@ public class Fornecedor : EntidadeBase<Fornecedor>
 
     public Fornecedor()
     {
-
     }
     public Fornecedor(string nome, string cnpj, string telefone) : this()
     {

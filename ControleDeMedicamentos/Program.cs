@@ -19,8 +19,6 @@ public class Program
 
             ITelaCrud telaSelecionada = telaPrincipal.ObterTela();
 
-            if(telaSelecionada == null) return; // Temporario Caso "Opção invalida / null" sistema irá fechar.
-
             if (telaSelecionada is TelaRequisicaoEntrada)
             {
                 TelaRequisicaoEntrada telaRequisicaoEntrada = (TelaRequisicaoEntrada)telaSelecionada;

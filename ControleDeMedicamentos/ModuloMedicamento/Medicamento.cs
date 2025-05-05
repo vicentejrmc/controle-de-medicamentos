@@ -32,6 +32,8 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         {
             string erros = "";
 
+            //Validação de fornecedor implementada na entrada de cadastro de medicamento
+
             if (string.IsNullOrWhiteSpace(NomeMedicamento))
                 erros += "Erro! O campo Nome do Medicamento é obrigatório\n";
 

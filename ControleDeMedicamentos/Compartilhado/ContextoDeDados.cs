@@ -44,11 +44,11 @@ public class ContextoDados
     {
         string caminho = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
-        if (!File.Exists(caminho)) return;  // Verificação de existencia de arquivo
+        if (!File.Exists(caminho)) return;  
 
         string json = File.ReadAllText(caminho);
 
-        if (string.IsNullOrWhiteSpace(json)) return; // Verificação de arquivo
+        if (string.IsNullOrWhiteSpace(json)) return;
 
         JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
         jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
@@ -70,17 +70,15 @@ public class ContextoDados
     {
         string caminho = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
-        // configuração
         JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
         jsonOptions.WriteIndented = true;
         jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
 
         string json = JsonSerializer.Serialize(this, jsonOptions);
 
-        if (!Directory.Exists(pastaArmazenamento))  // verificação de arquivo
-            Directory.CreateDirectory(pastaArmazenamento); // criação caso não exista
-
-        File.WriteAllText(caminho, json); // Escrita.
+        if (!Directory.Exists(pastaArmazenamento)) 
+            Directory.CreateDirectory(pastaArmazenamento); 
+        File.WriteAllText(caminho, json);
     }
 }
 
