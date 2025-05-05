@@ -136,7 +136,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         else
         {
             Console.WriteLine("Você tem certeza que deseja excluir o Registro? (S/N)");
-            string resposta = Console.ReadLine()!.ToUpper() ?? string.Empty;
+            string resposta = Console.ReadLine()! ?? string.Empty;
 
             if (resposta.ToUpper() != "S")
             {

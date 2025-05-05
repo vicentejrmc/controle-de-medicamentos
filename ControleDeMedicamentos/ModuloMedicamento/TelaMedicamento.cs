@@ -95,43 +95,6 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         Notificador.ExibirMensagem("Medicamento editado com sucesso!", ConsoleColor.Green);
     }
 
-    public override void ExcluirRegistro()
-    {
-        ExibirCabecalho();
-
-        Console.WriteLine("Excluindo Medicamentos");
-        Console.WriteLine("\n--------------------------------------------");
-
-        VisualizarRegistros(false);
-
-        Console.Write("Digite o id do Medicamento que deseja excluir: ");
-        int idSelecionado = Convertor.ConverterStringParaInt();
-        if (idSelecionado == 0) return;
-
-        Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idSelecionado);
-
-        if (medicamento == null)
-        {
-            Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
-            return;
-        }
-        else
-        {
-            Console.WriteLine("Você tem certeza que deseja excluir o Medicamento? (S/N)");
-            string resposta = Console.ReadLine()! ?? string.Empty;
-            
-            if (resposta.ToUpper() != "S")
-            {
-                Notificador.ExibirMensagem("Exclusão cancelada!", ConsoleColor.Yellow);
-                return;
-            }
-        }
-
-        repositorioMedicamento.ExcluirRegistro(idSelecionado);
-
-        Notificador.ExibirMensagem("Medicamento excluído com sucesso!", ConsoleColor.Green);
-    }
-
     public override Medicamento ObterDados()
     {
         Console.Write("Digite o Nome do Medicamento: ");
