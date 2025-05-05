@@ -51,16 +51,26 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
     public void Opcoes(char opcao)
     {
         if (opcao == '1') CadastrarRegistro();
-        else if (opcao == '2') VisualizarRegistros(true, repositorioRequisicaoSaida.SelecionarTodos());
+        else if (opcao == '2') VisualizarRegistros(true);
         else if (opcao == '3') VisualizarRegistrosPorPaciente();
     }
     public override RequisicaoSaida ObterDados()
     {
+        if (repositorioPaciente.SelecionarTodos().Count == 0)
+        {
+            Notificador.ExibirMensagem("Não há um paciente registrado, cadastre um paciente no Menu Pacientes", ConsoleColor.Red);
+            return null;
+        }
+        else if (repositorioPrescricaoMedica.SelecionarTodos().Count == 0)
+        {
+            Notificador.ExibirMensagem("Não há uma prescrição registrada, cadastre uma prescrição no menu Prescrição", ConsoleColor.Red);
+            return null;
+        }
         Console.Write("Digite a data da Solicitação(dd/MM/yyyy): ");
         string datastring = Console.ReadLine()!;
         DateTime? data = Convertor.ConverterStringParaDate(datastring);
         if (data == null) return null;
-        Console.WriteLine();
+        Console.WriteLine();        
         TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
         telaPaciente.VisualizarRegistros(false);
         Console.Write("Digite o Id do Paciente que deseja fazer uma requisição: ");
@@ -125,7 +135,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         return requisicaoSaida;
 
     }
-    public void VisualizarRegistros(bool exibirTitulo, List<RequisicaoSaida> repositorio)
+    public override void VisualizarRegistros(bool exibirTitulo)
     {
         if (exibirTitulo) ExibirCabecalho();
 
@@ -133,55 +143,9 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Console.WriteLine("--------------------------------------------");
 
         Console.WriteLine();
-
-        Console.WriteLine(
-            "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
-            "Id", "Data", "Paciente", "Quant Remédios Selecionados"
-        );
-
-        foreach (var r in repositorio)
-        {
-            Console.WriteLine(
-            "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
-            r.Id, r.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
-            );
-            Console.WriteLine();
-            
-            
-        }
-        Console.Write("Deseja ver alguma requisição em detalhes(s/n)? ");
-        string opcao = Console.ReadLine()!.ToUpper();
-        Console.WriteLine();
-        if (opcao == "S")
-        {
-            Console.Write("Digite o id da Requisição que deseja ver em detalhes: ");
-            int id = Convertor.ConverterStringParaInt();
-            if (id == 0) return;
-            Console.WriteLine();
-            Console.WriteLine(
-            "{0, -12} | {1, -10}",
-            "Medicamento", "Quantidade"
-            );
-            int posicao = 0;
-            if (id <= 0 || id - 1 >= repositorio.Count || repositorio[id - 1] == null)
-            {
-                Notificador.ExibirMensagem("Essa requisição não existe, retornando", ConsoleColor.Red);
-                return;
-            }
-
-            RequisicaoSaida r = repositorio[id - 1];
-            foreach (var d in r.MedicamentosRequisitados)
-            {
-
-                Console.WriteLine(
-                "{0, -12} | {1, -10}",
-                r.medicamentosstring[posicao], r.QuantidadeDeMedicamentos[posicao]
-                );
-                posicao += 1;
-            }
-        }
-            Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
-
+        List<RequisicaoSaida> requisicoes = repositorioRequisicaoSaida.SelecionarTodos();
+        VisualiarRequisicoes(requisicoes);
+        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
     }
     public void VisualizarRegistrosPorPaciente()
     {
@@ -213,10 +177,55 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
             return;
         }
-        VisualizarRegistros(false, requisicaoSaidas);
+        VisualiarRequisicoes(requisicaoSaidas);
     }
-    public override void VisualizarRegistros(bool exibirTitulo)
+    public void VisualiarRequisicoes(List<RequisicaoSaida> requisicoes)
     {
-        throw new NotImplementedException();
+        Console.WriteLine(
+            "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
+            "Id", "Data", "Paciente", "Quant Remédios Selecionados"
+        );
+        
+        foreach (var r in requisicoes)
+        {
+            Console.WriteLine(
+            "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
+            r.Id, r.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
+            );
+            Console.WriteLine();
+
+
+        }
+        Console.Write("Deseja ver alguma requisição em detalhes(s/n)? ");
+        string opcao = Console.ReadLine()!.ToUpper();
+        Console.WriteLine();
+        if (opcao == "S")
+        {
+            Console.Write("Digite o id da Requisição que deseja ver em detalhes: ");
+            int id = Convertor.ConverterStringParaInt();
+            if (id == 0) return;
+            Console.WriteLine();
+            Console.WriteLine(
+            "{0, -12} | {1, -10}",
+            "Medicamento", "Quantidade"
+            );
+            int posicao = 0;
+            if (id <= 0 || id - 1 >= requisicoes.Count || requisicoes[id - 1] == null)
+            {
+                Notificador.ExibirMensagem("Essa requisição não existe, retornando", ConsoleColor.Red);
+                return;
+            }
+
+            RequisicaoSaida r = requisicoes[id - 1];
+            foreach (var d in r.MedicamentosRequisitados)
+            {
+
+                Console.WriteLine(
+                "{0, -12} | {1, -10}",
+                r.medicamentosstring[posicao], r.QuantidadeDeMedicamentos[posicao]
+                );
+                posicao += 1;
+            }
+        }
     }
 }

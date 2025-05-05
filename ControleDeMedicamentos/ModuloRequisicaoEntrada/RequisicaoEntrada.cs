@@ -12,12 +12,12 @@ public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
     public Funcionario Funcionario { get; set; }
     public int Quantidade { get; set; }
 
-    public RequisicaoEntrada(DateTime? Data, Medicamento Medicamento, Funcionario Funcionario, int Quantidade)
+    public RequisicaoEntrada(DateTime data, Medicamento medicamento, Funcionario funcionario, int quantidade)
     {
-        this.Data = (DateTime)Data!;
-        this.Medicamento = Medicamento;
-        this.Funcionario = Funcionario;
-        this.Quantidade = Quantidade;
+        Data = data;
+        this.Medicamento = medicamento;
+        this.Funcionario = funcionario;
+        this.Quantidade = quantidade;
     }
 
     public override void AtualizarRegistro(RequisicaoEntrada resgitroEditado)
