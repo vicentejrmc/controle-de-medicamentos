@@ -49,7 +49,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
 
     public override RequisicaoSaida ObterDados()
     {
-        Console.Write("Digite a data da Solicitação(dd/mm/aaaa): ");
+        Console.Write("Digite a data da Solicitação(dd/MM/yyyy): ");
         string datastring = Console.ReadLine()!;
         DateTime? data = Convertor.ConverterStringParaDate(datastring);
         if (data == null) return null;

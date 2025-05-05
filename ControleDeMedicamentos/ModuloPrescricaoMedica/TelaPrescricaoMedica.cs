@@ -19,10 +19,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
     public void ApresentarMenuPrescricaoMedica()
     {
-        Console.Clear();
-        Console.WriteLine("--------------------------------------------");
-        Console.WriteLine("Controle de Prescrições Médicas");
-        Console.WriteLine("--------------------------------------------\n");
+        ExibirCabecalho();
 
         Console.WriteLine("[1] Cadastrar Prescrição Médica.");
         Console.WriteLine("[2] Visualizar Prescrições Médicas.");
@@ -105,7 +102,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
     {
         Console.WriteLine();
 
-        Console.WriteLine("Visualizando Prescrição Médicas...");
+        Console.WriteLine("Visualizando Prescrições Médicas...");
         Console.WriteLine("--------------------------------------------");
 
         Console.WriteLine();

@@ -15,14 +15,6 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         this.repositorioFornecedor = repositorioFornecedor;
     }
 
-    protected void ExibirCabecalho()
-    {
-        Console.Clear();
-        Console.WriteLine("--------------------------------------------");
-        Console.WriteLine("Controle de Medicamentos");
-        Console.WriteLine("\n--------------------------------------------");
-    }
-
     public override void CadastrarRegistro()
     {
         ExibirCabecalho();
@@ -71,7 +63,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
     {
         ExibirCabecalho();
 
-        Console.WriteLine("Editando MedicamentosDaPrescricao");
+        Console.WriteLine("Editando Medicamentos");
         Console.WriteLine("\n--------------------------------------------");
 
         VisualizarRegistros(false);

@@ -22,14 +22,6 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         this.repositorioFornecedor = repositorioFornecedor;
     }
 
-    protected void ExibirCabecalho()
-    {
-        Console.Clear();
-        Console.WriteLine("--------------------------------------------");
-        Console.WriteLine("Controle de Requisições de Entrada");
-        Console.WriteLine("\n--------------------------------------------");
-    }
-
     public void ApresentarMenuRequisicaoEntrada()
     {
         ExibirCabecalho();

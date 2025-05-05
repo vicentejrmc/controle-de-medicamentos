@@ -17,7 +17,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 
         Console.WriteLine();
 
-        Console.WriteLine($"Cadastrando {nomeEntidade}...");
+        Console.WriteLine("Cadastrando Paciente");
         Console.WriteLine("--------------------------------------------");
 
         Console.WriteLine();

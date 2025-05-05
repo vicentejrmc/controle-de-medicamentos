@@ -12,14 +12,6 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         this.repositorioFuncionario = repositorioFuncionario;
     }
 
-    protected void ExibirCabecalho()
-    {
-        Console.Clear();
-        Console.WriteLine("--------------------------------------------");
-        Console.WriteLine("Controle de Funcionarios");
-        Console.WriteLine("\n--------------------------------------------");
-    }
-
     public override void CadastrarRegistro()
     {
         ExibirCabecalho();

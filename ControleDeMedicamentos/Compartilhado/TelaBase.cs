@@ -17,15 +17,13 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
     {
         Console.Clear();
         Console.WriteLine("--------------------------------------------");
-        Console.WriteLine($"Controle de {nomeEntidade}s");
-        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine($"Gestão de {nomeEntidade}");
+        Console.WriteLine("--------------------------------------------\n");
     }
 
     public virtual char ApresentarMenu()
     {
         ExibirCabecalho();
-
-        Console.WriteLine();
 
         Console.WriteLine($"[1] Cadastrar {nomeEntidade}");
         Console.WriteLine($"[2] Editar {nomeEntidade}");
