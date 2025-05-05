@@ -3,6 +3,7 @@ using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.Util;
 using System.Security.Cryptography.X509Certificates;
 
@@ -35,7 +36,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das opções: ");
-        string opcao = Console.ReadLine().ToUpper() ?? string.Empty;
+        string opcao = Console.ReadLine() ?? string.Empty;
         if(opcao.Length > 0)
         {
             char operacaoEscolhida = Convert.ToChar(opcao[0]);
@@ -192,11 +193,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
             r.Id, r.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
             );
-            Console.WriteLine();
-
-
         }
-        Console.Write("Deseja ver alguma requisição em detalhes(s/n)? ");
+        Console.Write("\nDeseja ver alguma requisição em detalhes(s/n)? ");
         string opcao = Console.ReadLine()!.ToUpper();
         Console.WriteLine();
         if (opcao == "S")
@@ -226,6 +224,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
                 );
                 posicao += 1;
             }
-        }
+       }
     }
 }

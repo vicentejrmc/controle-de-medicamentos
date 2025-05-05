@@ -66,23 +66,18 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é insuficiente para uma prescrição médica de {quantidadeMedicamentos}.", ConsoleColor.Red);
             return null!;
         }
-        if(quantidadeMedicamentos > 5)
-        {
-            Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é maior que 5, o máximo permitido.", ConsoleColor.Red);
-            return null!;
-        }
         if(quantidadeMedicamentos < 1)
         {
             Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é menor que 1, o mínimo permitido.", ConsoleColor.Red);
             return null!;
         }
 
+        TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
+        telaMedicamento.VisualizarRegistros(false);
+
         for (int i = 0; i < quantidadeMedicamentos; i++)
         {
-            TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-            telaMedicamento.VisualizarRegistros(false);
-
-            Console.Write("Digite o id do Medicamento: ");
+            Console.Write($"Digite o id do {i}° Medicamento: ");
             int idMedicamento = Convertor.ConverterStringParaInt();
             if (idMedicamento == 0) return null;
 
@@ -124,9 +119,9 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         List<PrescricaoMedica> registros = repositorioPrescricaoMedica.SelecionarTodos();
         foreach (var p in registros)
         {
-            Console.WriteLine(
+            Console.Write(
                 "{0, -10} | {1, -20} | {2, -20}",
-                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico
+                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico+ "\nMedicamento(s): "
             );
 
             int i = 0;
@@ -140,6 +135,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 }
                 Console.Write(m.NomeMedicamento);
             }
+            Console.WriteLine();
         }
 
         Console.WriteLine();
