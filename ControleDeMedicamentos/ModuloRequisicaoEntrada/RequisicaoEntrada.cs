@@ -1,23 +1,23 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFuncionario;
 using ControleDeMedicamentos.ModuloMedicamento;
-using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
 public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
 {
+    public RequisicaoEntrada() { }
     public DateTime Data { get; set; }
     public Medicamento Medicamento { get; set; }
     public Funcionario Funcionario { get; set; }
     public int Quantidade { get; set; }
 
-    public RequisicaoEntrada(DateTime? data, Medicamento medicamento, Funcionario funcionario, int quantidade)
+    public RequisicaoEntrada(DateTime? Data, Medicamento Medicamento, Funcionario Funcionario, int Quantidade)
     {
-        Data = (DateTime)data!;
-        Medicamento = medicamento;
-        Funcionario = funcionario;
-        Quantidade = quantidade;
+        this.Data = (DateTime)Data!;
+        this.Medicamento = Medicamento;
+        this.Funcionario = Funcionario;
+        this.Quantidade = Quantidade;
     }
 
     public override void AtualizarRegistro(RequisicaoEntrada resgitroEditado)
