@@ -51,8 +51,16 @@ public class TelaPrincipal
         Console.WriteLine("[S] Sair...");
 
         Console.Write("\nEscolha uma das opções: ");
+        string opcaoEscolhida = Console.ReadLine()!.ToUpper() ?? string.Empty;
+        if (opcaoEscolhida.Length > 0)
+            opcaoPrincipal = Convert.ToChar(opcaoEscolhida[0]);
+        else
+        {
+            Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
+            
+            ApresentarMenuPrincipal();
+        }
 
-        opcaoPrincipal = Convert.ToChar(Console.ReadLine()!.ToUpper());
     }
 
     public ITelaCrud ObterTela()
@@ -91,5 +99,14 @@ public class TelaPrincipal
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
 
         return null!;
+    }
+
+    public static void OutroMetodo(char input)
+    {
+        char valor = (input == '\0') ? ' ' : input;
+       
+
+
+        Console.WriteLine($"O char (ou default) é: {valor}");
     }
 }
