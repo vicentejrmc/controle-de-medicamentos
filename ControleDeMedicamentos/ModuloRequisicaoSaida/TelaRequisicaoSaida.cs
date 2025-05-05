@@ -3,6 +3,7 @@ using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.Util;
 using System.Security.Cryptography.X509Certificates;
 
@@ -51,7 +52,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
     public void Opcoes(char opcao)
     {
         if (opcao == '1') CadastrarRegistro();
-        else if (opcao == '2') VisualizarRegistros(true, repositorioRequisicaoSaida.SelecionarTodos());
+        else if (opcao == '2') VisualizarRegistros(true);
         else if (opcao == '3') VisualizarRegistrosPorPaciente();
     }
     public override RequisicaoSaida ObterDados()
@@ -125,7 +126,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         return requisicaoSaida;
 
     }
-    public void VisualizarRegistros(bool exibirTitulo, List<RequisicaoSaida> repositorio)
+    public override void VisualizarRegistros(bool exibirTitulo)
     {
         if (exibirTitulo) ExibirCabecalho();
 
@@ -139,15 +140,15 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             "Id", "Data", "Paciente", "Quant Remédios Selecionados"
         );
 
-        foreach (var r in repositorio)
+        List<RequisicaoSaida> requisicoes = repositorioRequisicaoSaida.SelecionarTodos();
+
+        foreach (var r in requisicoes)
         {
             Console.WriteLine(
             "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
             r.Id, r.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
             );
             Console.WriteLine();
-            
-            
         }
         Console.Write("Deseja ver alguma requisição em detalhes(s/n)? ");
         string opcao = Console.ReadLine()!.ToUpper();
@@ -163,13 +164,13 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             "Medicamento", "Quantidade"
             );
             int posicao = 0;
-            if (id <= 0 || id - 1 >= repositorio.Count || repositorio[id - 1] == null)
+            if (id <= 0 || id - 1 >= requisicoes.Count || requisicoes[id - 1] == null)
             {
                 Notificador.ExibirMensagem("Essa requisição não existe, retornando", ConsoleColor.Red);
                 return;
             }
 
-            RequisicaoSaida r = repositorio[id - 1];
+            RequisicaoSaida r = requisicoes[id - 1];
             foreach (var d in r.MedicamentosRequisitados)
             {
 
@@ -197,26 +198,27 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Paciente paciente = repositorioPaciente.SelecionarRegistroPorId(idPaciente);
         if (paciente == null) return;
         Console.WriteLine();
-        List<RequisicaoSaida> requisicaoSaidas = new List<RequisicaoSaida>();
-        int contador = 0;
+        int numeroRequisicoes = 0;
+        Console.WriteLine(
+            "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
+            "Id", "Data", "Paciente", "Quant Remédios Selecionados"
+        );
         foreach (var i in repositorioRequisicaoSaida.SelecionarTodos())
         {
             if ((i.pacienteId == paciente.Id))
             {
-                i.Id = ++contador;
-                requisicaoSaidas.Add(i);
-            }
-            
+                numeroRequisicoes++;
+                Console.WriteLine(
+                "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
+                i.Id, i.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(i.pacienteId).Nome, i.MedicamentosRequisitados.Count
+                );
+            }            
         }
-        if(requisicaoSaidas.Count == 0)
+        if(numeroRequisicoes == 0)
         {
             Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
             return;
         }
-        VisualizarRegistros(false, requisicaoSaidas);
-    }
-    public override void VisualizarRegistros(bool exibirTitulo)
-    {
-        throw new NotImplementedException();
+        VisualizarRegistros(false);
     }
 }
