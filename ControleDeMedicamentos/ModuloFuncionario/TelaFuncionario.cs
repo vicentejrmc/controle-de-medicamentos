@@ -42,34 +42,6 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Notificador.ExibirMensagem("Funcionario cadastrado com sucesso!", ConsoleColor.Green);
     }
 
-    public override void EditarRegistro()
-    {
-        ExibirCabecalho();
-        Console.WriteLine("Editando Funcionarios");
-        Console.WriteLine("\n--------------------------------------------");
-
-        VisualizarRegistros(false);
-
-        Console.Write("Digite o id do funcionario que deseja editar: ");
-        int idFuncionario = Convertor.ConverterStringParaInt();
-        if (idFuncionario == 0) return;
-
-        Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
-
-        funcionario = ObterDados();
-
-        string erros = funcionario.Validar();
-        if (erros.Length > 0)
-        {
-            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
-            return;
-        }
-
-        repositorioFuncionario.EditarRegistro(idFuncionario, funcionario);
-
-        Notificador.ExibirMensagem("Funcionario editado com sucesso!", ConsoleColor.Green);
-    }
-
     public override Funcionario ObterDados()
     {
         Console.Write("Digite o nome do funcionario: ");
