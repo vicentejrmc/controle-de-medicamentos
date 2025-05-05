@@ -25,12 +25,12 @@ namespace ControleDeMedicamentos.ModuloFuncionario
 
         public override string Validar()
         {
-           string erros = "";
+            string erros = "";
 
             if (string.IsNullOrEmpty(Nome))
                 erros += "Erro! O campo Nome é obrigatório.\n";
 
-            else if (Nome!.Length < 3 || Nome.Length > 100)
+            if (Nome!.Length < 3 || Nome.Length > 100)
                 erros += "Erro! O campo Nome deve ter entre 3 e 100 caracteres.\n";
 
             if (string.IsNullOrEmpty(CPF))

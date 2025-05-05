@@ -31,14 +31,23 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das Opções: ");
-        char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
+        string opcao = Console.ReadLine() ?? string.Empty;
+        if (opcao.Length > 0)
+        {
+            char operacaoEscolhida = Convert.ToChar(opcao[0]);
 
-        if (operacaoEscolhida == '1')
-            CadastrarRegistro();
+            if (operacaoEscolhida == '1')
+                CadastrarRegistro();
 
-       if (operacaoEscolhida == '2')
-            VisualizarRegistros(false);
+            if (operacaoEscolhida == '2')
+                VisualizarRegistros(false);
+        }
+        else
+        {
+            Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
 
+            ApresentarMenuRequisicaoEntrada();
+        }
     }
 
     public override void CadastrarRegistro()

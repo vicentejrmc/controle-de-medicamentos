@@ -37,6 +37,8 @@ public class Program
                 telaRequisicaoSaida.ApresentarMenuSaida();
                 continue;
             }
+            if (telaSelecionada is null)
+                break;
 
             char opcaoEscolhida = telaSelecionada.ApresentarMenu();
 

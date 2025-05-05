@@ -26,13 +26,27 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das opções: ");
-        char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!.ToUpper());
-       
-        if (operacaoEscolhida == '1')
-            CadastrarRegistro();
-        
-        else if (operacaoEscolhida == '2')
-            VisualizarRegistros(false);
+        string opcao = Console.ReadLine() ?? string.Empty;
+        if (opcao.Length > 0)
+        {
+            char operacaoEscolhida = Convert.ToChar(opcao[0]);
+
+            if (operacaoEscolhida == '1')
+                CadastrarRegistro();
+
+            else if (operacaoEscolhida == '2')
+                VisualizarRegistros(false);         
+        }
+        else
+        {
+            Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
+            ApresentarMenuPrescricaoMedica();
+        }
+        if(opcao != "1" || opcao != "2" || opcao.ToUpper() != "S")
+        {
+            Notificador.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+            ApresentarMenuPrescricaoMedica();
+        }
     }
 
     public override PrescricaoMedica ObterDados()

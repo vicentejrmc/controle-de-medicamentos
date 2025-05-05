@@ -96,8 +96,10 @@ public class TelaPrincipal
             return new TelaRequisicaoSaida(repositorioPrescricaoMedica, repositorioMedicamento, repositorioPaciente, repositorioRequisicaoSaida);
 
         else
+        {
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
-
-        return null!;
+            ApresentarMenuPrincipal();
+        }
+        return null;
     }
 }

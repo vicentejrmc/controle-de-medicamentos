@@ -5,6 +5,7 @@ namespace ControleDeMedicamentos.Compartilhado;
 public abstract class TelaBase<T> where T : EntidadeBase<T>
 {
     protected string nomeEntidade;
+    char operacaoSelecionada = '0';
     private IRepositorio<T> repositorio;
 
     protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio)
@@ -32,9 +33,17 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das opções: ");
-        char operacaoEscolhida = Console.ReadLine()!.ToUpper()[0];
+        string opcaoEscolhida = Console.ReadLine() ?? string.Empty!;
+        if (opcaoEscolhida.Length > 0)
+            operacaoSelecionada = Convert.ToChar(opcaoEscolhida[0]);
+        else
+        {
+            Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
+           
+            ApresentarMenu();
+        }
 
-        return operacaoEscolhida;
+        return operacaoSelecionada;
     }
 
     public virtual void CadastrarRegistro()
@@ -50,7 +59,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
         T novoRegistro = ObterDados();
 
-        if (novoRegistro == null)return;
+        if (novoRegistro == null) return;
 
         string erros = novoRegistro.Validar();
 
