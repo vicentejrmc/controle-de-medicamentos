@@ -185,12 +185,15 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
         foreach (Medicamento med in medicamentos)
         {
-            if (med.Quantidade < 20)
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.ResetColor();
 
-            if (med.Quantidade == 0)
+             if (med.Quantidade == 0)
                 Console.ForegroundColor = ConsoleColor.Red;
 
+            else if (med.Quantidade < 20)
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+            
             Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
                med.Id, med.NomeMedicamento, med.Quantidade, med.Fornecedor.Nome, med.Descrição);
         }

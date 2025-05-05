@@ -55,7 +55,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Console.WriteLine();
         TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
         telaPaciente.VisualizarRegistros(false);
-        Console.WriteLine("Digite o Id do Paciente que deseja fazer uma requisição: ");
+        Console.Write("Digite o Id do Paciente que deseja fazer uma requisição: ");
         int idPaciente = Convertor.ConverterStringParaInt();
         if (idPaciente == 0) return null;
         Console.WriteLine();
@@ -69,7 +69,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         }
         TelaPrescricaoMedica telaPrescricaoMedica = new TelaPrescricaoMedica(repositorioMedicamento, repositorioPrescricaoMedica);
         telaPrescricaoMedica.VisualizarRegistros(false);
-        Console.WriteLine("Digite o Id da Prescrição Médica: ");
+        Console.Write("Digite o Id da Prescrição Médica: ");
         int idPrescricao = Convertor.ConverterStringParaInt();
         if (idPrescricao == 0) return null;
         Console.WriteLine();
@@ -79,7 +79,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         foreach (var p in requisicoes)
         {
             
-            if (p.Id == requisicoes[e].prescricaoMedicaId)
+            if (p.Id == prescricao.Id)
             {
                 Notificador.ExibirMensagem("Não é possível fazer uma requisição com uma prescrição já usada", ConsoleColor.Red);
                 return null;
