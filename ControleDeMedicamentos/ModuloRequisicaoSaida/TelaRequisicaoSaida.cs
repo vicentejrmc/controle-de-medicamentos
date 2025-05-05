@@ -57,11 +57,21 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
     }
     public override RequisicaoSaida ObterDados()
     {
+        if (repositorioPaciente.SelecionarTodos().Count == 0)
+        {
+            Notificador.ExibirMensagem("Não há um paciente registrado, cadastre um paciente no Menu Pacientes", ConsoleColor.Red);
+            return null;
+        }
+        else if (repositorioPrescricaoMedica.SelecionarTodos().Count == 0)
+        {
+            Notificador.ExibirMensagem("Não há uma prescrição registrada, cadastre uma prescrição no menu Prescrição", ConsoleColor.Red);
+            return null;
+        }
         Console.Write("Digite a data da Solicitação(dd/MM/yyyy): ");
         string datastring = Console.ReadLine()!;
         DateTime? data = Convertor.ConverterStringParaDate(datastring);
         if (data == null) return null;
-        Console.WriteLine();
+        Console.WriteLine();        
         TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
         telaPaciente.VisualizarRegistros(false);
         Console.Write("Digite o Id do Paciente que deseja fazer uma requisição: ");
@@ -134,14 +144,49 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Console.WriteLine("--------------------------------------------");
 
         Console.WriteLine();
+        List<RequisicaoSaida> requisicoes = repositorioRequisicaoSaida.SelecionarTodos();
+        VisualiarRequisicoes(requisicoes);
+        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
+    }
+    public void VisualizarRegistrosPorPaciente()
+    {
+        ExibirCabecalho();
 
+        Console.WriteLine();
+        TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
+        telaPaciente.VisualizarRegistros(false);
+        Console.Write("Digite o Id do Paciente: ");
+        int idPaciente = Convertor.ConverterStringParaInt();
+        if (idPaciente == 0) return;
+
+        Paciente paciente = repositorioPaciente.SelecionarRegistroPorId(idPaciente);
+        if (paciente == null) return;
+        Console.WriteLine();
+        List<RequisicaoSaida> requisicaoSaidas = new List<RequisicaoSaida>();
+        int contador = 0;
+        foreach (var i in repositorioRequisicaoSaida.SelecionarTodos())
+        {
+            if ((i.pacienteId == paciente.Id))
+            {
+                i.Id = ++contador;
+                requisicaoSaidas.Add(i);
+            }
+            
+        }
+        if(requisicaoSaidas.Count == 0)
+        {
+            Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
+            return;
+        }
+        VisualiarRequisicoes(requisicaoSaidas);
+    }
+    public void VisualiarRequisicoes(List<RequisicaoSaida> requisicoes)
+    {
         Console.WriteLine(
             "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
             "Id", "Data", "Paciente", "Quant Remédios Selecionados"
         );
-
-        List<RequisicaoSaida> requisicoes = repositorioRequisicaoSaida.SelecionarTodos();
-
+        
         foreach (var r in requisicoes)
         {
             Console.WriteLine(
@@ -179,45 +224,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
                 );
                 posicao += 1;
             }
-        }
-        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
-
-    }
-    public void VisualizarRegistrosPorPaciente()
-    {
-        ExibirCabecalho();
-
-        Console.WriteLine();
-        TelaPaciente telaPaciente = new TelaPaciente(repositorioPaciente);
-        telaPaciente.VisualizarRegistros(false);
-        Console.Write("Digite o Id do Paciente: ");
-        int idPaciente = Convertor.ConverterStringParaInt();
-        if (idPaciente == 0) return;
-
-        Paciente paciente = repositorioPaciente.SelecionarRegistroPorId(idPaciente);
-        if (paciente == null) return;
-        Console.WriteLine();
-        int numeroRequisicoes = 0;
-        Console.WriteLine(
-            "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
-            "Id", "Data", "Paciente", "Quant Remédios Selecionados"
-        );
-        foreach (var i in repositorioRequisicaoSaida.SelecionarTodos())
-        {
-            if ((i.pacienteId == paciente.Id))
-            {
-                numeroRequisicoes++;
-                Console.WriteLine(
-                "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
-                i.Id, i.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(i.pacienteId).Nome, i.MedicamentosRequisitados.Count
-                );
-            }            
-        }
-        if(numeroRequisicoes == 0)
-        {
-            Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
-            return;
-        }
-        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
+       }
     }
 }

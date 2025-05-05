@@ -124,7 +124,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
             
             Console.WriteLine("{0, -10} | {1, -20} | {2, -10} | {3, -20} | {4, -30}",
-               med.Id, med.NomeMedicamento, med.Quantidade, med.Fornecedor.Nome, med.Descrição);
+               med.Id, med.NomeMedicamento, med.Quantidade, med.Fornecedor.Nome, med.Descricao);
         }
 
         Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);

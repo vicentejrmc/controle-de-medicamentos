@@ -122,7 +122,7 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
         int quantidade = Convertor.ConverterStringParaInt();
         if (quantidade == 0) return null;
 
-        return new RequisicaoEntrada(data, medicamento, funcionario, quantidade);
+        return new RequisicaoEntrada(data.Value, medicamento, funcionario, quantidade);
     }
 
     public override void VisualizarRegistros(bool exibirTitulo)

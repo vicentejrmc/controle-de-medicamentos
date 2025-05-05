@@ -72,12 +72,12 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             return null!;
         }
 
+        TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
+        telaMedicamento.VisualizarRegistros(false);
+
         for (int i = 0; i < quantidadeMedicamentos; i++)
         {
-            TelaMedicamento telaMedicamento = new TelaMedicamento(repositorioMedicamento, repositorioFornecedor);
-            telaMedicamento.VisualizarRegistros(false);
-
-            Console.Write("Digite o id do Medicamento: ");
+            Console.Write($"Digite o id do {i}° Medicamento: ");
             int idMedicamento = Convertor.ConverterStringParaInt();
             if (idMedicamento == 0) return null;
 
