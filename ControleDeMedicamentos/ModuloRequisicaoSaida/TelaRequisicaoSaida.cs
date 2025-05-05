@@ -148,9 +148,8 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             "{0, -6} | {1, -10} | {2, -20} | {3, -20}",
             r.Id, r.Data.ToString("dd/MM/yyyy"), repositorioPaciente.SelecionarRegistroPorId(r.pacienteId).Nome, r.MedicamentosRequisitados.Count
             );
-            Console.WriteLine();
         }
-        Console.Write("Deseja ver alguma requisição em detalhes(s/n)? ");
+        Console.Write("\nDeseja ver alguma requisição em detalhes(s/n)? ");
         string opcao = Console.ReadLine()!.ToUpper();
         Console.WriteLine();
         if (opcao == "S")
@@ -181,7 +180,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
                 posicao += 1;
             }
         }
-            Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
+        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
 
     }
     public void VisualizarRegistrosPorPaciente()
@@ -219,6 +218,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
             return;
         }
-        VisualizarRegistros(false);
+        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
     }
 }
