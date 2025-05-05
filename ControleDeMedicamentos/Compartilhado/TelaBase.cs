@@ -133,6 +133,17 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
             return;
         }
+        else
+        {
+            Console.WriteLine("Você tem certeza que deseja excluir o Registro? (S/N)");
+            string resposta = Console.ReadLine()!.ToUpper() ?? string.Empty;
+
+            if (resposta.ToUpper() != "S")
+            {
+                Notificador.ExibirMensagem("Exclusão cancelada!", ConsoleColor.Yellow);
+                return;
+            }
+        }
 
         Notificador.ExibirMensagem("O registro foi excluído com sucesso!", ConsoleColor.Green);
     }
