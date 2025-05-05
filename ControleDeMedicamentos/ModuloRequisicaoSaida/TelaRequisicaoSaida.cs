@@ -36,7 +36,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das opções: ");
-        string opcao = Console.ReadLine().ToUpper() ?? string.Empty;
+        string opcao = Console.ReadLine() ?? string.Empty;
         if(opcao.Length > 0)
         {
             char operacaoEscolhida = Convert.ToChar(opcao[0]);

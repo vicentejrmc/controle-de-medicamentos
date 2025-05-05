@@ -66,11 +66,6 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é insuficiente para uma prescrição médica de {quantidadeMedicamentos}.", ConsoleColor.Red);
             return null!;
         }
-        if(quantidadeMedicamentos > 5)
-        {
-            Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é maior que 5, o máximo permitido.", ConsoleColor.Red);
-            return null!;
-        }
         if(quantidadeMedicamentos < 1)
         {
             Notificador.ExibirMensagem($"Erro! A quantidade de medicamentos é menor que 1, o mínimo permitido.", ConsoleColor.Red);
