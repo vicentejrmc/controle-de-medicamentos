@@ -7,4 +7,3 @@ public abstract class EntidadeBase<T>
 
     public abstract void AtualizarRegistro(T resgitroEditado);
 }
-

@@ -1,4 +1,5 @@
-﻿using ControleDeMedicamentos.Util;
+﻿using ControleDeMedicamentos.ModuloMedicamento;
+using ControleDeMedicamentos.Util;
 
 namespace ControleDeMedicamentos.Compartilhado;
 
@@ -91,12 +92,25 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.Write("Digite o ID do registro que deseja selecionar: ");
         int idRegistro = Convertor.ConverterStringParaInt();
         if (idRegistro == 0) return;
-
+        T registroSelecionado = repositorio.SelecionarRegistroPorId(idRegistro);
+        if (registroSelecionado == null)
+        {
+            Notificador.ExibirMensagem("Registro não encontrado!", ConsoleColor.Red);
+            return;
+        }
         Console.WriteLine();
 
         T registroEditado = ObterDados();
 
         bool conseguiuEditar = repositorio.EditarRegistro(idRegistro, registroEditado);
+
+        string erros = registroEditado.Validar();
+
+        if (erros.Length > 0)
+        {
+            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+            return;
+        }
 
         if (!conseguiuEditar)
         {
