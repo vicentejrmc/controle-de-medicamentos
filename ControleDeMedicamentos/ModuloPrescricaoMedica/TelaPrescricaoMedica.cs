@@ -42,11 +42,6 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
             ApresentarMenuPrescricaoMedica();
         }
-        if(opcao != "1" || opcao != "2" || opcao.ToUpper() != "S")
-        {
-            Notificador.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
-            ApresentarMenuPrescricaoMedica();
-        }
     }
 
     public override PrescricaoMedica ObterDados()

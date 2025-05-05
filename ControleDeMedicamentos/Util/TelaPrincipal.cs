@@ -70,7 +70,7 @@ public class TelaPrincipal
             Console.WriteLine("\n---------------------");
             Console.WriteLine("Saindo do Sistema....");
             Console.WriteLine("-----------------------");
-            Thread.Sleep(1500); ;
+            Thread.Sleep(2000); ;
             Environment.Exit(0);
         }
 

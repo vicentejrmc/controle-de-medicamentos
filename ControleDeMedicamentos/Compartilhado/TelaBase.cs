@@ -33,7 +33,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das opções: ");
-        string opcaoEscolhida = Console.ReadLine() ?? string.Empty!;
+        string opcaoEscolhida = Console.ReadLine()!.ToUpper() ?? string.Empty!;
         if (opcaoEscolhida.Length > 0)
             operacaoSelecionada = Convert.ToChar(opcaoEscolhida[0]);
         else

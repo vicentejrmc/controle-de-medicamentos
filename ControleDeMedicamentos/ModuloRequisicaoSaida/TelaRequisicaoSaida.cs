@@ -35,7 +35,7 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         Console.WriteLine("[S] Voltar");
 
         Console.Write("\nEscolha uma das opções: ");
-        string opcao = Console.ReadLine() ?? string.Empty;
+        string opcao = Console.ReadLine().ToUpper() ?? string.Empty;
         if(opcao.Length > 0)
         {
             char operacaoEscolhida = Convert.ToChar(opcao[0]);
@@ -44,11 +44,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         else
         {
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
-            ApresentarMenuSaida();
-        }
-        if (opcao != "1" || opcao != "2" || opcao.ToUpper() != "S")
-        {
-            Notificador.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
             ApresentarMenuSaida();
         }
     }
