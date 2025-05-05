@@ -119,9 +119,9 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
         List<PrescricaoMedica> registros = repositorioPrescricaoMedica.SelecionarTodos();
         foreach (var p in registros)
         {
-            Console.WriteLine(
+            Console.Write(
                 "{0, -10} | {1, -20} | {2, -20}",
-                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico
+                p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico+ "\nMedicamento(s): "
             );
 
             int i = 0;
@@ -135,6 +135,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 }
                 Console.Write(m.NomeMedicamento);
             }
+            Console.WriteLine();
         }
 
         Console.WriteLine();
