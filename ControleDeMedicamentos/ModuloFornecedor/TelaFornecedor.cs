@@ -23,6 +23,8 @@ public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
         Console.WriteLine();
         Fornecedor novoRegistro = ObterDados();
 
+        if (novoRegistro == null) CadastrarRegistro();
+
         foreach (var item in repositorioFornecedor.SelecionarTodos())
         {
             if (item.CNPJ == novoRegistro.CNPJ)

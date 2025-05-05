@@ -20,7 +20,7 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Console.WriteLine("\n--------------------------------------------");
 
         Funcionario novoFuncionario = ObterDados();
-
+        if (novoFuncionario == null) CadastrarRegistro();
         string erros = novoFuncionario.Validar();
         if (erros.Length > 0)
         {
