@@ -46,7 +46,6 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         else if (opcao == '2') VisualizarRegistros(true, repositorioRequisicaoSaida.SelecionarTodos());
         else if (opcao == '3') VisualizarRegistrosPorPaciente();
     }
-
     public override RequisicaoSaida ObterDados()
     {
         Console.Write("Digite a data da Solicitação(dd/MM/yyyy): ");
@@ -75,6 +74,18 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         if (idPrescricao == 0) return null;
         Console.WriteLine();
         PrescricaoMedica prescricao = repositorioPrescricaoMedica.SelecionarRegistroPorId(idPrescricao);
+        List<RequisicaoSaida> requisicoes = repositorioRequisicaoSaida.SelecionarTodos();
+        int e = 0;
+        foreach (var p in requisicoes)
+        {
+            
+            if (p.Id == requisicoes[e].prescricaoMedicaId)
+            {
+                Notificador.ExibirMensagem("Não é possível fazer uma requisição com uma prescrição já usada", ConsoleColor.Red);
+                return null;
+            }
+                e++;
+        }
 
         if (prescricao == null)
         {
@@ -144,7 +155,13 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             "Medicamento", "Quantidade"
             );
             int posicao = 0;
-            RequisicaoSaida r = repositorioRequisicaoSaida.SelecionarRegistroPorId(id);
+            if (id <= 0 || id - 1 >= repositorio.Count || repositorio[id - 1] == null)
+            {
+                Notificador.ExibirMensagem("Essa requisição não existe, retornando", ConsoleColor.Red);
+                return;
+            }
+
+            RequisicaoSaida r = repositorio[id - 1];
             foreach (var d in r.MedicamentosRequisitados)
             {
 
@@ -173,16 +190,21 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
         if (paciente == null) return;
         Console.WriteLine();
         List<RequisicaoSaida> requisicaoSaidas = new List<RequisicaoSaida>();
+        int contador = 0;
         foreach (var i in repositorioRequisicaoSaida.SelecionarTodos())
         {
-            if (!(i.pacienteId == paciente.Id))
+            if ((i.pacienteId == paciente.Id))
             {
-                Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
-                return;
+                i.Id = ++contador;
+                requisicaoSaidas.Add(i);
             }
-            requisicaoSaidas.Add(i);
+            
         }
-
+        if(requisicaoSaidas.Count == 0)
+        {
+            Notificador.ExibirMensagem("Esse paciente não tem nenhuma requisição de saída", ConsoleColor.Red);
+            return;
+        }
         VisualizarRegistros(false, requisicaoSaidas);
     }
     public override void VisualizarRegistros(bool exibirTitulo)
