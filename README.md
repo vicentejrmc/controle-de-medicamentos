@@ -1,6 +1,6 @@
 # Trabalho Controle de Medicamentos
 
-![Alguem coloca um gif]()
+![](https://i.imgur.com/bCKO9DI.gif)
 
 ## Introdução
 
