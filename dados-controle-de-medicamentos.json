@@ -1,0 +1,273 @@
+{
+  "$id": "1",
+  "Fornecedores": {
+    "$id": "2",
+    "$values": [
+      {
+        "$id": "3",
+        "Nome": "HyperMed",
+        "CNPJ": "12.344.433/0001-35",
+        "Telefone": "77 9999-9999",
+        "Id": 2
+      },
+      {
+        "$id": "4",
+        "Nome": "MedSemMedi",
+        "CNPJ": "12.131.132/0001-13",
+        "Telefone": "88 8888-8888",
+        "Id": 3
+      },
+      {
+        "$id": "5",
+        "Nome": "MedUno",
+        "CNPJ": "45.456.456/0001-65",
+        "Telefone": "49 33535-3535",
+        "Id": 4
+      }
+    ]
+  },
+  "Pacientes": {
+    "$id": "6",
+    "$values": [
+      {
+        "$id": "7",
+        "Nome": "Luiz",
+        "Telefone": "77 7777-7777",
+        "CartaoSUS": "123456789101112",
+        "Id": 1
+      },
+      {
+        "$id": "8",
+        "Nome": "Iago",
+        "Telefone": "88 9999-9999",
+        "CartaoSUS": "123654852123456",
+        "Id": 2
+      },
+      {
+        "$id": "9",
+        "Nome": "Bernardo",
+        "Telefone": "44 4444-4444",
+        "CartaoSUS": "123456789789456",
+        "Id": 3
+      }
+    ]
+  },
+  "Funcionarios": {
+    "$id": "10",
+    "$values": [
+      {
+        "$id": "11",
+        "Nome": "Georgia",
+        "CPF": "030.031.032-33",
+        "Telefone": "77 65656-6565",
+        "Id": 1
+      },
+      {
+        "$id": "12",
+        "Nome": "Bernado",
+        "CPF": "031.031.031-73",
+        "Telefone": "78 9898-9898",
+        "Id": 2
+      },
+      {
+        "$id": "13",
+        "Nome": "Vicente",
+        "CPF": "654.654.654-78",
+        "Telefone": "99 9999-9999",
+        "Id": 3
+      }
+    ]
+  },
+  "Medicamentos": {
+    "$id": "14",
+    "$values": [
+      {
+        "$id": "15",
+        "NomeMedicamento": "Dipirona",
+        "Descricao": null,
+        "Fornecedor": {
+          "$id": "16",
+          "Nome": "MedTec",
+          "CNPJ": "77 9999-9999",
+          "Telefone": "12.345.678/0001-95",
+          "Id": 1
+        },
+        "Quantidade": 34,
+        "Id": 1
+      },
+      {
+        "$id": "17",
+        "NomeMedicamento": "Inssulina",
+        "Descricao": null,
+        "Fornecedor": {
+          "$ref": "16"
+        },
+        "Quantidade": 25,
+        "Id": 2
+      },
+      {
+        "$id": "18",
+        "NomeMedicamento": "Aglucose",
+        "Descricao": null,
+        "Fornecedor": {
+          "$ref": "3"
+        },
+        "Quantidade": 21,
+        "Id": 3
+      }
+    ]
+  },
+  "RequisicaoEntradas": {
+    "$id": "19",
+    "$values": [
+      {
+        "$id": "20",
+        "Data": "2024-03-23T00:00:00",
+        "Medicamento": {
+          "$ref": "15"
+        },
+        "Funcionario": {
+          "$ref": "11"
+        },
+        "Quantidade": 5,
+        "Id": 1
+      },
+      {
+        "$id": "21",
+        "Data": "2023-05-05T00:00:00",
+        "Medicamento": {
+          "$ref": "17"
+        },
+        "Funcionario": {
+          "$ref": "11"
+        },
+        "Quantidade": 22,
+        "Id": 2
+      },
+      {
+        "$id": "22",
+        "Data": "2023-05-05T00:00:00",
+        "Medicamento": {
+          "$ref": "17"
+        },
+        "Funcionario": {
+          "$ref": "12"
+        },
+        "Quantidade": 3,
+        "Id": 3
+      }
+    ]
+  },
+  "PrescricoesMedicas": {
+    "$id": "23",
+    "$values": [
+      {
+        "$id": "26",
+        "Data": "2025-05-05T00:00:00",
+        "MedicamentosDaPrescricao": {
+          "$id": "27",
+          "$values": [
+            {
+              "$ref": "15"
+            },
+            {
+              "$ref": "15"
+            }
+          ]
+        },
+        "CRMMedico": "654789",
+        "Id": 2
+      },
+      {
+        "$id": "28",
+        "Data": "2025-04-23T00:00:00",
+        "MedicamentosDaPrescricao": {
+          "$id": "29",
+          "$values": [
+            {
+              "$ref": "15"
+            },
+            {
+              "$ref": "15"
+            },
+            {
+              "$ref": "18"
+            }
+          ]
+        },
+        "CRMMedico": "789789",
+        "Id": 3
+      },
+      {
+        "$id": "30",
+        "Data": "2025-05-04T00:00:00",
+        "MedicamentosDaPrescricao": {
+          "$id": "31",
+          "$values": [
+            {
+              "$ref": "15"
+            },
+            {
+              "$ref": "18"
+            }
+          ]
+        },
+        "CRMMedico": "987987",
+        "Id": 4
+      }
+    ]
+  },
+  "RequisicaoSaidas": {
+    "$id": "32",
+    "$values": [
+      {
+        "$id": "33",
+        "Data": "2025-05-05T00:00:00",
+        "pacienteId": 1,
+        "prescricaoMedicaId": 2,
+        "MedicamentosRequisitados": {
+          "$ref": "27"
+        },
+        "medicamentosstring": {
+          "$id": "34",
+          "$values": [
+            "Dipirona",
+            "Dipirona"
+          ]
+        },
+        "QuantidadeDeMedicamentos": {
+          "$id": "35",
+          "$values": [
+            2,
+            1
+          ]
+        },
+        "Id": 1
+      },
+      {
+        "$id": "36",
+        "Data": "2023-05-05T00:00:00",
+        "pacienteId": 3,
+        "prescricaoMedicaId": 4,
+        "MedicamentosRequisitados": {
+          "$ref": "31"
+        },
+        "medicamentosstring": {
+          "$id": "37",
+          "$values": [
+            "Dipirona",
+            "Aglucose"
+          ]
+        },
+        "QuantidadeDeMedicamentos": {
+          "$id": "38",
+          "$values": [
+            1,
+            3
+          ]
+        },
+        "Id": 2
+      }
+    ]
+  }
+}
