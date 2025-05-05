@@ -48,6 +48,11 @@ public class TelaRequisicaoEntrada : TelaBase<RequisicaoEntrada>, ITelaCrud
 
             ApresentarMenuRequisicaoEntrada();
         }
+        if (opcao != "1" || opcao != "2" || opcao.ToUpper() != "S")
+        {
+            Notificador.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+            ApresentarMenuRequisicaoEntrada();
+        }
     }
 
     public override void CadastrarRegistro()

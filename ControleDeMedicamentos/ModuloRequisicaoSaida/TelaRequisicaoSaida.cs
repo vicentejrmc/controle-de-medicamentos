@@ -46,7 +46,13 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
             Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
             ApresentarMenuSaida();
         }
+        if (opcao != "1" || opcao != "2" || opcao.ToUpper() != "S")
+        {
+            Notificador.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+            ApresentarMenuSaida();
+        }
     }
+
     public void Opcoes(char opcao)
     {
         if (opcao == '1') CadastrarRegistro();
