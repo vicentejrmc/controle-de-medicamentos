@@ -128,7 +128,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 "{0, -10} | {1, -20} | {2, -20}",
                 p.Id, p.Data.ToString("dd/MM/yyyy"), p.CRMMedico
             );
-            Console.Write("Medicamentos da prescrição: {");
+
             int i = 0;
             foreach (var m in p.MedicamentosDaPrescricao)
             {
@@ -140,7 +140,6 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
                 }
                 Console.Write(m.NomeMedicamento);
             }
-            Console.WriteLine("}\n");
         }
 
         Console.WriteLine();
