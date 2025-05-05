@@ -24,14 +24,6 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 
         Paciente novoRegistro = ObterDados();
 
-        foreach (var item in repositorioPaciente.SelecionarTodos())
-        {
-            if(item.CartaoSUS == novoRegistro.CartaoSUS)
-            {
-                Notificador.ExibirMensagem("o Cartão do SUS digitado já existe, tente novamente", ConsoleColor.Red);
-                CadastrarRegistro();
-            }
-        }
         if (novoRegistro == null) return;
 
         string erros = novoRegistro.Validar();

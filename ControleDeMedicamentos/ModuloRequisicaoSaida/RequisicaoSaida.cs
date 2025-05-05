@@ -16,7 +16,6 @@ public class RequisicaoSaida : EntidadeBase<RequisicaoSaida>
     {
         MedicamentosRequisitados = new List<Medicamento>();
         medicamentosstring = new List<string>();
-        AdicionarNomeMedicamentos();
         QuantidadeDeMedicamentos = new List<int>();
     }
     public RequisicaoSaida(DateTime? Data, int pacienteId, int prescricaoMedicaId, List<int> QuantidadeDeMedicamentos, List<Medicamento> MedicamentosRequisitados) : this()
@@ -26,6 +25,7 @@ public class RequisicaoSaida : EntidadeBase<RequisicaoSaida>
         this.prescricaoMedicaId = prescricaoMedicaId;
         this.QuantidadeDeMedicamentos = QuantidadeDeMedicamentos;
         this.MedicamentosRequisitados = MedicamentosRequisitados;
+        AdicionarNomeMedicamentos();
     }
 
     public override void AtualizarRegistro(RequisicaoSaida resgitroEditado)
