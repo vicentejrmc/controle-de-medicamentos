@@ -60,41 +60,6 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         Notificador.ExibirMensagem("Medicamento cadastrado com sucesso!", ConsoleColor.Green);
     }
 
-    public override void EditarRegistro()
-    {
-        ExibirCabecalho();
-
-        Console.WriteLine("Editando Medicamentos");
-        Console.WriteLine("\n--------------------------------------------");
-
-        VisualizarRegistros(false);
-
-        Console.Write("Digite o id do Medicamento que deseja editar: ");
-        int idSelecionado = Convertor.ConverterStringParaInt();
-        if (idSelecionado == 0) return;
-
-        Medicamento medicamento = repositorioMedicamento.SelecionarRegistroPorId(idSelecionado);
-
-        if (medicamento == null)
-        {
-            Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
-            return;
-        }
-
-        medicamento = ObterDados();
-
-        string erros = medicamento.Validar();
-        if (erros.Length > 0)
-        {
-            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
-            return;
-        }
-
-        repositorioMedicamento.EditarRegistro(idSelecionado, medicamento);
-
-        Notificador.ExibirMensagem("Medicamento editado com sucesso!", ConsoleColor.Green);
-    }
-
     public override Medicamento ObterDados()
     {
         Console.Write("Digite o Nome do Medicamento: ");
