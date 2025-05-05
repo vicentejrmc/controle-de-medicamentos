@@ -114,29 +114,4 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Notificador.ExibirMensagem("Pressione qualquer tecla para continuar...", ConsoleColor.Yellow);
     }
 
-    public override void ExcluirRegistro()
-    {
-        ExibirCabecalho();
-        Console.WriteLine("Excluindo Funcionarios");
-        Console.WriteLine("\n--------------------------------------------");
-
-        VisualizarRegistros(false);
-
-        Console.Write("Digite o id do funcionario que deseja excluir: ");
-        int idFuncionario = Convertor.ConverterStringParaInt();
-        if (idFuncionario == 0) return;
-
-        Funcionario funcionario = repositorioFuncionario.SelecionarRegistroPorId(idFuncionario);
-        
-        if (funcionario == null)
-        {
-            Notificador.ExibirMensagem("Funcionario não encontrado!", ConsoleColor.Red);
-            return;
-        }
-
-        repositorioFuncionario.ExcluirRegistro(idFuncionario);
-
-        Notificador.ExibirMensagem("Funcionario excluido com sucesso!", ConsoleColor.Green);
-    }
-
 }
