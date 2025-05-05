@@ -26,20 +26,20 @@ public class Fornecedor : EntidadeBase<Fornecedor>
         if (string.IsNullOrEmpty(Nome))
             erros += "Erro! O campo Nome é obrigatório.\n";
 
-        if (Nome.Length < 3 || Nome.Length > 100)
+        else if (Nome.Length < 3 || Nome.Length > 100)
             erros += "Erro! O campo Nome deve ter entre 3 e 100 caracteres.\n";
 
         if (string.IsNullOrEmpty(CNPJ))
             erros += "Erro! O campo CNPJ é obrigatório.\n";
 
-        if (!Regex.IsMatch(CNPJ, @"^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$"))
+        else if (!Regex.IsMatch(CNPJ, @"^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$"))
             erros += "Erro! O campo CNPJ deve estar no formato XX.XXX.XXX/XXXX-XX.\n";
 
         if (string.IsNullOrEmpty(Telefone))
             erros += "Erro! O campo Telefone é obrigatório.\n";
 
-        if (!Regex.IsMatch(Telefone!.ToString(), @"^\d{2}\ \d{4,5}-\d{4}$"))
-            erros += "Erro! O campo Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.\n";
+        else if (!Regex.IsMatch(Telefone!.ToString(), @"^\d{2}\ \d{4,5}-\d{4}$"))
+            erros += "Erro! O campo Telefone deve estar no formato XX XXXX-XXXX ou XX XXXXX-XXXX.\n";
 
         return erros;
     }
