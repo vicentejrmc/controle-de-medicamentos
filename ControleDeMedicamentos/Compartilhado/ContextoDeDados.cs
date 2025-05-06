@@ -16,6 +16,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using ControleDeMedicamentos.Util;
 
 namespace ControleDeMedicamentos.Compartilhado;
 
@@ -115,7 +116,7 @@ public class ContextoDados
         }
     }
 
-    public void ExportarParaPDF(List<Medicamento> medicamentos)
+    public void ExportarParaPDF()
     {
         string nomeArquivo = $"medicamentos_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
 
@@ -139,7 +140,7 @@ public class ContextoDados
             foreach (var cabecalho in cabecalhos)
                 tabela.AddHeaderCell(cabecalho);
 
-            foreach (var m in medicamentos)
+            foreach (var m in Medicamentos)
             {
                 var cor = m.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
                 tabela.AddCell(new Paragraph(m.Id.ToString()).SetFontColor(cor));
@@ -154,7 +155,7 @@ public class ContextoDados
             document.Add(tabela);
 
             // Rodapé
-            var rodape = new Paragraph($"Gerado em: {DateTime.Now:dd/MM/yyyy HH:mm:ss} | Total: {medicamentos.Count}")
+            var rodape = new Paragraph($"Gerado em: {DateTime.Now:dd/MM/yyyy HH:mm:ss} | Total: {Medicamentos.Count}")
                 .SetTextAlignment(TextAlignment.RIGHT)
                 .SetFontSize(10);
             document.Add(rodape);
