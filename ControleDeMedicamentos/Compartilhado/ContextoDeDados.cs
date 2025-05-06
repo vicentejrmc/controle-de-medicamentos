@@ -139,7 +139,7 @@ public class ContextoDados
 
         foreach (Medicamento med in Medicamentos)
         {
-            var cor = med.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
+            var cor = med.Quantidade < 20 ? ColorConstants.RED : ColorConstants.BLACK;
             tabela.AddCell(new Paragraph(med.Id.ToString()).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.NomeMedicamento).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.Descricao).SetFontColor(cor));
@@ -255,8 +255,6 @@ public class ContextoDados
                     }
                 }
             }
-            
-
         }
     }
 
@@ -288,5 +286,3 @@ public class ContextoDados
         return dados.ToArray();
     }
 }
-
-        
