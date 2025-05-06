@@ -91,56 +91,44 @@ public class ContextoDados
     }
     public void ExportarParaPDF(List<Medicamento> medicamentos)
     {
-        string dataHora = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        string nomeArquivo = $"medicamentos_{dataHora}.pdf";
+        string nomeArquivo = $"medicamentos_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
 
-        using (FileStream fs = new FileStream(nomeArquivo, FileMode.Create, FileAccess.Write))
+        using (var fs = new FileStream(nomeArquivo, FileMode.Create, FileAccess.Write))
         {
-            PdfWriter writer = new PdfWriter(fs);
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
+            var writer = new PdfWriter(fs);
+            var pdf = new PdfDocument(writer);
+            var document = new Document(pdf);
 
             // Título
-            string dataTitulo = DateTime.Now.ToString("dd/MM/yyyy");
-            Paragraph titulo = new Paragraph($"Lista de Medicamentos - {dataTitulo}")
+            var titulo = new Paragraph($"Lista de Medicamentos - {DateTime.Now:dd/MM/yyyy}")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(16);
             document.Add(titulo);
 
-            document.Add(new Paragraph("\n")); // Espaço entre título e tabela
-
             // Tabela
-            Table tabela = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 2, 3, 3, 3 }))
+            var tabela = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 2, 3, 3, 3 }))
                 .UseAllAvailableWidth();
 
-            // Cabeçalho
             string[] cabecalhos = { "Id", "Nome", "Descrição", "Qtd. Estoque", "CNPJ Fornecedor", "Nome Fornecedor", "Telefone Fornecedor" };
             foreach (var cabecalho in cabecalhos)
-            {
-                tabela.AddHeaderCell(new Cell().Add(new Paragraph(cabecalho)));
-            }
+                tabela.AddHeaderCell(cabecalho);
 
-            // Dados
-            foreach (var med in medicamentos)
+            foreach (var m in medicamentos)
             {
-                Color corTexto = med.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
-
-                tabela.AddCell(new Cell().Add(new Paragraph(med.Id.ToString()).SetFontColor(corTexto)));
-                tabela.AddCell(new Cell().Add(new Paragraph(med.NomeMedicamento).SetFontColor(corTexto)));
-                tabela.AddCell(new Cell().Add(new Paragraph(med.Descricao).SetFontColor(corTexto)));
-                tabela.AddCell(new Cell().Add(new Paragraph(med.Quantidade.ToString()).SetFontColor(corTexto)));
-                tabela.AddCell(new Cell().Add(new Paragraph(med.Fornecedor.CNPJ).SetFontColor(corTexto)));
-                tabela.AddCell(new Cell().Add(new Paragraph(med.Fornecedor.Nome).SetFontColor(corTexto)));
-                tabela.AddCell(new Cell().Add(new Paragraph(med.Fornecedor.Telefone).SetFontColor(corTexto)));
+                var cor = m.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
+                tabela.AddCell(new Paragraph(m.Id.ToString()).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.NomeMedicamento).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Descricao).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Quantidade.ToString()).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Fornecedor.CNPJ).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Fornecedor.Nome).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Fornecedor.Telefone).SetFontColor(cor));
             }
 
             document.Add(tabela);
 
-            document.Add(new Paragraph("\n")); // Espaço entre tabela e rodapé
-
             // Rodapé
-            string dataHoraRodape = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-            Paragraph rodape = new Paragraph($"Relatório gerado em: {dataHoraRodape} | Total de registros: {medicamentos.Count}")
+            var rodape = new Paragraph($"Gerado em: {DateTime.Now:dd/MM/yyyy HH:mm:ss} | Total: {medicamentos.Count}")
                 .SetTextAlignment(TextAlignment.RIGHT)
                 .SetFontSize(10);
             document.Add(rodape);
