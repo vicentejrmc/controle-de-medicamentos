@@ -25,7 +25,11 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         }
 
         Medicamento novoMedicamento = ObterDados();
-        if (novoMedicamento == null) CadastrarRegistro();
+        if (novoMedicamento == null)
+        {
+            CadastrarRegistro();
+            return;
+        }
 
         string ehValido = novoMedicamento.Validar();
 
