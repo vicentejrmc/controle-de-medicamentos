@@ -79,7 +79,6 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
             if (operacaoEscolhida == '1')
             {
                 contexto.ExportarParaPDF();
-                Notificador.ExibirMensagem("Arquivo exportado com sucesso!", ConsoleColor.Green);
             }
             else if (operacaoEscolhida == '2')
             {
