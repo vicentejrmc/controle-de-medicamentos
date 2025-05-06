@@ -33,6 +33,13 @@ public class TelaPrincipal
         repositorioRequisicaoSaida = new RepositorioRequisicaoSaida(contexto);
     }
     
+    public void Pdf()
+    {
+        List<Medicamento> listaMedicamentos = repositorioMedicamento.SelecionarTodos(); // método que retorna a lista
+        contexto.ExportarParaPDF(listaMedicamentos);
+        Notificador.ExibirMensagem("PDF gerado com sucesso!", ConsoleColor.Green);
+    }
+
     public void ApresentarMenuPrincipal()
     {
         Console.Clear();
@@ -60,7 +67,6 @@ public class TelaPrincipal
             
             ApresentarMenuPrincipal();
         }
-
     }
 
     public ITelaCrud ObterTela()

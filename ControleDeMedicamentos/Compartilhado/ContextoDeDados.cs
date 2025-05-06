@@ -7,6 +7,15 @@ using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ModuloRequisicaoSaida;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using iText.Kernel.Colors;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace ControleDeMedicamentos.Compartilhado;
 
@@ -107,3 +116,51 @@ public class ContextoDados
     }
 }
 
+    public void ExportarParaPDF(List<Medicamento> medicamentos)
+    {
+        string nomeArquivo = $"medicamentos_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+        using (var fs = new FileStream(nomeArquivo, FileMode.Create, FileAccess.Write))
+        {
+            var writer = new PdfWriter(fs);
+            var pdf = new PdfDocument(writer);
+            var document = new Document(pdf);
+
+            // Título
+            var titulo = new Paragraph($"Lista de Medicamentos - {DateTime.Now:dd/MM/yyyy}")
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetFontSize(16);
+            document.Add(titulo);
+
+            // Tabela
+            var tabela = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 2, 3, 3, 3 }))
+                .UseAllAvailableWidth();
+
+            string[] cabecalhos = { "Id", "Nome", "Descrição", "Qtd. Estoque", "CNPJ Fornecedor", "Nome Fornecedor", "Telefone Fornecedor" };
+            foreach (var cabecalho in cabecalhos)
+                tabela.AddHeaderCell(cabecalho);
+
+            foreach (var m in medicamentos)
+            {
+                var cor = m.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
+                tabela.AddCell(new Paragraph(m.Id.ToString()).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.NomeMedicamento).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Descricao).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Quantidade.ToString()).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Fornecedor.CNPJ).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Fornecedor.Nome).SetFontColor(cor));
+                tabela.AddCell(new Paragraph(m.Fornecedor.Telefone).SetFontColor(cor));
+            }
+
+            document.Add(tabela);
+
+            // Rodapé
+            var rodape = new Paragraph($"Gerado em: {DateTime.Now:dd/MM/yyyy HH:mm:ss} | Total: {medicamentos.Count}")
+                .SetTextAlignment(TextAlignment.RIGHT)
+                .SetFontSize(10);
+            document.Add(rodape);
+
+            document.Close();
+        }
+    }
+}
