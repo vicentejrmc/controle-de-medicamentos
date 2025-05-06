@@ -83,6 +83,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
             else if (operacaoEscolhida == '2')
             {
                 contexto.ExportarParaCsv();
+                Notificador.ExibirCorDeFonte("Arquivo exportado para: C://ArquivosJson/dados-controle-de-medicamentos.csv", ConsoleColor.Yellow);
                 Notificador.ExibirMensagem("Arquivo exportado com sucesso!", ConsoleColor.Green);
             }
             else if (operacaoEscolhida == '3')
