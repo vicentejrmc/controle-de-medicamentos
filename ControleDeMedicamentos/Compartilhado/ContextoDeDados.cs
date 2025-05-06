@@ -100,19 +100,18 @@ public class ContextoDados
             Directory.CreateDirectory(pastaArmazenamento);
 
         using StreamWriter exportar = new StreamWriter(caminho);
-        exportar.WriteLine("Tipo,ID,Nome,Descrição,Qtd Estoque, CNPJ, Forncedor, Telefone Fornecedor");
+        exportar.WriteLine("ID, Nome, Descrição, Qtd Estoque, CNPJ, Forncedor, Telefone Fornecedor");
 
-        foreach (Medicamento med in Medicamentos)
+        foreach (var med in Medicamentos)
         {
-            string tipo = med.GetType().Name;
             string id = med.Id.ToString();
             string nome = med.NomeMedicamento;
             string descricao = med.Descricao;
             string qtdEstoque = med.Quantidade.ToString();
-            string cnpj = med.Fornecedor.CNPJ;
+            string cnpj = med.Fornecedor.CNPJ.ToString();
             string fornecedor = med.Fornecedor.Nome;
-            string telefoneFornecedor = med.Fornecedor.Telefone;
-            exportar.WriteLine($"{tipo},{id},{nome},{descricao},{qtdEstoque},{cnpj},{fornecedor},{telefoneFornecedor}");
+            string telefoneFornecedor = med.Fornecedor.Telefone.ToString();
+            exportar.WriteLine($"{id},  {nome},  {descricao},  {qtdEstoque},  {cnpj},  {fornecedor},  {telefoneFornecedor}");
         }
     }
 
