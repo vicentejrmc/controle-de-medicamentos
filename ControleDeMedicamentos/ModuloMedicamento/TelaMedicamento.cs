@@ -83,18 +83,16 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
             else if (operacaoEscolhida == '2')
             {
                 contexto.ExportarParaCsv();
-                Notificador.ExibirMensagem("Arquivo exportado com sucesso!", ConsoleColor.Green);
             }
             else if (operacaoEscolhida == '3')
             {
-                //contexto.ImportarCsv();
-                Notificador.ExibirMensagem("Arquivo importado com sucesso!", ConsoleColor.Green);
+                contexto.ImportarCSV(repositorioMedicamento, repositorioFornecedor);
             }
             else if (operacaoEscolhida == 'S')
                 return;
             else
             {
-                Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
+                Notificador.ExibirMensagem("Entrada Inválida! verifique a opção digitada e tente novamente.", ConsoleColor.Red);
                 MenuExportarDados();
             }
         }
