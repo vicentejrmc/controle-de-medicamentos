@@ -38,8 +38,8 @@ public class Fornecedor : EntidadeBase<Fornecedor>
         if (string.IsNullOrEmpty(Telefone))
             erros += "Erro! O campo Telefone é obrigatório.\n";
 
-        else if (!Regex.IsMatch(Telefone!.ToString(), @"^\d{2}\ \d{4,5}-\d{4}$"))
-            erros += "Erro! O campo Telefone deve estar no formato XX XXXX-XXXX ou XX XXXXX-XXXX.\n";
+        else if (!Regex.IsMatch(Telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
+            erros += "Erro! O campo Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.\n";
 
         return erros;
     }

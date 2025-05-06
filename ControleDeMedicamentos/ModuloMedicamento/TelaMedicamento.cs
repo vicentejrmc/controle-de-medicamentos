@@ -72,7 +72,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         Console.Write("Digite a Descrição Medicamento: ");
         string descricao = Console.ReadLine()! ?? string.Empty;
 
-        TelaFornecedor telaFornecedor = new TelaFornecedor(repositorioFornecedor);
+        TelaFornecedor telaFornecedor = new TelaFornecedor(repositorioFornecedor, repositorioMedicamento);
         telaFornecedor.VisualizarRegistros(false);
 
         Console.Write("Selecione o Id do Fornecedor: ");
