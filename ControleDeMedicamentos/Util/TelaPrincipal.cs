@@ -6,7 +6,6 @@ using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ModuloRequisicaoSaida;
-using iText.Kernel.Pdf.Annot;
 
 namespace ControleDeMedicamentos.Util;
 
@@ -38,7 +37,7 @@ public class TelaPrincipal
     {
         List<Medicamento> listaMedicamentos = repositorioMedicamento.SelecionarTodos(); // método que retorna a lista
         contexto.ExportarParaPDF(listaMedicamentos);
-        Console.WriteLine("PDF gerado com sucesso!");
+        Notificador.ExibirMensagem("PDF gerado com sucesso!", ConsoleColor.Green);
     }
 
     public void ApresentarMenuPrincipal()
@@ -68,7 +67,6 @@ public class TelaPrincipal
             
             ApresentarMenuPrincipal();
         }
-
     }
 
     public ITelaCrud ObterTela()

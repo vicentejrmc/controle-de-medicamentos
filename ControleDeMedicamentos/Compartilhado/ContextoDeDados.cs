@@ -89,6 +89,7 @@ public class ContextoDados
             Directory.CreateDirectory(pastaArmazenamento); 
         File.WriteAllText(caminho, json);
     }
+
     public void ExportarParaPDF(List<Medicamento> medicamentos)
     {
         string nomeArquivo = $"medicamentos_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
@@ -137,4 +138,3 @@ public class ContextoDados
         }
     }
 }
-
