@@ -90,29 +90,26 @@ public class ContextoDados
         File.WriteAllText(caminho, json);
     }
 
-    // exportar arquivos para csv
-    public void ExportarParaCsv()
+    public void ExportarParaCsv(IRepositorio<Medicamento> repositorioMedicamentos)
     {
         string caminho = Path.Combine(pastaArmazenamentoJson, "dados-controle-de-medicamentos.csv");
-
         if (!Directory.Exists(pastaArmazenamentoJson))
             Directory.CreateDirectory(pastaArmazenamentoJson);
-
         using StreamWriter exportar = new StreamWriter(caminho);
-        exportar.WriteLine("ID, Nome, Descrição, Qtd Estoque, CNPJ, Forncedor, Telefone Fornecedor");
-
+        exportar.WriteLine("ID,Nome,Descrição,Qtd Estoque,CNPJ,Forncedor,Telefone Fornecedor");
         foreach (var med in Medicamentos)
         {
             string id = med.Id.ToString();
-            string nome = med.NomeMedicamento;
+            string nome = med.NomeMedicamento.ToString();
             string descricao = med.Descricao;
             string qtdEstoque = med.Quantidade.ToString();
             string cnpj = med.Fornecedor.CNPJ.ToString();
-            string fornecedor = med.Fornecedor.Nome;
+            string fornecedor = med.Fornecedor.Nome.ToString();
             string telefoneFornecedor = med.Fornecedor.Telefone.ToString();
-            exportar.WriteLine($"{id},  {nome},  {descricao},  {qtdEstoque},  {cnpj},  {fornecedor},  {telefoneFornecedor}");
+            exportar.WriteLine($"{id},{nome},{descricao},{qtdEstoque},{cnpj},{fornecedor},{telefoneFornecedor}");
         }
     }
+
     public void ExportarParaPDF()
     {
         string caminho = Path.Combine(pastaArmazenamentoJson, "dados-controle-de-medicamentos.pdf");
