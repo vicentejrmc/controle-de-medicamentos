@@ -28,13 +28,12 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         Console.WriteLine("[S] Sair");
 
         Console.Write("\nEscolha uma das opções: ");
-        string opcao = Console.ReadLine() ?? string.Empty;
-        if (opcao.Length > 0)
-        {
-            char operacaoEscolhida = Convert.ToChar(opcao[0]);
+        string opcao = Console.ReadLine()!.ToUpper() ?? string.Empty;
+        
+        char operacaoEscolhida = Convert.ToChar(opcao[0]);
 
-            EscolherOpcao(operacaoEscolhida);
-        }      
+        EscolherOpcao(operacaoEscolhida);
+  
     }
 
     public void EscolherOpcao(char operacao)

@@ -108,10 +108,10 @@ public class ContextoDados
             string telefoneFornecedor = med.Fornecedor.Telefone.ToString();
             exportar.WriteLine($"{id},{nome},{descricao},{qtdEstoque},{cnpj},{fornecedor},{telefoneFornecedor}");
         }
+        Notificador.ExibirCorDeFonte("Arquivo exportado para: C://ArquivosJson/dados-controle-de-medicamentos.csv", ConsoleColor.Yellow);
+        Notificador.ExibirMensagem("Arquivo exportado com sucesso", ConsoleColor.Green);     
 
-        Notificador.ExibirMensagem("Arquivo exportado com sucesso", ConsoleColor.Green);
     }
-
     public void ExportarParaPDF()
     {
         string caminho = Path.Combine(pastaArmazenamentoJson, "dados-controle-de-medicamentos.pdf");
