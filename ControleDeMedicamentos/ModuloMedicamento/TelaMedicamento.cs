@@ -88,7 +88,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
             }
             else if (operacaoEscolhida == '3')
             {
-                //contexto.ImportarCsv();
+                contexto.ImportarCSV(repositorioMedicamento, repositorioFornecedor);
                 Notificador.ExibirMensagem("Arquivo importado com sucesso!", ConsoleColor.Green);
             }
             else if (operacaoEscolhida == 'S')
