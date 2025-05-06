@@ -30,7 +30,7 @@ public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
 
         registros.Add(novoRegistro);
 
-        contexto.Salvar();
+        contexto.SalvarJson();
 
     }
 
@@ -42,7 +42,7 @@ public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
             {
                 entidade.AtualizarRegistro(registroEditado);
 
-                contexto.Salvar();
+                contexto.SalvarJson();
 
                 return true;
             }
@@ -59,7 +59,7 @@ public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
         {
             registros.Remove(registroSelecionado);
 
-            contexto.Salvar();
+            contexto.SalvarJson();
 
             return true;
         }
