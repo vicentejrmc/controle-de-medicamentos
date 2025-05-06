@@ -131,8 +131,27 @@ public class TelaRequisicaoSaida : TelaBase<RequisicaoSaida>, ITelaCrud
                 quantidadeDeMedicamentos.Add(quantidade);
                 m.RemoverEstoque(quantidade);
             }
-        }        
+        } 
+        
         RequisicaoSaida requisicaoSaida = new RequisicaoSaida(data, idPaciente, idPrescricao, quantidadeDeMedicamentos, prescricao.MedicamentosDaPrescricao);
+
+        Console.WriteLine();
+        for (int i = 0; i < prescricao.MedicamentosDaPrescricao.Count; i++)
+        {
+            Medicamento m = prescricao.MedicamentosDaPrescricao[i];
+            if (m.Quantidade < 20)
+            {
+                Notificador.ExibirCorDeFonte($"Medicamento {m.NomeMedicamento} com estoque menor que 20un. Marcado como: 'Em Falta.'", ConsoleColor.DarkYellow);
+                Notificador.ExibirCorDeFonte($"Recomenda-se uma nova Requisição de entrada do Medicamento {m.NomeMedicamento} antes que o estoque chegue a 0", ConsoleColor.Yellow);
+            }
+            Console.WriteLine();
+            if(m.Quantidade == 0)
+            {
+                Notificador.ExibirCorDeFonte($"Medicamento {m.NomeMedicamento} sem estoque..'", ConsoleColor.Red);
+                Notificador.ExibirCorDeFonte($"Recomenda-se uma nova Requisição de entrada do Medicamento {m.NomeMedicamento}", ConsoleColor.Red);
+            }
+        }
+
         return requisicaoSaida;
 
     }

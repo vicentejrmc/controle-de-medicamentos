@@ -77,7 +77,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
         for (int i = 0; i < quantidadeMedicamentos; i++)
         {
-            Console.Write($"Digite o id do {i}° Medicamento: ");
+            Console.Write($"Digite o id do {i + 1}° Medicamento: ");
             int idMedicamento = Convertor.ConverterStringParaInt();
             if (idMedicamento == 0) return null;
 
