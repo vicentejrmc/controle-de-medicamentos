@@ -7,6 +7,15 @@ using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ModuloRequisicaoSaida;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using iText.Kernel.Colors;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace ControleDeMedicamentos.Compartilhado;
 
@@ -79,6 +88,65 @@ public class ContextoDados
         if (!Directory.Exists(pastaArmazenamento)) 
             Directory.CreateDirectory(pastaArmazenamento); 
         File.WriteAllText(caminho, json);
+    }
+    public void ExportarParaPDF(List<Medicamento> medicamentos)
+    {
+        string dataHora = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        string nomeArquivo = $"medicamentos_{dataHora}.pdf";
+
+        using (FileStream fs = new FileStream(nomeArquivo, FileMode.Create, FileAccess.Write))
+        {
+            PdfWriter writer = new PdfWriter(fs);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            // Título
+            string dataTitulo = DateTime.Now.ToString("dd/MM/yyyy");
+            Paragraph titulo = new Paragraph($"Lista de Medicamentos - {dataTitulo}")
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetFontSize(16);
+            document.Add(titulo);
+
+            document.Add(new Paragraph("\n")); // Espaço entre título e tabela
+
+            // Tabela
+            Table tabela = new Table(UnitValue.CreatePercentArray(new float[] { 1, 3, 4, 2, 3, 3, 3 }))
+                .UseAllAvailableWidth();
+
+            // Cabeçalho
+            string[] cabecalhos = { "Id", "Nome", "Descrição", "Qtd. Estoque", "CNPJ Fornecedor", "Nome Fornecedor", "Telefone Fornecedor" };
+            foreach (var cabecalho in cabecalhos)
+            {
+                tabela.AddHeaderCell(new Cell().Add(new Paragraph(cabecalho)));
+            }
+
+            // Dados
+            foreach (var med in medicamentos)
+            {
+                Color corTexto = med.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
+
+                tabela.AddCell(new Cell().Add(new Paragraph(med.Id.ToString()).SetFontColor(corTexto)));
+                tabela.AddCell(new Cell().Add(new Paragraph(med.NomeMedicamento).SetFontColor(corTexto)));
+                tabela.AddCell(new Cell().Add(new Paragraph(med.Descricao).SetFontColor(corTexto)));
+                tabela.AddCell(new Cell().Add(new Paragraph(med.Quantidade.ToString()).SetFontColor(corTexto)));
+                tabela.AddCell(new Cell().Add(new Paragraph(med.Fornecedor.CNPJ).SetFontColor(corTexto)));
+                tabela.AddCell(new Cell().Add(new Paragraph(med.Fornecedor.Nome).SetFontColor(corTexto)));
+                tabela.AddCell(new Cell().Add(new Paragraph(med.Fornecedor.Telefone).SetFontColor(corTexto)));
+            }
+
+            document.Add(tabela);
+
+            document.Add(new Paragraph("\n")); // Espaço entre tabela e rodapé
+
+            // Rodapé
+            string dataHoraRodape = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            Paragraph rodape = new Paragraph($"Relatório gerado em: {dataHoraRodape} | Total de registros: {medicamentos.Count}")
+                .SetTextAlignment(TextAlignment.RIGHT)
+                .SetFontSize(10);
+            document.Add(rodape);
+
+            document.Close();
+        }
     }
 }
 
