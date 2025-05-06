@@ -89,30 +89,29 @@ public class ContextoDados
             Directory.CreateDirectory(pastaArmazenamentoJson); 
         File.WriteAllText(caminho, json);
     }
-    public void ExportarParaCsv()
+
+    public void ExportarParaCsv(IRepositorio<Medicamento> repositorioMedicamentos)
     {
         string caminho = Path.Combine(pastaArmazenamentoJson, "dados-controle-de-medicamentos.csv");
-
         if (!Directory.Exists(pastaArmazenamentoJson))
             Directory.CreateDirectory(pastaArmazenamentoJson);
-
         using StreamWriter exportar = new StreamWriter(caminho);
-        exportar.WriteLine("ID, Nome, Descrição, Qtd Estoque, CNPJ, Forncedor, Telefone Fornecedor");
-
+        exportar.WriteLine("ID,Nome,Descrição,Qtd Estoque,CNPJ,Forncedor,Telefone Fornecedor");
         foreach (var med in Medicamentos)
         {
             string id = med.Id.ToString();
-            string nome = med.NomeMedicamento;
+            string nome = med.NomeMedicamento.ToString();
             string descricao = med.Descricao;
             string qtdEstoque = med.Quantidade.ToString();
             string cnpj = med.Fornecedor.CNPJ.ToString();
-            string fornecedor = med.Fornecedor.Nome;
+            string fornecedor = med.Fornecedor.Nome.ToString();
             string telefoneFornecedor = med.Fornecedor.Telefone.ToString();
-            exportar.WriteLine($"{id},  {nome},  {descricao},  {qtdEstoque},  {cnpj},  {fornecedor},  {telefoneFornecedor}");
+            exportar.WriteLine($"{id},{nome},{descricao},{qtdEstoque},{cnpj},{fornecedor},{telefoneFornecedor}");
         }
 
         Notificador.ExibirMensagem("Arquivo exportado com sucesso", ConsoleColor.Green);
     }
+
     public void ExportarParaPDF()
     {
         string caminho = Path.Combine(pastaArmazenamentoJson, "dados-controle-de-medicamentos.pdf");
@@ -139,7 +138,7 @@ public class ContextoDados
 
         foreach (Medicamento med in Medicamentos)
         {
-            var cor = med.Quantidade < 5 ? ColorConstants.RED : ColorConstants.BLACK;
+            var cor = med.Quantidade < 20 ? ColorConstants.RED : ColorConstants.BLACK;
             tabela.AddCell(new Paragraph(med.Id.ToString()).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.NomeMedicamento).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.Descricao).SetFontColor(cor));
@@ -280,8 +279,6 @@ public class ContextoDados
 
                 Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
             }
-            
-
         }
     }
 
@@ -313,5 +310,3 @@ public class ContextoDados
         return dados.ToArray();
     }
 }
-
-        

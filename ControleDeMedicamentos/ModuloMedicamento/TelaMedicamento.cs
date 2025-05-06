@@ -82,7 +82,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
             }
             else if (operacaoEscolhida == '2')
             {
-                contexto.ExportarParaCsv();
+                contexto.ExportarParaCsv(repositorioMedicamento);
             }
             else if (operacaoEscolhida == '3')
             {
