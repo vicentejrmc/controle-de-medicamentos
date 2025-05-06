@@ -114,7 +114,6 @@ public class ContextoDados
             exportar.WriteLine($"{tipo},{id},{nome},{descricao},{qtdEstoque},{cnpj},{fornecedor},{telefoneFornecedor}");
         }
     }
-}
 
     public void ExportarParaPDF(List<Medicamento> medicamentos)
     {
