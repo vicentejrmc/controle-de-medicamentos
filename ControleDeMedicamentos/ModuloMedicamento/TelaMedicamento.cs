@@ -15,6 +15,91 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         this.repositorioFornecedor = repositorioFornecedor;
     }
 
+    public void ApresentarMenuMedicamentos()
+    {
+        Console.Clear();
+        ExibirCabecalho();
+        Console.WriteLine("Selecione uma opção:");
+        Console.WriteLine("[1] Cadastrar Medicamento");
+        Console.WriteLine("[2] Editar Medicamento");
+        Console.WriteLine("[3] Excluir Medicamento");
+        Console.WriteLine("[4] Visualizar Medicamentos");
+        Console.WriteLine("[5] Import/Export Dados");
+        Console.WriteLine("[S] Sair");
+
+        Console.Write("\nEscolha uma das opções: ");
+        string opcao = Console.ReadLine() ?? string.Empty;
+        if (opcao.Length > 0)
+        {
+            char operacaoEscolhida = Convert.ToChar(opcao[0]);
+
+            EscolherOpcao(operacaoEscolhida);
+        }      
+    }
+
+    public void EscolherOpcao(char operacao)
+    {
+        if (operacao == '1')
+            CadastrarRegistro();
+        else if (operacao == '2')
+            EditarRegistro();
+        else if (operacao == '3')
+            ExcluirRegistro();
+        else if (operacao == '4')
+            VisualizarRegistros(true);
+        else if (operacao == '5')
+            MenuExportarDados();
+        else if (operacao == 'S')
+            return;
+        else
+        {
+            Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
+            ApresentarMenuMedicamentos();
+        }
+    }
+
+    private void MenuExportarDados()
+    {
+        Console.Clear();
+        ExibirCabecalho();
+        Console.WriteLine("Selecione uma opção:");
+        Console.WriteLine("[1] Exportar PDF");
+        Console.WriteLine("[2] Exportar CSV");
+        Console.WriteLine("[3] Importar CSV");
+
+        Console.WriteLine("[S] Sair");
+
+        Console.Write("\nEscolha uma das opções: ");
+        string opcao = Console.ReadLine() ?? string.Empty;
+        if (opcao.Length > 0)
+        {
+            char operacaoEscolhida = Convert.ToChar(opcao[0]);
+            ContextoDados contexto = new ContextoDados(true);
+
+            if (operacaoEscolhida == '1')
+            {
+                contexto.ExportarParaPDF();
+            }
+            else if (operacaoEscolhida == '2')
+            {
+                contexto.ExportarParaCsv();
+                Notificador.ExibirMensagem("Arquivo exportado com sucesso!", ConsoleColor.Green);
+            }
+            else if (operacaoEscolhida == '3')
+            {
+                //contexto.ImportarCsv();
+                Notificador.ExibirMensagem("Arquivo importado com sucesso!", ConsoleColor.Green);
+            }
+            else if (operacaoEscolhida == 'S')
+                return;
+            else
+            {
+                Notificador.ExibirMensagem("Entrada Invalida! vefirique a opção digitada e tente novamente.", ConsoleColor.Red);
+                MenuExportarDados();
+            }
+        }
+    }
+
     public override void CadastrarRegistro()
     {
         ExibirCabecalho();

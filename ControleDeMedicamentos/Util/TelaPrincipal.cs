@@ -60,7 +60,6 @@ public class TelaPrincipal
             
             ApresentarMenuPrincipal();
         }
-
     }
 
     public ITelaCrud ObterTela()
