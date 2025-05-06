@@ -22,19 +22,11 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         Funcionario novoFuncionario = ObterDados();
         if (novoFuncionario == null) CadastrarRegistro();
         string erros = novoFuncionario.Validar();
+
         if (erros.Length > 0)
         {
             Notificador.ExibirMensagem(erros, ConsoleColor.Red);
             return;
-        }
-
-        foreach (Funcionario funcionario in repositorioFuncionario.SelecionarTodos()) // Validação de CPF
-        {
-            if (funcionario.CPF == novoFuncionario.CPF)
-            {
-                Notificador.ExibirMensagem("Erro! CPF já cadastrado.", ConsoleColor.Red);
-                return;
-            }
         }
 
         repositorioFuncionario.CadastrarRegistro(novoFuncionario);
@@ -56,7 +48,14 @@ public class TelaFuncionario : TelaBase<Funcionario>, ITelaCrud
         string telefone = Console.ReadLine()! ?? string.Empty;
 
         Funcionario funcionario = new Funcionario(nome, cpf, telefone);
-
+        foreach (var item in repositorioFuncionario.SelecionarTodos()) // Validação de CPF
+        {
+            if (item.CPF == funcionario.CPF)
+            {
+                Notificador.ExibirMensagem("Erro! CPF já cadastrado.", ConsoleColor.Red);
+                return null;
+            }
+        }
         return funcionario;
     }
 

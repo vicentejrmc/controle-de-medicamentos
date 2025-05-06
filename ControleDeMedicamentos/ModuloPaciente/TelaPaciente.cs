@@ -24,7 +24,11 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 
         Paciente novoRegistro = ObterDados();
 
-        if (novoRegistro == null) CadastrarRegistro();
+        if (novoRegistro == null)
+        {
+            CadastrarRegistro();
+            return;
+        }
 
         string erros = novoRegistro.Validar();
 

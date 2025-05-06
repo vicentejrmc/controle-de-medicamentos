@@ -101,6 +101,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine();
 
         T registroEditado = ObterDados();
+        if (registroEditado == null) return;
 
         bool conseguiuEditar = repositorio.EditarRegistro(idRegistro, registroEditado);
 
