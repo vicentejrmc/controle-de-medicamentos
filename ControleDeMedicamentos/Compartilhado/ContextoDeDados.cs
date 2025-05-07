@@ -249,6 +249,7 @@ public class ContextoDados
                 {
                     Medicamento medicamento = new Medicamento(nome, descricao, fornecedor1, quantidade);
                     repositorioMedicamentos.CadastrarRegistro(medicamento);
+                    medicamento.Id = id;
                 } else
                 {
                     foreach (var i in medicamentosRegistrados)
@@ -262,9 +263,11 @@ public class ContextoDados
                         }
                         else if (nome == i.NomeMedicamento)
                         {
+                            Console.WriteLine();
                             i.AdicionarEstoque(quantidade);
-                            Console.WriteLine($"Já possuímos o remédio {nome}, sua quantidade de {quantidade} foi adicionada ao nosso estoque de {i.Quantidade - quantidade} \n" +
-                                $"Agora o estoque é de {i.Quantidade}");
+                            Notificador.ExibirCorDeFonte($"Já possuímos o remédio {nome}, sua quantidade de {quantidade} foi adicionada ao nosso estoque de {i.Quantidade - quantidade} \n" +
+                                $"Agora o estoque é de {i.Quantidade}", ConsoleColor.DarkCyan);
+                            Console.WriteLine();
                             break;
                         }
                         else
