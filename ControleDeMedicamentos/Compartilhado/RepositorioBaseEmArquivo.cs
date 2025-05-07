@@ -58,11 +58,23 @@ public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
         if (registroSelecionado != null)
         {
             registros.Remove(registroSelecionado);
+            int maiorId = 0;
+            foreach (var registro in registros)
+            {
+                if (registro.Id > maiorId)
+                    maiorId = registro.Id;
+            }
+            contadorIds = maiorId;
 
             contexto.SalvarJson();
-
             return true;
+
+            
         }
+           // metodo para garantir que o Id virá corretamente ordenado quando recuperarmos os arquivos
+        
+
+        
 
         return false;
     }
