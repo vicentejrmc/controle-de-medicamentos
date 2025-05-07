@@ -161,8 +161,6 @@ public class ContextoDados
     }
     public void ImportarCSV(IRepositorio<Medicamento> repositorioMedicamentos, IRepositorio<Fornecedor> repositorioFornecedor)
     {
-        List<Medicamento> medicamentosRegistrados = repositorioMedicamentos.SelecionarTodos();
-        List<Fornecedor> FornecedoresRegistrados = repositorioFornecedor.SelecionarTodos();
 
         Console.WriteLine("Digite o Caminho do seu aquivo CSV, Ex: (C:\\Users\\Public)");
         string caminho = Console.ReadLine()!.Trim('"');
@@ -216,7 +214,7 @@ public class ContextoDados
                 }
 
                 int idFornecedor = 0;
-                if(FornecedoresRegistrados.Count == 0)
+                if(Fornecedores.Count == 0)
                 {
                     Fornecedor fornecedor = new Fornecedor(nomeFornecedor, CNPJ, telefone);
                     repositorioFornecedor.CadastrarRegistro(fornecedor);
@@ -224,41 +222,46 @@ public class ContextoDados
                     
                 } else
                 {
-                    foreach (var i in FornecedoresRegistrados)
+                    bool temId = false;
+                    foreach (var i in Fornecedores)
                     {
                         if (CNPJ == i.CNPJ)
                         {
                             i.Nome = nomeFornecedor;
                             i.Telefone = telefone;
                             idFornecedor = i.Id;
+                            temId = true;
+                            repositorioFornecedor.EditarRegistro(id, i);
                             break;
-                        }
-                        else
-                        {
-                            Fornecedor fornecedor = new Fornecedor(nomeFornecedor, CNPJ, telefone);
-                            repositorioFornecedor.CadastrarRegistro(fornecedor);
-                            idFornecedor = fornecedor.Id;
-                            break;
-                        }
+                        }                                             
+                    }
+                    if(!temId)
+                    {
+                        Fornecedor fornecedor = new Fornecedor(nomeFornecedor, CNPJ, telefone);
+                        repositorioFornecedor.CadastrarRegistro(fornecedor);
+                        idFornecedor = fornecedor.Id;
                     }
                 }
                     
                 Fornecedor fornecedor1 = repositorioFornecedor.SelecionarRegistroPorId(idFornecedor);
                 
-                if(medicamentosRegistrados.Count == 0)
+                if(Medicamentos.Count == 0)
                 {
                     Medicamento medicamento = new Medicamento(nome, descricao, fornecedor1, quantidade);
                     repositorioMedicamentos.CadastrarRegistro(medicamento);
                     medicamento.Id = id;
                 } else
                 {
-                    foreach (var i in medicamentosRegistrados)
+                    bool temId = false;
+                    foreach (var i in Medicamentos)
                     {
                         if (id == i.Id)
                         {
                             i.NomeMedicamento = nome;
                             i.Descricao = descricao;
                             i.Quantidade = quantidade;
+                            temId = true;
+                            repositorioMedicamentos.EditarRegistro(id, i);
                             break;
                         }
                         else if (nome == i.NomeMedicamento)
@@ -268,20 +271,22 @@ public class ContextoDados
                             Notificador.ExibirCorDeFonte($"Já possuímos o remédio {nome}, sua quantidade de {quantidade} foi adicionada ao nosso estoque de {i.Quantidade - quantidade} \n" +
                                 $"Agora o estoque é de {i.Quantidade}", ConsoleColor.DarkCyan);
                             Console.WriteLine();
+                            repositorioMedicamentos.EditarRegistro(id, i);
                             break;
                         }
-                        else
-                        {
-                            Medicamento medicamento = new Medicamento(nome, descricao, fornecedor1, quantidade);
-                            repositorioMedicamentos.CadastrarRegistro(medicamento);
-                            break;
-                        }
+                    }
+
+                    if(!temId)
+                    {
+                        Medicamento medicamento = new Medicamento(nome, descricao, fornecedor1, quantidade);
+                        repositorioMedicamentos.CadastrarRegistro(medicamento);
                     }
                 }
                     
 
-                Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
+                
             }
+            Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
         }
     }
 
