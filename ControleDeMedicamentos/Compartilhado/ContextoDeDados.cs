@@ -275,10 +275,8 @@ public class ContextoDados
                         }
                     }
                 }
-                    
-
-                Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
             }
+            Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
         }
     }
 
