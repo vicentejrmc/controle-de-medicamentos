@@ -282,9 +282,6 @@ public class ContextoDados
                         repositorioMedicamentos.CadastrarRegistro(medicamento);
                     }
                 }
-                    
-
-                
             }
             Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
         }
