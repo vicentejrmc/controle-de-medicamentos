@@ -88,7 +88,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine();
 
         VisualizarRegistros(false);
-
+        if (repositorio.SelecionarTodos().Count == 0) return;
         Console.Write("Digite o ID do registro que deseja selecionar: ");
         int idRegistro = Convertor.ConverterStringParaInt();
         if (idRegistro == 0) return;
