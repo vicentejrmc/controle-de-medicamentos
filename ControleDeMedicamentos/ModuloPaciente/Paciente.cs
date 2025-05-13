@@ -23,6 +23,11 @@ public class Paciente : EntidadeBase<Paciente>
         CartaoSUS = resgitroEditado.CartaoSUS;
     }
 
+    public override string ToString()
+    {
+        return $"Id: {Id}, Nome: {Nome}, Telefone: {Telefone}, CartaoSus: {CartaoSUS}";
+    }
+
     public override string Validar()
     {
         string erros = "";
