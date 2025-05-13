@@ -11,53 +11,26 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args); // argumentos do programa podem ser passados no CreateBuilder ((args) rede de strings)
 
+        WebApplication app  = builder.Build(); 
 
-        while (true)
-        {
-            telaPrincipal.ApresentarMenuPrincipal();
+        app.MapGet("/", PaginaInicial); // dado uma rota ele execulta uma ação (' "/" rota incial ', "MetodoCriado")
 
-            ITelaCrud telaSelecionada = telaPrincipal.ObterTela();
+        app.MapGet("/pacientes/visualizar", VisualizarFabricantes);
 
-            if (telaSelecionada is TelaRequisicaoEntrada)
-            {
-                TelaRequisicaoEntrada telaRequisicaoEntrada = (TelaRequisicaoEntrada)telaSelecionada;
-                telaRequisicaoEntrada.ApresentarMenuRequisicaoEntrada();
-                continue;
-            }
-            if(telaSelecionada is TelaPrescricaoMedica)
-            {
-                TelaPrescricaoMedica telaPrescricaoMedica = (TelaPrescricaoMedica)telaSelecionada;
-                telaPrescricaoMedica.ApresentarMenuPrescricaoMedica();
-                continue;
-            }
-            if(telaSelecionada is TelaRequisicaoSaida)
-            {
-                TelaRequisicaoSaida telaRequisicaoSaida = (TelaRequisicaoSaida)telaSelecionada;
-                telaRequisicaoSaida.ApresentarMenuSaida();
-                continue;
-            }
-            if(telaSelecionada is TelaMedicamento)
-            {
-                TelaMedicamento telaMedicamento = (TelaMedicamento)telaSelecionada;
-                telaMedicamento.ApresentarMenuMedicamentos();
-                continue;
-            }
-            if (telaSelecionada is null)
-                break;
+        app.Run(); // Run() funciona como um loop infinito do servidor, enquando o navegador estiver aberto ele funcionara
+    }
 
-            char opcaoEscolhida = telaSelecionada.ApresentarMenu();
+    static Task VisualizarFabricantes(HttpContext context)
+    {
+        throw new NotImplementedException();
+    }
 
-            switch (opcaoEscolhida)
-            {
-                case '1': telaSelecionada.CadastrarRegistro(); break;
-                case '2': telaSelecionada.EditarRegistro(); break;
-                case '3': telaSelecionada.ExcluirRegistro(); break;
-                case '4': telaSelecionada.VisualizarRegistros(true); break;
+    static Task PaginaInicial(HttpContext context)
+    {
+        string conteudo = File.ReadAllText("Html/PaginaInicial.html"); // O ReadAllText lê o testo e passa para uma string
 
-                default: break;
-            }
-        }
+        return context.Response.WriteAsync(conteudo);   // Retorna a resposta
     }
 }
