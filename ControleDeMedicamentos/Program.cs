@@ -22,6 +22,9 @@ public class Program
         app.MapGet("/pacientes/cadastrar", ExibirFormularioCadastroPaciente);
         app.MapPost("/pacientes/cadastrar", CadastrarFabricante);
 
+        app.MapGet("/pacientes/editar/{id:int}", ExibirFormularioEdicaoPaciente);
+        app.MapPost("/pacientes/editar/{id:int}", EditarPaciente);
+
         app.MapGet("/pacientes/visualizar", VisualizarFabricantes);
        
 
@@ -59,6 +62,55 @@ public class Program
         return context.Response.WriteAsync(conteudoSting);
     }
 
+    static Task ExibirFormularioEdicaoPaciente(HttpContext context)
+    {
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
+
+        int id = Convert.ToInt32(context.GetRouteValue("id"));
+
+        Paciente pacienteSelecionado  = repositorioPaciente.SelecionarRegistroPorId(id);
+
+        string conteudo = File.ReadAllText("ModuloPaciente/Html/Editar.html");
+
+        StringBuilder sb = new StringBuilder(conteudo);
+
+        sb.Replace("#id#", pacienteSelecionado.Id.ToString());
+        sb.Replace("#nome#", pacienteSelecionado.Nome);
+        sb.Replace("#telefone#", pacienteSelecionado.Telefone);
+        sb.Replace("#cartaoSus#", pacienteSelecionado.CartaoSUS);
+
+        string conteudoString = sb.ToString();
+
+        return context.Response.WriteAsync(conteudoString);
+    }
+
+    static Task EditarPaciente(HttpContext context)
+    {
+        int id = Convert.ToInt32(context.GetRouteValue("id"));
+
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
+
+        string nome = context.Request.Form["nome"].ToString();
+        string telefone = context.Request.Form["telefone"].ToString();
+        string cartaoSus = context.Request.Form["cartaoSus"].ToString();
+
+        Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus);
+
+        repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
+
+        string conteudo = File.ReadAllText("Compartilhado/Html/Notificacao.html");
+
+        StringBuilder sb = new StringBuilder(conteudo);
+
+        sb.Replace("#mensagem#", $"O Registro \"{pacienteAtualizado.Nome}\" foi Editado com sucesso!");
+
+        string conteudoSting = sb.ToString();
+
+        return context.Response.WriteAsync(conteudoSting);
+    }
+
     static Task PaginaInicial(HttpContext context)
     {
         string conteudo = File.ReadAllText("Compartilhado/Html/PaginaInicial.html"); // O ReadAllText lê o testo e passa para uma string
@@ -79,7 +131,7 @@ public class Program
 
         foreach (Paciente p in paciente)
         {
-            string intemLista = $"<li>{p.ToString()} <a>Editar</a> / <a>Excluir</a> </li> #paciente#";
+            string intemLista = $"<li>{p.ToString()} <a href=\"/pacientes/editar/{p.Id}\">Editar</a> / <a href=\"/pacientes/excluir/{p.Id}\">Excluir</a> </li> #paciente#";
 
             stringBuilder.Replace("#paciente#", intemLista);
         }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title> Cadastro de Pacientes - Controle de Medicamentos</title>
+    <title> Edição de Pacientes - Controle de Medicamentos</title>
 </head>
 <body>
 
@@ -10,25 +10,25 @@
 
     <h3>Edição de Pacientes</h3>
 
-     <form action="/pacientes/editar" method="post"> <!--Formularios-->
+     <form action="/pacientes/editar/#id#" method="post"> <!--passando o valor de forma dinamica com #id#-->
 
             <label>Nome do Paciente:</label>
             <br />
-            <input type="text" name="nome" value="" />
+            <input type="text" name="nome" value="#nome#" />
             <br />  
                 
             <label>Telefone do Paciente:</label>
             <br />
-            <input type="text" name="telefone" value="" />
+            <input type="text" name="telefone" value="#telefone#" />
             <br />
 
             <label>Catão Sus do Paciente:</label>
             <br />
-            <input type="text" name="cartaoSus" value="" />
+            <input type="text" name="cartaoSus" value="#cartaoSus#" />
             <br />
             <hr />
 
-            <button type="submit">Inserir</button>
+            <button type="submit">Gravar</button>
      </form>
 
 </body>
