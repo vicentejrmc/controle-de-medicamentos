@@ -8,28 +8,31 @@
 
     <h1>Controle de Medicamentos</h1>
 
+
+
     <h3>Edição de Pacientes</h3>
 
-     <form action="/pacientes/editar/#id#" method="post"> <!--passando o valor de forma dinamica com #id#-->
+    <form action="/pacientes/editar/#id#" method="post">
+        <!--passando o valor de forma dinamica com #id#-->
 
-            <label>Nome do Paciente:</label>
-            <br />
-            <input type="text" name="nome" value="#nome#" />
-            <br />  
-                
-            <label>Telefone do Paciente:</label>
-            <br />
-            <input type="text" name="telefone" value="#telefone#" />
-            <br />
+        <label>Nome do Paciente:</label>
+        <br />
+        <input type="text" name="nome" value="#nome#" />
+        <br />
 
-            <label>Catão Sus do Paciente:</label>
-            <br />
-            <input type="text" name="cartaoSus" value="#cartaoSus#" />
-            <br />
-            <hr />
+        <label>Telefone do Paciente:</label>
+        <br />
+        <input type="text" name="telefone" value="#telefone#" />
+        <br />
 
-            <button type="submit">Gravar</button>
-     </form>
+        <label>Catão Sus do Paciente:</label>
+        <br />
+        <input type="text" name="cartaoSus" value="#cartaoSus#" />
+        <br />
+        <hr />
+
+        <button type="submit">Gravar</button>    <button> <a href="/">Voltar</a></button>
+    </form>
 
 </body>
 </html>
