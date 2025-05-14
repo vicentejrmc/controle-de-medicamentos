@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.Extensions;
 using ControleDeMedicamentos.Models;
 using ControleDeMedicamentos.ModuloPaciente;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +28,9 @@ namespace ControleDeMedicamentos.Controllers
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
 
-            Paciente novoPaciente = new Paciente(
-             cadastrarVM.Nome,
-             cadastrarVM.Telefone,
-             cadastrarVM.CartaoSus
-            );
+            Paciente novoPaciente = cadastrarVM.ParaEntidade();  // usando o método de estensão,
+            // asseguramos de que os dados que forem passados virão da forma correta
+            //sem o risco de que sejam passados em uma ordem errada. da qual deve ser instanciada no construtor da entidade
 
             repositorioPaciente.CadastrarRegistro(novoPaciente);
 

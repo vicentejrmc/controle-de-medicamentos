@@ -1,4 +1,5 @@
-﻿using ControleDeMedicamentos.ModuloPaciente;
+﻿using ControleDeMedicamentos.Extensions;
+using ControleDeMedicamentos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.Models
 {
@@ -56,10 +57,7 @@ namespace ControleDeMedicamentos.Models
         {
             foreach (Paciente p in pacientes)
             {
-                DetalhesPacienteViewModel detalhesVM = new DetalhesPacienteViewModel(
-                  p.Id, p.Nome, p.Telefone, p.CartaoSus      
-                );
-
+                DetalhesPacienteViewModel detalhesVM = p.ParaDetalhesVM(); // Método de extenção 
                 Registros.Add(detalhesVM);
             }
         }
