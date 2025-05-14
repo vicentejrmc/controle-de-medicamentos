@@ -59,7 +59,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
         List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
         foreach (var p in pacientes)
         {
-            if (p.CartaoSUS == cartao)
+            if (p.CartaoSus == cartao)
             {
                 Notificador.ExibirMensagem("Erro! Cartão SUS já cadastrado.", ConsoleColor.Red);
                 return null!;
@@ -95,7 +95,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 
             Console.WriteLine(
                 "{0, -6} | {1, -12} | {2, -15} | {3, -30}",
-                p.Id, p.Nome, p.Telefone, p.CartaoSUS
+                p.Id, p.Nome, p.Telefone, p.CartaoSus
             );
         }
 

@@ -7,28 +7,23 @@ public class Paciente : EntidadeBase<Paciente>
 {
     public string Nome { get; set; }
     public string Telefone { get; set; }
-    public string CartaoSUS { get; set; }
+    public string CartaoSus { get; set; }
 
 
     public Paciente() {}
 
-    public Paciente(string nome, string telefone, string cartaoSUS)
+    public Paciente(string nome, string telefone, string cartaoSUS) : this()
     {
         Nome = nome;
         Telefone = telefone;
-        CartaoSUS = cartaoSUS;
+        CartaoSus = cartaoSUS;
     }
 
     public override void AtualizarRegistro(Paciente resgitroEditado)
     {
         Nome = resgitroEditado.Nome;
         Telefone = resgitroEditado.Telefone;
-        CartaoSUS = resgitroEditado.CartaoSUS;
-    }
-
-    public override string ToString()
-    {
-        return $"Id: {Id}, Nome: {Nome}, Telefone: {Telefone}, CartaoSus: {CartaoSUS}";
+        CartaoSus = resgitroEditado.CartaoSus;
     }
 
     public override string Validar()
@@ -41,10 +36,10 @@ public class Paciente : EntidadeBase<Paciente>
         else if (Nome.Length < 3 || Nome.Length > 100)
             erros += "Erro! O campo Nome deve ter entre 3 e 100 caracteres.\n";
 
-        if (string.IsNullOrEmpty(CartaoSUS))
+        if (string.IsNullOrEmpty(CartaoSus))
             erros += "Erro! O campo Cartão do SUS é obrigatório.\n";
 
-        else if (CartaoSUS.Length != 15)
+        else if (CartaoSus.Length != 15)
             erros += "Erro! O campo Cartão do SUS deve ter exatamente 15 caracteres.\n";
 
         if (string.IsNullOrEmpty(Telefone))

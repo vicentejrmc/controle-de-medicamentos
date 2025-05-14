@@ -1,6 +1,7 @@
-﻿@using ControleDeMedicamentos.ModuloPaciente
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloPaciente
 
-@model List<Paciente>;
+@model VisualizarPacientesViewModel;
 
 <!DOCTYPE html>
 <html>
@@ -13,12 +14,12 @@
     <h1>Controle de Medicamentos</h1>
 
     <button> <a href="/">Voltar</a></button>
-    <button> <a href="pacientes/cadastrar">Cadastrar Paciente</a></button>
+    <button> <a href="/pacientes/cadastrar">Cadastrar Paciente</a></button>
 
     <h3>Visualizando de Pacientes</h3>
 
     <ul>
-        @foreach(Paciente p in Model)
+        @foreach(DetalhesPacienteViewModel p in Model.Registros)
         {
             <li>@p.ToString() <a href="/pacientes/editar/@p.Id">Editar</a> /
                  <a href="/pacientes/excluir/@p.Id">Excluir</a> </li>

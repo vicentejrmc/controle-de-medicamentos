@@ -1,6 +1,7 @@
-﻿@using ControleDeMedicamentos.ModuloPaciente
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloPaciente
 
-@model Paciente;
+@model EditarPacienteViewModel;
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,7 @@
 
         <label>Catão Sus do Paciente:</label>
         <br />
-        <input type="text" name="cartaoSus" value="@Model.CartaoSUS" />
+        <input type="text" name="cartaoSus" value="@Model.CartaoSus" />
         <br />
         <hr />
 
