@@ -1,6 +1,7 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloPaciente;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace ControleDeMedicamentos.Controllers
@@ -12,7 +13,7 @@ namespace ControleDeMedicamentos.Controllers
         [HttpGet("cadastrar")]
         public IActionResult ExibirFormularioCadastroPaciente()
         {
-            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Cadastrar.html");
+            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/cadastrar.html");
 
             return Content(conteudo, "text/html");
         }
@@ -42,6 +43,101 @@ namespace ControleDeMedicamentos.Controllers
             return Content(conteudoSting, "text/html");
         }
 
+        [HttpGet("editar/{id:int}")]
+        public IActionResult ExibirFormularioEdicaoPaciente()
+        {
+            ContextoDados contextoDados = new ContextoDados(true);
+            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
+
+            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
+
+            Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
+
+            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Editar.html");
+
+            StringBuilder sb = new StringBuilder(conteudo);
+
+            sb.Replace("#id#", pacienteSelecionado.Id.ToString());
+            sb.Replace("#nome#", pacienteSelecionado.Nome);
+            sb.Replace("#telefone#", pacienteSelecionado.Telefone);
+            sb.Replace("#cartaoSus#", pacienteSelecionado.CartaoSUS);
+
+            string conteudoString = sb.ToString();
+
+            return Content(conteudoString, "text/html");
+        }
+
+        [HttpPost("editar/{id:int}")]
+        public IActionResult EditarPaciente()
+        {
+            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
+
+            ContextoDados contextoDados = new ContextoDados(true);
+            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
+
+            string nome = HttpContext.Request.Form["nome"].ToString();
+            string telefone = HttpContext.Request.Form["telefone"].ToString();
+            string cartaoSus = HttpContext.Request.Form["cartaoSus"].ToString();
+
+            Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus);
+
+            repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
+
+            string conteudo = System.IO.File.ReadAllText("Compartilhado/Html/Notificacao.html");
+
+            StringBuilder sb = new StringBuilder(conteudo);
+
+            sb.Replace("#mensagem#", $"O Registro \"{pacienteAtualizado.Nome}\" foi Editado com sucesso!");
+
+            string conteudoSting = sb.ToString();
+
+            return Content(conteudoSting, "text/html");
+        }
+
+        [HttpGet("excluir/{id:int}")]
+        public IActionResult ExibirFormularioExclusaoPaciente()
+        {
+            ContextoDados contextoDados = new ContextoDados(true);
+            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
+
+            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
+
+            Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
+
+            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Excluir.html");
+
+            StringBuilder sb = new StringBuilder(conteudo);
+
+            sb.Replace("#id#", id.ToString());
+            sb.Replace("#paciente#", pacienteSelecionado.Nome);
+
+            string conteudoString = sb.ToString();
+
+            return Content(conteudoString, "text/html");
+
+        }
+
+        [HttpPost("excluir/{id:int}")]
+        public IActionResult ExcluirPaciente()
+        {
+            ContextoDados contextoDados = new ContextoDados(true);
+            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
+
+            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
+
+            repositorioPaciente.ExcluirRegistro(id);
+
+            string conteudo = System.IO.File.ReadAllText("Compartilhado/Html/Notificacao.html");
+
+            StringBuilder sb = new StringBuilder(conteudo);
+
+            sb.Replace("#mensagem#", $"O registro foi Excluido com sucesso!");
+
+            string conteudoString = sb.ToString();
+
+            return Content(conteudoString, "text/html");
+        }
+
         [HttpGet("visualizar")]
         public IActionResult VisualizarPacientes()
         {
@@ -68,55 +164,5 @@ namespace ControleDeMedicamentos.Controllers
             return Content(conteudoString, "text/html");
         }
 
-        [HttpGet("editar")]
-        public IActionResult ExibirFormularioEdicaoPaciente()
-        {
-            ContextoDados contextoDados = new ContextoDados(true);
-            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
-
-            Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
-
-            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Editar.html");
-
-            StringBuilder sb = new StringBuilder(conteudo);
-
-            sb.Replace("#id#", pacienteSelecionado.Id.ToString());
-            sb.Replace("#nome#", pacienteSelecionado.Nome);
-            sb.Replace("#telefone#", pacienteSelecionado.Telefone);
-            sb.Replace("#cartaoSus#", pacienteSelecionado.CartaoSUS);
-
-            string conteudoString = sb.ToString();
-
-            return Content(conteudoString, "text/html");
-        }
-
-        [HttpPost("editar")]
-        public IActionResult EditarPaciente()
-        {
-            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
-
-            ContextoDados contextoDados = new ContextoDados(true);
-            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            string nome = HttpContext.Request.Form["nome"].ToString();
-            string telefone = HttpContext.Request.Form["telefone"].ToString();
-            string cartaoSus = HttpContext.Request.Form["cartaoSus"].ToString();
-
-            Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus);
-
-            repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
-
-            string conteudo = System.IO.File.ReadAllText("Compartilhado/Html/Notificacao.html");
-
-            StringBuilder sb = new StringBuilder(conteudo);
-
-            sb.Replace("#mensagem#", $"O Registro \"{pacienteAtualizado.Nome}\" foi Editado com sucesso!");
-
-            string conteudoSting = sb.ToString();
-
-            return Content(conteudoSting, "text/html");
-        }
     }
 }

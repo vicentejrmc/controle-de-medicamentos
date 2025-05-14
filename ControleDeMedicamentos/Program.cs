@@ -19,8 +19,6 @@ public class Program
 
         WebApplication app  = builder.Build();
 
-        app.MapGet("/pacientes/editar/{id:int}", ExibirFormularioEdicaoPaciente);
-        app.MapPost("/pacientes/editar/{id:int}", EditarPaciente);
 
         app.MapControllers();
        
