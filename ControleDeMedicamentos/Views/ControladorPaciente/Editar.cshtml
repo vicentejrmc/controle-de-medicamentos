@@ -1,8 +1,6 @@
 ﻿@using ControleDeMedicamentos.ModuloPaciente
 
-@{
-    Paciente p = ViewBag.Paciente;
-}
+@model Paciente;
 
 <!DOCTYPE html>
 <html>
@@ -18,22 +16,22 @@
 
     <h3>Edição de Pacientes</h3>
 
-    <form action="/pacientes/editar/@p.Id" method="post">
+    <form action="/pacientes/editar/@Model.Id" method="post">
         <!--passando o valor de forma dinamica com #id#-->
 
         <label>Nome do Paciente:</label>
         <br />
-        <input type="text" name="nome" value="@p.Nome" />
+        <input type="text" name="nome" value="@Model.Nome" />
         <br />
 
         <label>Telefone do Paciente:</label>
         <br />
-        <input type="text" name="telefone" value="@p.Telefone" />
+        <input type="text" name="telefone" value="@Model.Telefone" />
         <br />
 
         <label>Catão Sus do Paciente:</label>
         <br />
-        <input type="text" name="cartaoSus" value="@p.CartaoSUS" />
+        <input type="text" name="cartaoSus" value="@Model.CartaoSUS" />
         <br />
         <hr />
 

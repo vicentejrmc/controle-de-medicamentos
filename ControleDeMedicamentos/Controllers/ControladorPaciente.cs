@@ -17,21 +17,14 @@ namespace ControleDeMedicamentos.Controllers
         }
 
         [HttpPost("cadastrar")]
-        public IActionResult CadastrarPaciente(
-            [FromForm]string nome,    // FromForm especifica par ao metodo de onde estão vindo as informações.
-            [FromForm]string telefone,   //Elimina a necessidade de serem atribidas dentro do Método
-            [FromForm]string cartaoSus)     //O proprio MVC entende e passa os atributos para o metodo
-            // Note que o nome da variável precisa corresponder exatamente com nome passado pelo formulario
+        public IActionResult CadastrarPaciente(Paciente novoPaciente)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
 
-            Paciente novoPaciente = new Paciente(nome, telefone, cartaoSus);
-
             repositorioPaciente.CadastrarRegistro(novoPaciente);
 
             ViewBag.Mensagem = $"O Registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!";
-
 
             return View("Notificacao");
         }
@@ -44,22 +37,14 @@ namespace ControleDeMedicamentos.Controllers
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-            ViewBag.Paciente = pacienteSelecionado;
-
-            return View("Editar");
+            return View("Editar", pacienteSelecionado);
         }
 
         [HttpPost("editar/{id:int}")]
-        public IActionResult EditarPaciente(
-            [FromRoute] int id,
-            [FromForm]string nome,    
-            [FromForm]string telefone,   
-            [FromForm]string cartaoSus )
+        public IActionResult EditarPaciente([FromRoute] int id, Paciente pacienteAtualizado)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus);
 
             repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
@@ -76,9 +61,7 @@ namespace ControleDeMedicamentos.Controllers
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-            ViewBag.Paciente = pacienteSelecionado;
-
-            return View("Excluir");
+            return View("Excluir", pacienteSelecionado);
 
         }
 
@@ -103,9 +86,7 @@ namespace ControleDeMedicamentos.Controllers
 
             List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
 
-            ViewBag.Pacientes = pacientes;
-
-            return View("Visualizar");
+            return View("Visualizar", pacientes); // fornece os dados passados como modelo na pagina html '@model'
         }
 
     }

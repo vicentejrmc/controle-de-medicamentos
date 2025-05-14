@@ -1,8 +1,6 @@
 ﻿@using ControleDeMedicamentos.ModuloPaciente
 
-@{
-    Paciente p = ViewBag.Paciente;
-}
+@model Paciente;
 
 <!DOCTYPE html>
 <html>
@@ -22,9 +20,9 @@
 
     <h3>Exclusao de Pacientes</h3>
 
-    <p>Você tem certeza que deseja Excluir o Registro @p.Nome?</p>
+    <p>Você tem certeza que deseja Excluir o Registro @Model.Nome?</p>
 
-    <form action="/pacientes/excluir/@p.Id" method="post">
+    <form action="/pacientes/excluir/@Model.Id" method="post">
         <!--passando o valor de forma dinamica com #id#-->
         <button type="submit">Excluir</button>
     </form>

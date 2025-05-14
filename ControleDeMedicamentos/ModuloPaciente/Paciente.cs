@@ -9,6 +9,9 @@ public class Paciente : EntidadeBase<Paciente>
     public string Telefone { get; set; }
     public string CartaoSUS { get; set; }
 
+
+    public Paciente() {}
+
     public Paciente(string nome, string telefone, string cartaoSUS)
     {
         Nome = nome;
