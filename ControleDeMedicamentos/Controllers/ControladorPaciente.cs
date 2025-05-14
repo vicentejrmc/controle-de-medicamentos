@@ -15,18 +15,20 @@ namespace ControleDeMedicamentos.Controllers
         {
             string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/cadastrar.html");
 
-            return Content(conteudo, "text/html");
+            return Content(conteudo, "text/html"); 
+            // embora não seja obrigatório recomendado o uso de  ,"text/html"
+            // para evitar conflitos e especificar que ao navegador o que será reenderizado
         }
 
         [HttpPost("cadastrar")]
-        public IActionResult CadastrarPaciente()
+        public IActionResult CadastrarPaciente(
+            [FromForm]string nome,    // FromForm especifica par ao metodo de onde estão vindo as informações.
+            [FromForm]string telefone,   //Elimina a necessidade de serem atribidas dentro do Método
+            [FromForm]string cartaoSus)     //O proprio MVC entende e passa os atributos para o metodo
+            // Note que o nome da variável precisa corresponder exatamente com nome passado pelo formulario
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            string nome = HttpContext.Request.Form["nome"].ToString();
-            string telefone = HttpContext.Request.Form["telefone"].ToString();
-            string cartaoSus = HttpContext.Request.Form["cartaoSus"].ToString();
 
             Paciente novoPaciente = new Paciente(nome, telefone, cartaoSus);
 
@@ -44,12 +46,10 @@ namespace ControleDeMedicamentos.Controllers
         }
 
         [HttpGet("editar/{id:int}")]
-        public IActionResult ExibirFormularioEdicaoPaciente()
+        public IActionResult ExibirFormularioEdicaoPaciente([FromRoute]int id) //Maperando parametro de Roda vindo do [HttpGet(.../{id:int})]
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
@@ -68,16 +68,14 @@ namespace ControleDeMedicamentos.Controllers
         }
 
         [HttpPost("editar/{id:int}")]
-        public IActionResult EditarPaciente()
+        public IActionResult EditarPaciente(
+            [FromRoute] int id,
+            [FromForm]string nome,    
+            [FromForm]string telefone,   
+            [FromForm]string cartaoSus )
         {
-            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
-
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            string nome = HttpContext.Request.Form["nome"].ToString();
-            string telefone = HttpContext.Request.Form["telefone"].ToString();
-            string cartaoSus = HttpContext.Request.Form["cartaoSus"].ToString();
 
             Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus);
 
@@ -94,13 +92,11 @@ namespace ControleDeMedicamentos.Controllers
             return Content(conteudoSting, "text/html");
         }
 
-        [HttpGet("excluir/{id:int}")]
-        public IActionResult ExibirFormularioExclusaoPaciente()
+        [HttpGet("excluir/{id:int}")]  // Sempre que tiver um parametro de roda, ele pode ser usado como argumento do método.
+        public IActionResult ExibirFormularioExclusaoPaciente([FromRoute] int id)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
@@ -118,12 +114,10 @@ namespace ControleDeMedicamentos.Controllers
         }
 
         [HttpPost("excluir/{id:int}")]
-        public IActionResult ExcluirPaciente()
+        public IActionResult ExcluirPaciente([FromRoute] int id)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
-
-            int id = Convert.ToInt32(HttpContext.GetRouteValue("id"));
 
             repositorioPaciente.ExcluirRegistro(id);
 

@@ -19,10 +19,8 @@ public class Program
 
         WebApplication app  = builder.Build();
 
-
         app.MapControllers();
        
         app.Run(); // Run() funciona como um loop infinito do servidor, enquando o navegador estiver aberto ele funcionara
     }
-
 }
