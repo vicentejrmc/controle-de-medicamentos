@@ -15,9 +15,11 @@ public class Program
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args); // argumentos do programa podem ser passados no CreateBuilder ((args) rede de strings)
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllersWithViews(); // adiciona supoerte ao nosso servidor para execultar Views()
 
         WebApplication app  = builder.Build();
+
+        app.UseRouting(); // adiciona supoerte ao nosso servidor para execultar Views()
 
         app.MapControllers();
        

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using ControleDeMedicamentos.ModuloPaciente
+
+@{
+    Paciente p = ViewBag.Paciente;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,26 +18,26 @@
 
     <h3>Edição de Pacientes</h3>
 
-    <form action="/pacientes/editar/#id#" method="post">
+    <form action="/pacientes/editar/@p.Id" method="post">
         <!--passando o valor de forma dinamica com #id#-->
 
         <label>Nome do Paciente:</label>
         <br />
-        <input type="text" name="nome" value="#nome#" />
+        <input type="text" name="nome" value="@p.Nome" />
         <br />
 
         <label>Telefone do Paciente:</label>
         <br />
-        <input type="text" name="telefone" value="#telefone#" />
+        <input type="text" name="telefone" value="@p.Telefone" />
         <br />
 
         <label>Catão Sus do Paciente:</label>
         <br />
-        <input type="text" name="cartaoSus" value="#cartaoSus#" />
+        <input type="text" name="cartaoSus" value="@p.CartaoSUS" />
         <br />
         <hr />
 
-        <button type="submit">Gravar</button>    <button> <a href="/">Voltar</a></button>
+        <button type="submit">Gravar</button>  <button> <a href="/">Voltar</a></button>
     </form>
 
 </body>

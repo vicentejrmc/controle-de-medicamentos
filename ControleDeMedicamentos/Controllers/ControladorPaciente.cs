@@ -53,18 +53,9 @@ namespace ControleDeMedicamentos.Controllers
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Editar.html");
+            ViewBag.Paciente = pacienteSelecionado;
 
-            StringBuilder sb = new StringBuilder(conteudo);
-
-            sb.Replace("#id#", pacienteSelecionado.Id.ToString());
-            sb.Replace("#nome#", pacienteSelecionado.Nome);
-            sb.Replace("#telefone#", pacienteSelecionado.Telefone);
-            sb.Replace("#cartaoSus#", pacienteSelecionado.CartaoSUS);
-
-            string conteudoString = sb.ToString();
-
-            return Content(conteudoString, "text/html");
+            return View("Editar");
         }
 
         [HttpPost("editar/{id:int}")]
@@ -100,16 +91,9 @@ namespace ControleDeMedicamentos.Controllers
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Excluir.html");
+            ViewBag.Paciente = pacienteSelecionado;
 
-            StringBuilder sb = new StringBuilder(conteudo);
-
-            sb.Replace("#id#", id.ToString());
-            sb.Replace("#paciente#", pacienteSelecionado.Nome);
-
-            string conteudoString = sb.ToString();
-
-            return Content(conteudoString, "text/html");
+            return View("Excluir");
 
         }
 
@@ -138,24 +122,11 @@ namespace ControleDeMedicamentos.Controllers
             ContextoDados contextoDados = new ContextoDados(true); // true indica que os dados serão carregados quando a função for chamada
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
 
-            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/Visualizar.html");
+            List<Paciente> pacientes = repositorioPaciente.SelecionarTodos();
 
-            StringBuilder stringBuilder = new StringBuilder(conteudo); // stringBuilder recebendo o conteudo 
+            ViewBag.Pacientes = pacientes;
 
-            List<Paciente> paciente = repositorioPaciente.SelecionarTodos();
-
-            foreach (Paciente p in paciente)
-            {
-                string intemLista = $"<li>{p.ToString()} <a href=\"/pacientes/editar/{p.Id}\">Editar</a> / <a href=\"/pacientes/excluir/{p.Id}\">Excluir</a> </li> #paciente#";
-
-                stringBuilder.Replace("#paciente#", intemLista);
-            }
-
-            stringBuilder.Replace("#paciente#", "");
-
-            string conteudoString = stringBuilder.ToString();
-
-            return Content(conteudoString, "text/html");
+            return View("Visualizar");
         }
 
     }

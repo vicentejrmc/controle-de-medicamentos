@@ -1,0 +1,32 @@
+﻿@using ControleDeMedicamentos.ModuloPaciente
+
+@{
+    List<Paciente> pacientes = ViewBag.Pacientes;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Visualização de Pacientes - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+    <button> <a href="/">Voltar</a></button>
+    <button> <a href="pacientes/cadastrar">Cadastrar Paciente</a></button>
+
+    <h3>Visualizando de Pacientes</h3>
+
+    <ul>
+        @foreach(Paciente p in pacientes)
+        {
+            <li>@p.ToString() <a href="/pacientes/editar/@p.Id">Editar</a> /
+                 <a href="/pacientes/excluir/@p.Id">Excluir</a> </li>
+        }
+    </ul>
+
+
+</body>
+</html>
