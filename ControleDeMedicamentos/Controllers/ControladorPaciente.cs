@@ -13,11 +13,7 @@ namespace ControleDeMedicamentos.Controllers
         [HttpGet("cadastrar")]
         public IActionResult ExibirFormularioCadastroPaciente()
         {
-            string conteudo = System.IO.File.ReadAllText("ModuloPaciente/Html/cadastrar.html");
-
-            return Content(conteudo, "text/html"); 
-            // embora não seja obrigatório recomendado o uso de  ,"text/html"
-            // para evitar conflitos e especificar que ao navegador o que será reenderizado
+            return View("Cadastrar");
         }
 
         [HttpPost("cadastrar")]
@@ -34,15 +30,10 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioPaciente.CadastrarRegistro(novoPaciente);
 
-            string conteudo = System.IO.File.ReadAllText("Compartilhado/Html/Notificacao.html");
+            ViewBag.Mensagem = $"O Registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!";
 
-            StringBuilder sb = new StringBuilder(conteudo);
 
-            sb.Replace("#mensagem#", $"O Registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
-
-            string conteudoSting = sb.ToString();
-
-            return Content(conteudoSting, "text/html");
+            return View("Notificacao");
         }
 
         [HttpGet("editar/{id:int}")]
@@ -72,15 +63,9 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
-            string conteudo = System.IO.File.ReadAllText("Compartilhado/Html/Notificacao.html");
+            ViewBag.Mensagem =  $"O Registro \"{pacienteAtualizado.Nome}\" foi Editado com sucesso!";
 
-            StringBuilder sb = new StringBuilder(conteudo);
-
-            sb.Replace("#mensagem#", $"O Registro \"{pacienteAtualizado.Nome}\" foi Editado com sucesso!");
-
-            string conteudoSting = sb.ToString();
-
-            return Content(conteudoSting, "text/html");
+            return View("Notificacao");
         }
 
         [HttpGet("excluir/{id:int}")]  // Sempre que tiver um parametro de roda, ele pode ser usado como argumento do método.
@@ -105,15 +90,9 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioPaciente.ExcluirRegistro(id);
 
-            string conteudo = System.IO.File.ReadAllText("Compartilhado/Html/Notificacao.html");
+            ViewBag.Mensagem = $"O registro foi Excluido com sucesso!";
 
-            StringBuilder sb = new StringBuilder(conteudo);
-
-            sb.Replace("#mensagem#", $"O registro foi Excluido com sucesso!");
-
-            string conteudoString = sb.ToString();
-
-            return Content(conteudoString, "text/html");
+            return View("Notificacao");
         }
 
         [HttpGet("visualizar")]
