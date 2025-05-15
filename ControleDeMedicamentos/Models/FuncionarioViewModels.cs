@@ -10,6 +10,18 @@ namespace ControleDeMedicamentos.Models
         public string? Telefone { get; set; }
     }
 
+    public class CadastrarFuncionarioViewModel : FormularioFuncionarioViewModel
+    {
+        public CadastrarFuncionarioViewModel(){ }
+
+        public CadastrarFuncionarioViewModel(string nome, string cpf, string telefone) : this()
+        {
+            Nome = nome;
+            CPF = cpf;
+            Telefone = telefone;
+        }
+    }
+
     public class VisualizarFuncionarioViewModel
     {
         public List<DetalhesFuncionarioViewModel> Registros { get; } = new List<DetalhesFuncionarioViewModel>();

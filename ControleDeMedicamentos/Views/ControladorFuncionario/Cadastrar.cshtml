@@ -1,0 +1,43 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloFuncionario
+
+@model CadastrarFuncionarioViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Cadastro de Funcionário - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+    <button> <a href="/">Página Inicial</a></button>
+
+    <h3>Cadastrando Funcionário</h3>
+
+    <form action="/funcionarios/cadastrar" method="post">
+        <!--Formularios-->
+
+        <label>Nome do Funcionário:</label>
+        <br />
+        <input type="text" name="nome" />
+        <br />
+
+        <label>CPF do Funcionário:</label>
+        <br />
+        <input type="text" name="cpf" />
+        <br />
+
+        <label>Telefone do Funcionário:</label>
+        <br />
+        <input type="text" name="telefone" />
+        <br />
+        <hr />
+
+        <button type="submit">Inserir</button>
+    </form>
+
+</body>
+</html>
