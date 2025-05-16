@@ -1,0 +1,43 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloPaciente
+
+@model EditarFuncionarioViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Edição de Funcionario - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+
+
+    <h3>Edição de Funcionario</h3>
+
+    <form action="/funcionarios/editar/@Model.Id" method="post">
+        <!--passando o valor de forma dinamica com #id#-->
+
+        <label>Nome do Funcionario:</label>
+        <br />
+        <input type="text" name="nome" value="@Model.Nome" />
+        <br />
+
+        <label>CPF do Funcionario:</label>
+        <br />
+        <input type="text" name="cpf" value="@Model.CPF" />
+        <br />
+
+        <label>Telefone do Funcionario:</label>
+        <br />
+        <input type="text" name="telefone" value="@Model.Telefone" />
+        <br />
+        <hr />
+
+        <button type="submit">Gravar</button>  <button> <a href="/funcionarios/visualizar">Voltar</a></button>
+    </form>
+
+</body>
+</html>

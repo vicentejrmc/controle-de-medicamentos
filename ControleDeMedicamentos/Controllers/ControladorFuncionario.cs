@@ -3,6 +3,7 @@ using ControleDeMedicamentos.Extensions;
 using ControleDeMedicamentos.Models;
 using ControleDeMedicamentos.ModuloFuncionario;
 using Microsoft.AspNetCore.Mvc;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace ControleDeMedicamentos.Controllers;
 
@@ -32,7 +33,38 @@ public class ControladorFuncionario : Controller
         return View("Notificacao");
     }
 
+    [HttpGet("editar/{id:int}")]
+    public IActionResult ExibirFormEditarFuncionario([FromRoute] int id)
+    {
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario(contextoDados);
 
+        Funcionario funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
+
+        EditarFuncionarioViewModel editarVM = new EditarFuncionarioViewModel(
+            funcionarioSelecionado.Id,
+            funcionarioSelecionado.Nome!,
+            funcionarioSelecionado.CPF!,
+            funcionarioSelecionado.Telefone!
+            );
+
+        return View("Editar", editarVM);
+    }
+
+    [HttpPost("editar/{id:int}")]
+    public IActionResult EditarFuncionario([FromRoute] int id, EditarFuncionarioViewModel editarVM)
+    {
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario(contextoDados);
+
+        Funcionario funcionarioEditado = new Funcionario(editarVM.Nome, editarVM.CPF, editarVM.Telefone);
+
+        repositorioFuncionario.EditarRegistro(id, funcionarioEditado);
+
+        ViewBag.Mensagem = $"O Registro do funcionario {editarVM.Nome} foi realizado com sucesso!";
+
+        return View("Notificacao"); 
+    }
 
     [HttpGet("visualizar")]
     public IActionResult VisualizarFuncionarios()

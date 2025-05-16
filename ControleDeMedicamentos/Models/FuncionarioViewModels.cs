@@ -5,9 +5,9 @@ namespace ControleDeMedicamentos.Models
 {
     public abstract class FormularioFuncionarioViewModel
     {
-        public string? Nome { get; set; }
-        public string? CPF { get; set; }
-        public string? Telefone { get; set; }
+        public string Nome { get; set; }
+        public string CPF { get; set; }
+        public string Telefone { get; set; }
     }
 
     public class CadastrarFuncionarioViewModel : FormularioFuncionarioViewModel
@@ -20,6 +20,21 @@ namespace ControleDeMedicamentos.Models
             CPF = cpf;
             Telefone = telefone;
         }
+    }
+
+    public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel
+    {
+        public int Id { get; set; }
+        public EditarFuncionarioViewModel() { }
+
+        public EditarFuncionarioViewModel(int id, string nome, string cpf, string telefone) : this()
+        {
+            Id = id;
+            Nome = nome;
+            CPF = cpf;
+            Telefone = telefone;
+        }
+
     }
 
     public class VisualizarFuncionarioViewModel

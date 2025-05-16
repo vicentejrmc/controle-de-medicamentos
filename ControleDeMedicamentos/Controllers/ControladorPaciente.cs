@@ -60,8 +60,8 @@ namespace ControleDeMedicamentos.Controllers
         }
 
         [HttpPost("editar/{id:int}")]
-        // O ...VM apenas serve para transferir os dados do formulario para a instancia do obejto dentro do método
-        public IActionResult EditarPaciente([FromRoute] int id, EditarPacienteViewModel editarVM) 
+        public IActionResult EditarPaciente([FromRoute] int id, EditarPacienteViewModel editarVM)
+        // O editarVM serve para transferir os dados vindos do formulario para a instância do obejto dentro do método
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contextoDados);
