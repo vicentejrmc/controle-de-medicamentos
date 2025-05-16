@@ -1,0 +1,43 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloPaciente
+
+@model EditarPacienteViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Edição de Pacientes - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+
+
+    <h3>Edição de Pacientes</h3>
+
+    <form action="/pacientes/editar/@Model.Id" method="post">
+        <!--passando o valor de forma dinamica com #id#-->
+
+        <label>Nome do Paciente:</label>
+        <br />
+        <input type="text" name="nome" value="@Model.Nome" />
+        <br />
+
+        <label>Telefone do Paciente:</label>
+        <br />
+        <input type="text" name="telefone" value="@Model.Telefone" />
+        <br />
+
+        <label>Catão Sus do Paciente:</label>
+        <br />
+        <input type="text" name="cartaoSus" value="@Model.CartaoSus" />
+        <br />
+        <hr />
+
+        <button type="submit">Gravar</button>  <button> <a href="/pacientes/visualizar">Voltar</a></button>
+    </form>
+
+</body>
+</html>

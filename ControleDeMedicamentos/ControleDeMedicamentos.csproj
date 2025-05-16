@@ -12,4 +12,8 @@
     <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\ControladorFornecedor - Copy\" />
+  </ItemGroup>
+
 </Project>

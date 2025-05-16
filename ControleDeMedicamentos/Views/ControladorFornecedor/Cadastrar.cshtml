@@ -1,0 +1,43 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloFornecedor
+
+@model CadastrarFornecedorViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Cadastro de Fornecedor - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+    <button> <a href="/">Página Inicial</a></button>
+
+    <h3>Cadastrando Fornecedor</h3>
+
+    <form action="/fornecedores/cadastrar" method="post">
+        <!--Formularios-->
+
+        <label>Nome do Fornecedor:</label>
+        <br />
+        <input type="text" name="nome" />
+        <br />
+
+        <label>CNPJ do Fornecedor:</label>
+        <br />
+        <input type="text" name="telefone" />
+        <br />
+
+        <label>Telefone do Fornecedor:</label>
+        <br />
+        <input type="text" name="telefone" />
+        <br />
+        <hr />
+
+        <button type="submit">Inserir</button>
+    </form>
+
+</body>
+</html>

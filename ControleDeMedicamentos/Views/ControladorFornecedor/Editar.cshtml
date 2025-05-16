@@ -1,0 +1,42 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloFornecedor
+
+@model EditarFornecedorViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Edição de Fornecedor - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+
+    <h3>Edição de Fornecedor</h3>
+
+    <form action="/fornecedores/editar/@Model.Id" method="post">
+        <!--passando o valor de forma dinamica com #id#-->
+
+        <label>Nome do Fornecedor:</label>
+        <br />
+        <input type="text" name="nome" value="@Model.Nome" />
+        <br />
+
+        <label>CNPJ do Fornecedor:</label>
+        <br />
+        <input type="text" name="cnpj" value="@Model.CNPJ" />
+        <br />
+
+        <label>Telefone do Fornecedor:</label>
+        <br />
+        <input type="text" name="telefone" value="@Model.Telefone" />
+        <br />
+        <hr />
+
+        <button type="submit">Gravar</button>  <button> <a href="/fornecedor/visualizar">Voltar</a></button>
+    </form>
+
+</body>
+</html>
