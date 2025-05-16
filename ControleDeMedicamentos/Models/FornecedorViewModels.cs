@@ -6,6 +6,7 @@ namespace ControleDeMedicamentos.Models
 {
     public abstract class FormularioFornecedorViewModel 
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string CNPJ { get; set; }
         public string Telefone { get; set; }
@@ -25,7 +26,6 @@ namespace ControleDeMedicamentos.Models
 
     public class EditarFornecedorViewModel : FormularioFornecedorViewModel
     {
-        public int Id { get; set; }
         public EditarFornecedorViewModel() { }
 
         public EditarFornecedorViewModel(int id, string nome, string cnpj, string telefone) : this()
@@ -83,7 +83,7 @@ namespace ControleDeMedicamentos.Models
 
         public override string ToString()
         {
-            return $"Id: {Id}, Nome: {Nome} CPF: {CNPJ}, Telefone: {Telefone}";
+            return $"Id: {Id}, Nome: {Nome} CNPJ: {CNPJ}, Telefone: {Telefone}";
         }
     }
 }

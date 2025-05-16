@@ -1,7 +1,7 @@
 ﻿@using ControleDeMedicamentos.Models
 @using ControleDeMedicamentos.ModuloFuncionario
 
-@model VisualizarFornecedorViewModel;
+@model VisualizarFuncionarioViewModel;
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
     <h3>Visualizando Funcionários</h3>
 
     <ul>
-        @foreach(DetalhesFornecedorViewModel f in Model.Registros)
+        @foreach(DetalhesFuncionarioViewModel f in Model.Registros)
         {
             <li>@f.ToString() <a href="/funcionarios/editar/@f.Id">Editar</a> /
                  <a href="/funcionarios/excluir/@f.Id">Excluir</a> </li>
