@@ -37,6 +37,20 @@ namespace ControleDeMedicamentos.Models
 
     }
 
+    public class ExcluirFuncionarioViewModel
+    {
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+
+        public ExcluirFuncionarioViewModel() { }
+
+        public ExcluirFuncionarioViewModel(int id, string? nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
+    }
+
     public class VisualizarFuncionarioViewModel
     {
         public List<DetalhesFuncionarioViewModel> Registros { get; } = new List<DetalhesFuncionarioViewModel>();

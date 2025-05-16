@@ -63,7 +63,36 @@ public class ControladorFuncionario : Controller
 
         ViewBag.Mensagem = $"O Registro do funcionario {editarVM.Nome} foi realizado com sucesso!";
 
-        return View("Notificacao"); 
+        return View("Notificacao");
+    }
+
+    [HttpGet("excluir/{id:int}")]
+    public IActionResult ExibirFormExcluirFuncionario([FromRoute] int id)
+    {
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario(contextoDados);
+
+        Funcionario funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
+
+        ExcluirFuncionarioViewModel excluirVM = new ExcluirFuncionarioViewModel(
+            funcionarioSelecionado.Id,
+            funcionarioSelecionado.Nome
+            );
+
+        return View("excluir", excluirVM);
+    }
+
+    [HttpPost("excluir/{id:int}")]
+    public IActionResult ExcluirFuncionario([FromRoute] int id)
+    {
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario(contextoDados);
+
+        repositorioFuncionario.ExcluirRegistro(id);
+
+        ViewBag.Mensagem = "O Registro do Funcionario foi Excluido com sucesso!";
+
+        return View("Notificacao");
     }
 
     [HttpGet("visualizar")]

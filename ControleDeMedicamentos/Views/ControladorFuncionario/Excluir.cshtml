@@ -1,0 +1,30 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloFuncionario
+
+@model ExcluirFuncionarioViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Exclusão de Funcionario - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+    <botton><a href="/funcionarios/visualizar">Voltar</a></botton>
+
+    <hr />
+
+    <h3>Exclusao de Funcionario</h3>
+
+    <p>Você tem certeza que deseja Excluir o Registro @Model.Nome?</p>
+
+    <form action="/funcionarios/excluir/@Model.Id" method="post">
+        <!--passando o valor de forma dinamica com #id#-->
+        <button type="submit">Excluir</button>
+    </form>
+
+</body>
+</html>

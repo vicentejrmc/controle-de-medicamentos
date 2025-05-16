@@ -75,7 +75,7 @@ namespace ControleDeMedicamentos.Controllers
             return View("Notificacao");
         }
 
-        [HttpGet("excluir/{id:int}")]  // Sempre que tiver um parametro de roda, ele pode ser usado como argumento do método.
+        [HttpGet("excluir/{id:int}")]  // Sempre que tiver um parametro de rota, ele pode ser usado como argumento do método.
         public IActionResult ExibirFormularioExclusaoPaciente([FromRoute] int id) // parametro de rota passada como argumento.
         {
             ContextoDados contextoDados = new ContextoDados(true);
@@ -83,7 +83,7 @@ namespace ControleDeMedicamentos.Controllers
 
             Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-//Utilizando ViewModel, escondemos as informações desnecessarias da nossa Entidade. de form que o usuario(navegador)
+//Utilizando ViewModel, escondemos as informações desnecessarias da nossa Entidade. de forma que o usuario(navegador)
 //não tenha acesso direto aos dados internos do sistema, melhorando a proteção dos dados da entidade por não expor os nosso Dominio.
             ExcluirPacienteViewModel excluirVM = new ExcluirPacienteViewModel(
                 pacienteSelecionado.Id, 
