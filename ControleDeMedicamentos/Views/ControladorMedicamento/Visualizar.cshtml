@@ -1,0 +1,33 @@
+﻿@using ControleDeMedicamentos.Models
+@using ControleDeMedicamentos.ModuloMedicamento;
+
+@model VisualizarMedicamentosViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Visualização de Medicamentos - Controle de Medicamentos</title>
+</head>
+<body>
+
+    <h1>Controle de Medicamentos</h1>
+
+    <button><a href="/">Página Inciail</a></button>
+    <button><a href="/medicamentos/cadastrar">Cadastrar Medicamento</a></button>
+
+    <h3>Visualizando Medicamentos</h3>
+
+    <ul>
+        @foreach (DetalhesMedicamentoViewModel m in Model.Registros)
+        {
+            <li>
+                @m.ToString() <a href="/medicamentos/editar/@m.Id">Editar</a> /
+                <a href="/medicamentos/excluir/@m.Id">Excluir</a>
+            </li>
+        }
+    </ul>
+
+
+</body>
+</html>
