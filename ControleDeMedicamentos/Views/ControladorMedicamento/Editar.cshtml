@@ -1,7 +1,7 @@
 ﻿@using ControleDeMedicamentos.Models
 @using ControleDeMedicamentos.ModuloMedicamento
 
-@model CadastrarMedicamentoViewModel;
+@model EditarMedicamentoViewModel;
 
 <!DOCTYPE html>
 <html>
@@ -18,17 +18,17 @@
 
     <h3>Editando Medicamento</h3>
 
-    <form action="/medicamentos/editar" method="post">
+    <form action="/medicamentos/editar/@Model.Id" method="post">
 
         <label for="Nome">Nome do Medicamento:</label>
         <br />
-        <input type="text" name="Nome" id="Nome"/>
+        <input type="text" name="Nome" id="Nome" value="@Model.NomeMedicamento"/>
 
         <br />
 
         <label for="Descricao">Descrição do Medicamento:</label>
         <br />
-        <input type="text" name="Descricao" id="Descricao" />
+        <input type="text" name="Descricao" id="Descricao" value="@Model.Descricao" />
 
         <br />
 
@@ -45,7 +45,7 @@
 
         <label for="Quantidade">Quantidade do Medicamento:</label>
         <br />
-        <input type="text" name="Quantidade" id="Quantidade" />
+        <input type="text" name="Quantidade" id="Quantidade" value="@Model.Quantidade" />
 
         <hr>
 

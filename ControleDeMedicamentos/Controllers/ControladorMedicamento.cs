@@ -47,8 +47,6 @@ namespace ControleDeMedicamentos.Controllers
         }
 
 
-
-
         [HttpGet("visualizar")]
         public IActionResult Visualizar()
         {
@@ -60,7 +58,7 @@ namespace ControleDeMedicamentos.Controllers
             var medicamentos = repositorioMedicamento.SelecionarTodos(); 
             // nesse contexto o Compliador também entende que se trata de uma lista do objeto que está sendo retornado
 
-            VisualizarMedicamentosViewModel visualizarVM = new VisualizarMedicamentosViewModel(medicamentos);
+           var visualizarVM = new VisualizarMedicamentosViewModel(medicamentos);
 
             return View(visualizarVM);
         }

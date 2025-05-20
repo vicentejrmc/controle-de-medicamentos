@@ -4,57 +4,6 @@
     <meta charset="utf-8" />
     <title> Página Inicial - Controle de Medicamentos</title>
 
-    <style>
-        body{
-            margin: 0;
-        }
-
-        header{
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            justify-content: space-between;
-            background-color: black; 
-            padding: 30px 100px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-       a{
-            text-decoration: none;
-            color: black;
-            font-style: unset;
-        }
-
-        ul{
-            list-style: none;
-        }
-
-        nav > h2{
-            margin: 0;
-        }
-
-        nav > ul{
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        main {
-            gap: 10px;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .card{
-            width: 350px;
-            height: 150px;
-            border: 1px solid black;
-            text-align: center;
-        }
-    </style>
-
 </head>
 <body>
     <header>
@@ -62,42 +11,21 @@
     </header>
 
     <main>
-        <div class="card">
-            <h3>Pacientes</h3>
-
-            <ul>
-                <li><a href="pacientes/cadastrar">Cadastrar Paciente</a></li>
-                <li><a href="pacientes/visualizar">Visualizar Pacientes</a></li>
-            </ul>
+        <div>
+            <a href="pacientes/visualizar"><h3>Gestão de Pacientes</h3></a>
         </div>
 
-        <div class="card">
-            <h3>Funcionários</h3>
-
-            <ul>
-                <li><a href="funcionarios/cadastrar">Cadastrar Funcionário</a></li>
-                <li><a href="funcionarios/visualizar">Visualizar Funcionário</a></li>
-            </ul>
+        <div>
+            <a href="funcionarios/visualizar"><h3>Gestão de Funcionários</h3></a>
         </div>
 
-        <div class="card">
-            <h3>Fornecedores</h3>
-
-            <ul>
-                <li><a href="fornecedores/cadastrar">Cadastrar  Fornecedor</a></li>
-                <li><a href="fornecedores/visualizar">Visualizar Fornecedor</a></li>
-            </ul>
+        <div>
+            <a href="fornecedores/visualizar"><h3>Gestão de Fornecedores</h3></a>
         </div>
 
-        <div class="card">
-            <h3>Medicamentos</h3>
-
-            <ul>
-                <li><a href="medicamentos/cadastrar">Cadastrar Medicamento</a></li>
-                <li><a href="medicamentos/visualizar">Visualizar Medicamento</a></li>
-            </ul>
+        <div>
+            <a href="medicamentos/visualizar"><h3>Gestão de Medicamentos</h3></a>
         </div>
-
     </main>
 
 

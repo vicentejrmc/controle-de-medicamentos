@@ -14,15 +14,14 @@
     <h1>Controle de Medicamentos</h1>
 
     <button> <a href="/">Página Inicial</a></button>
-    <button> <a href="medicamentos/visualizar">Visualizar Medicamentos</a></button>
 
     <h3>Cadastrando Medicamento</h3>
 
     <form action="/medicamentos/cadastrar" method="post">
 
-        <label for="Nome">Nome do Medicamento:</label>
+        <label for="NomeMedicamento">Nome do Medicamento:</label>
         <br />
-        <input type="text" name="Nome" id="Nome"/>
+        <input type="text" name="NomeMedicamento" id="NomeMedicamento"/>
 
         <br />
 
@@ -32,20 +31,20 @@
 
         <br />
 
+        <label for="Quantidade">Quantidade do Medicamento:</label>
+        <br />
+        <input type="text" name="Quantidade" id="Quantidade" />
+
+        <br />
+
         <label for="FornecedorId">Fornecedor do Medicamento:</label>
         <br />
         <select name="FornecedorId" id="FornecedorId">
-            @foreach( var fornecedor in Model.FornecedoresDisponiveis)
+            @foreach (var fornecedor in Model.FornecedoresDisponiveis)
             {
                 <option value="@fornecedor.Id">@fornecedor.Nome</option>
             }
         </select>
-
-        <br />
-
-        <label for="Quantidade">Quantidade do Medicamento:</label>
-        <br />
-        <input type="text" name="Quantidade" id="Quantidade" />
 
         <hr>
 

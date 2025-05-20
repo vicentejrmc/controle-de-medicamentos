@@ -107,10 +107,6 @@ public class DetalhesMedicamentoViewModel
 
     public override string ToString()
     {
-        return $"Id: {Id} " +
-            $"- NomeMedicamento: {NomeMedicamento} " +
-            $"- Descrição: {Descricao} " +
-            $"- Fornecedor: {NomeFornecedor}" +
-            $" - Quantidade: {Quantidade}";
+        return $"Id: {Id} NomeMedicamento: {NomeMedicamento} Descrição: {Descricao} Fornecedor: {NomeFornecedor} Quantidade: {Quantidade}";
     }
 }
