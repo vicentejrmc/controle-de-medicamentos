@@ -19,6 +19,8 @@ public class Program
 
         WebApplication app  = builder.Build();
 
+        app.UseStaticFiles(); // Indica o uso de arquivo stativos para que o inicializador encontre a pasta
+        //com os arquivos stativos wwwroot onde se encontram os arquivos css(folhas de estilo)
         app.UseRouting(); // adiciona supoerte ao nosso servidor para execultar Views()
 
         app.MapControllers();

@@ -33,15 +33,10 @@ public class SelecionarFornecedorViewModel // atravez dessa classe iremos recupe
     }
 }
 
-
-
 public class CadastrarMedicamentoViewModel : FormularioMedicamentoViewModel
 { // Desta forma, toda vez que formos cadastar um Medicamento, precisamos passar uma lista de fornecedor
 
-    public CadastrarMedicamentoViewModel()
-    {
-    }
-
+    public CadastrarMedicamentoViewModel() { }
 
     public CadastrarMedicamentoViewModel(List<Fornecedor> fornecedores)
     {
@@ -50,17 +45,50 @@ public class CadastrarMedicamentoViewModel : FormularioMedicamentoViewModel
             var selecionarVM = new SelecionarFornecedorViewModel(fornecedor.Id, fornecedor.Nome);
 
             FornecedoresDisponiveis.Add(selecionarVM);
-        }
-            
+        }         
     }
 }
 
 public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel
 {
     public int Id { get; set; }
-    public EditarMedicamentoViewModel()
-    { }
+    public List<Fornecedor> Fornecedor { get; set; }
 
+    public EditarMedicamentoViewModel() { }
+
+    public EditarMedicamentoViewModel(
+        int id, 
+        string nomeMedicamento, 
+        string descricao, 
+        int fornecedorId,
+        List<Fornecedor> fornecedores, 
+        int quantidade)
+    {
+        Id = id;
+        NomeMedicamento = nomeMedicamento;
+        Descricao = descricao;
+        Quantidade = quantidade;
+        FornecedorId = fornecedorId;
+
+        foreach (var fornecedor in fornecedores)
+        {
+            var selecionarVM = new SelecionarFornecedorViewModel(fornecedor.Id, fornecedor.Nome);
+
+            FornecedoresDisponiveis.Add(selecionarVM);
+        }
+    }
+}
+
+public class ExcluirMedicamentoViewModel
+{ 
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public ExcluirMedicamentoViewModel(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
 }
 
 public class VisualizarMedicamentosViewModel
@@ -107,6 +135,6 @@ public class DetalhesMedicamentoViewModel
 
     public override string ToString()
     {
-        return $"Id: {Id} NomeMedicamento: {NomeMedicamento} Descrição: {Descricao} Fornecedor: {NomeFornecedor} Quantidade: {Quantidade}";
+        return $"Id: {Id} Nome: {NomeMedicamento} Descrição: {Descricao} Fornecedor: {NomeFornecedor} Quantidade: {Quantidade}";
     }
 }

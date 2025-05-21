@@ -1,6 +1,7 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFornecedor;
 using ControleDeMedicamentos.Util;
+using System.Xml;
 
 namespace ControleDeMedicamentos.ModuloMedicamento;
 

@@ -71,10 +71,7 @@ public abstract class RepositorioBasEmArquivo<T> where T : EntidadeBase<T>
 
             
         }
-           // metodo para garantir que o Id virá corretamente ordenado quando recuperarmos os arquivos
-        
-
-        
+           // metodo para garantir que o Id virá corretamente ordenado quando recuperarmos os arquivos      
 
         return false;
     }

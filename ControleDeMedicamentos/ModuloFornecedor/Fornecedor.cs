@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.ModuloMedicamento;
 using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.ModuloFornecedor;
@@ -8,9 +9,12 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     public string Nome { get; set; }
     public string CNPJ { get; set; }
     public string Telefone { get; set; }
+    public List<Medicamento> Medicamentos { get; set; }
+
 
     public Fornecedor()
     {
+        Medicamentos = new List<Medicamento>();
     }
     public Fornecedor(string nome, string cnpj, string telefone) : this()
     {
@@ -18,6 +22,7 @@ public class Fornecedor : EntidadeBase<Fornecedor>
         CNPJ = cnpj;
         Telefone = telefone;
     }
+
 
     public override string Validar()
     {
@@ -50,4 +55,19 @@ public class Fornecedor : EntidadeBase<Fornecedor>
         CNPJ = resgitroEditado.CNPJ;
         Telefone = resgitroEditado.Telefone;
     }
+
+    public void AdicionarMedicamento(Medicamento medicamento)
+    {
+        if(!Medicamentos.Contains(medicamento))
+            Medicamentos.Add(medicamento);
+    }
+
+    public void RemoverMedicamento(Medicamento medicamento)
+    {
+        if(Medicamentos.Contains(medicamento))
+            Medicamentos.Remove(medicamento);
+    }
+
+
+
 }

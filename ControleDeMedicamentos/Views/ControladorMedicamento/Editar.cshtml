@@ -14,15 +14,14 @@
     <h1>Controle de Medicamentos</h1>
 
     <button> <a href="/">Página Inicial</a></button>
-    <button> <a href="medicamentos/visualizar">Visualizar Medicamentos</a></button>
 
     <h3>Editando Medicamento</h3>
 
     <form action="/medicamentos/editar/@Model.Id" method="post">
 
-        <label for="Nome">Nome do Medicamento:</label>
+        <label for="NomeMedicamento">Nome do Medicamento:</label>
         <br />
-        <input type="text" name="Nome" id="Nome" value="@Model.NomeMedicamento"/>
+        <input type="text" name="NomeMedicamento" id="NomeMedicamento" value="@Model.NomeMedicamento"/>
 
         <br />
 
@@ -37,7 +36,7 @@
         <select name="FornecedorId" id="FornecedorId">
             @foreach( var fornecedor in Model.FornecedoresDisponiveis)
             {
-                <option value="@fornecedor.Id">@fornecedor.Nome</option>
+                <option value="@fornecedor.Id" @(fornecedor.Id == Model.Id ? "selected" : "")>@fornecedor.Nome</option>
             }
         </select>
 
