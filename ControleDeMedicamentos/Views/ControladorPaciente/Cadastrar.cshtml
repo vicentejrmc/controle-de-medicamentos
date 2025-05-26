@@ -3,41 +3,22 @@
 
 @model CadastrarPacienteViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Cadastro de Pacientes - Controle de Medicamentos</title>
-</head>
-<body>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Paciente";
+}
 
-    <h1>Controle de Medicamentos</h1>
+<link rel="stylesheet" href="~/form.css" />
 
-    <button> <a href="/">Página Inicial</a></button>
-
-    <h3>Cadastrando de Pacientes</h3>
-
-    <form action="/pacientes/cadastrar" method="post">
-        <!--Formularios-->
-
-        <label>Nome do Paciente:</label>
-        <br />
-        <input type="text" name="nome" />
-        <br />
-
-        <label>Telefone do Paciente:</label>
-        <br />
-        <input type="text" name="telefone" />
-        <br />
-
-        <label>Catão Sus do Paciente:</label>
-        <br />
-        <input type="text" name="cartaoSus" />
-        <br />
-        <hr />
-
-        <button type="submit">Inserir</button>
-    </form>
-
-</body>
-</html>
+<form action="/pacientes/cadastrar" method="post">
+    <label for="nome">Nome do Paciente:</label>
+    <input type="text" name="nome" />
+    <label for="telefone">Telefone do Paciente:</label>
+    <input type="text" name="telefone" />
+    <label for="cartaoSus">Cartão SUS do Paciente:</label>
+    <input type="text" name="cartaoSus" />
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/pacientes/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>

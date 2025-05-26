@@ -3,28 +3,17 @@
 
 @model ExcluirPacienteViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Exclusão de Pacientes - Controle de Medicamentos</title>
-</head>
-<body>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Exclusão de Paciente";
+}
 
-    <h1>Controle de Medicamentos</h1>
+<link rel="stylesheet" href="~/form.css" />
 
-    <botton><a href="/pacientes/visualizar">Voltar</a></botton>
-
-    <hr />
-
-    <h3>Exclusao de Pacientes</h3>
-
-    <p>Você tem certeza que deseja Excluir o Registro @Model.Nome?</p>
-
-    <form action="/pacientes/excluir/@Model.Id" method="post">
-        <!--passando o valor de forma dinamica com #id#-->
-        <button type="submit">Excluir</button>
-    </form>
-
-</body>
-</html>
+<form action="/pacientes/excluir/@Model.Id" method="post">
+    <p>Tem certeza que deseja excluir o paciente <strong>@Model.Nome</strong>?</p>
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/pacientes/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Excluir</button>
+    </div>
+</form>

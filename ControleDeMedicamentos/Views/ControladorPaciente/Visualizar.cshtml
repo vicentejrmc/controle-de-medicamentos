@@ -3,29 +3,68 @@
 
 @model VisualizarPacientesViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Visualização de Pacientes - Controle de Medicamentos</title>
-</head>
-<body>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Pacientes";
+}
 
-    <h1>Controle de Medicamentos</h1>
+<style>
+    #botaoCadastrar {
+        padding: 10px 20px;
+        width: 200px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        text-align: center;
+    }
 
-    <button> <a href="/">Página Inciail</a></button>
-    <button> <a href="/pacientes/cadastrar">Cadastrar Paciente</a></button>
+    .secao-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-    <h3>Visualizando de Pacientes</h3>
+    .card {
+        height: 200px;
+    }
 
-    <ul>
-        @foreach(DetalhesPacienteViewModel p in Model.Registros)
-        {
-            <li>@p.ToString() <a href="/pacientes/editar/@p.Id">Editar</a> /
-                 <a href="/pacientes/excluir/@p.Id">Excluir</a> </li>
+    .botoes-interacao {
+        display: flex;
+        gap: 10px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+        .botoes-interacao > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90px;
+            height: 30px;
+            border: 1px solid var(--cor-principal);
+            border-radius: 9px;
+            background-color: var(--cor-principal);
+            color: var(--cor-neutra);
+            cursor: pointer;
+            font-size: 16px;
         }
-    </ul>
+</style>
 
+<a href="/pacientes/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Paciente</a>
 
-</body>
-</html>
+<div class="secao-cards">
+    @foreach (var p in Model.Registros)
+    {
+        <div class="card">
+            <h3>@p.Nome</h3>
+            <p><strong>Telefone:</strong> @p.Telefone</p>
+            <p><strong>Cartão SUS:</strong> @p.CartaoSus</p>
+            <div class="botoes-interacao">
+                <a type="button" href="/pacientes/editar/@p.Id">Editar</a>
+                <a type="button" href="/pacientes/excluir/@p.Id">Excluir</a>
+            </div>
+        </div>
+    }
+</div>
