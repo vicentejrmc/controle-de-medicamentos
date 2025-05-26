@@ -2,13 +2,24 @@
 
 namespace ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
-public class RepositorioRequisicaoEntrada : RepositorioBasEmArquivo<RequisicaoEntrada>, IRepositorioRequisicaoEntrada
+public class RepositorioRequisicaoEntrada : IRepositorioRequisicaoEntrada
 {
-    public RepositorioRequisicaoEntrada(ContextoDados contexto) : base(contexto)
+    private readonly ContextoDados contexto;
+    private List<RequisicaoEntrada> requisicoesEntrada;
+
+    public RepositorioRequisicaoEntrada(ContextoDados contexto)
     {
+        this.contexto = contexto;
+        this.requisicoesEntrada = contexto.RequisicaoEntradas;
     }
 
-    protected override List<RequisicaoEntrada> ObterRegistros()
+    public void CadastrarRequisicaoEntrada(RequisicaoEntrada requisicao)
+    {
+        requisicoesEntrada.Add(requisicao);
+        contexto.SalvarJson();
+    }
+
+    protected List<RequisicaoEntrada> ObterRegistros()
     {
         return contexto.RequisicaoEntradas;
     }

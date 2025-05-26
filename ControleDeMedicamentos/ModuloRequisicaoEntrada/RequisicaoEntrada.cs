@@ -6,11 +6,19 @@ namespace ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
 public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
 {
-    public RequisicaoEntrada() { }
     public DateTime Data { get; set; }
     public Medicamento Medicamento { get; set; }
     public Funcionario Funcionario { get; set; }
     public int Quantidade { get; set; }
+
+    public RequisicaoEntrada() { }
+
+    public RequisicaoEntrada(Funcionario funcionario, Medicamento medicamento, int quantidade)
+    {
+        this.Medicamento = medicamento;
+        this.Funcionario = funcionario;
+        this.Quantidade = quantidade;
+    }
 
     public RequisicaoEntrada(DateTime data, Medicamento medicamento, Funcionario funcionario, int quantidade)
     {

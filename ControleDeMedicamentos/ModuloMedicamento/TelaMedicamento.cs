@@ -65,7 +65,6 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
         Console.WriteLine("Selecione uma opção:");
         Console.WriteLine("[1] Exportar PDF");
         Console.WriteLine("[2] Exportar CSV");
-        Console.WriteLine("[3] Importar CSV");
 
         Console.WriteLine("[S] Sair");
 
@@ -83,10 +82,6 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
             else if (operacaoEscolhida == '2')
             {
                 contexto.ExportarParaCsv(repositorioMedicamento);
-            }
-            else if (operacaoEscolhida == '3')
-            {
-                contexto.ImportarCSV(repositorioMedicamento, repositorioFornecedor);
             }
             else if (operacaoEscolhida == 'S')
                 return;
@@ -133,7 +128,7 @@ public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
 
                 if (resposta == "S")
                 {
-                    med.AdicionarEstoque(novoMedicamento.Quantidade);
+                   //med.AdicionarAoEstoque(novoMedicamento.Quantidade);
                     repositorioMedicamento.EditarRegistro(med.Id, med);
                     Notificador.ExibirMensagem("Medicamento atualizado com sucesso!", ConsoleColor.Green);
                 }

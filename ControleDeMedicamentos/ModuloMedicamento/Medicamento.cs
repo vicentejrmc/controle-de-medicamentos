@@ -1,5 +1,7 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloFornecedor;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
+using ControleDeMedicamentos.ModuloRequisicaoSaida;
 
 namespace ControleDeMedicamentos.ModuloMedicamento
 {
@@ -9,6 +11,9 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         public string Descricao { get; set; }
         public Fornecedor Fornecedor { get; set; }
         public int Quantidade { get; set; }
+        public List<RequisicaoEntrada> RequisicoesEntrada { get; set; }
+        public List<RequisicaoSaida> RequisicoesSaida { get; set; }
+
         public bool EmFalta
         {
             get { return Quantidade < 20; }
@@ -16,8 +21,11 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
         public Medicamento()
         {
-            Fornecedor = new Fornecedor();
+            RequisicoesEntrada = new List<RequisicaoEntrada>();
+            RequisicoesSaida = new List<RequisicaoSaida>();
         }
+
+
         public Medicamento(string nomeMedicamento, string descricao, Fornecedor fornecedor, int quantidade) : this()
         {
             NomeMedicamento = nomeMedicamento;
@@ -59,13 +67,17 @@ namespace ControleDeMedicamentos.ModuloMedicamento
             return erros;
         }
 
-        public void AdicionarEstoque(int quantidade)
+        public void AdicionarAoEstoque(RequisicaoEntrada requisicaoEntrada)
         {
-                Quantidade += quantidade;
+            if (!RequisicoesEntrada.Contains(requisicaoEntrada))
+                RequisicoesEntrada.Add(requisicaoEntrada);
         }
-        public void RemoverEstoque(int quantidade)
+
+        public void RemoverDoEstoque(RequisicaoSaida requisicaoSaida)
         {
-                Quantidade -= quantidade;
+            if (!RequisicoesSaida.Contains(requisicaoSaida))
+                RequisicoesSaida.Add(requisicaoSaida);
         }
+
     }
 }

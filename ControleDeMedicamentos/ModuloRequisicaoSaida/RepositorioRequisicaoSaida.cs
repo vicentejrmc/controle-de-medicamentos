@@ -1,14 +1,26 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
 namespace ControleDeMedicamentos.ModuloRequisicaoSaida;
 
-public class RepositorioRequisicaoSaida : RepositorioBasEmArquivo<RequisicaoSaida>, IRepositorioRequisicaoSaida
+public class RepositorioRequisicaoSaida : IRepositorioRequisicaoSaida
 {
-    public RepositorioRequisicaoSaida(ContextoDados contexto) : base(contexto)
+    private readonly ContextoDados contexto;
+    private List<RequisicaoSaida> requisicoesSaida;
+
+    public RepositorioRequisicaoSaida(ContextoDados contexto)
     {
+        this.contexto = contexto;
+        this.requisicoesSaida = contexto.RequisicaoSaidas;
     }
 
-    protected override List<RequisicaoSaida> ObterRegistros()
+    public void CadastrarRequisicaoSaida(RequisicaoSaida requisicao)
+    {
+        requisicoesSaida.Add(requisicao);
+        contexto.SalvarJson();
+    }
+
+    protected List<RequisicaoSaida> ObterRegistros()
     {
         return contexto.RequisicaoSaidas;
     }

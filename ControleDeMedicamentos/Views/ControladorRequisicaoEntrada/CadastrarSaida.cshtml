@@ -1,18 +1,18 @@
 ﻿@using ControleDeMedicamentos.Models
 
 
-@model CadastrarRequisicaoEntradaViewModel
+@model CadastrarRequisicaoSaidaViewModel;
 
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Cadastro de Requisição de Entrada de Medicamento";
+    ViewBag.Titulo = "Cadastro de Requisição de Saída de Medicamento";
 
     string nomeMedicamento = ViewBag.NomeMedicamento;
 }
 
 <link rel="stylesheet" href="~/form.css" />
 
-<form action="/requisicoes-medicamentos/entrada/@Model.MedicamentoId" method="post">
+<form action="/requisicoes-medicamentos/saida/@Model.MedicamentoId" method="post">
     <label for="medicamentoId">Id do Medicamento:</label>
     <input type="text" name="nome" value="@Model.MedicamentoId" readonly disabled />
 
@@ -22,9 +22,9 @@
     <label for="quantidadeRequisitada">Quantidade Requisitada:</label>
     <input type="number" name="quantidadeRequisitada" value="@Model.QuantidadeRequisitada" />
 
-    <label for="funcionarioId">Funcionário Requisitante:</label>
-    <select name="funcionarioId" id="funcionarioId">
-        @foreach (var f in Model.FuncionariosDisponiveis)
+    <label for="pacienteId">Paciente Requisitante:</label>
+    <select name="pacienteId" id="pacienteId">
+        @foreach (var f in Model.PacientesDisponiveis)
         {
             <option value="@f.Id">@f.Nome</option>
         }

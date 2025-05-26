@@ -53,7 +53,7 @@ public class ContextoDados
     {
         string caminho = Path.Combine(pastaArmazenamentoJson, arquivoArmazenamentoJson);
 
-        if (!File.Exists(caminho)) return;  
+        if (!File.Exists(caminho)) return;
 
         string json = File.ReadAllText(caminho);
 
@@ -85,8 +85,8 @@ public class ContextoDados
 
         string json = JsonSerializer.Serialize(this, jsonOptions);
 
-        if (!Directory.Exists(pastaArmazenamentoJson)) 
-            Directory.CreateDirectory(pastaArmazenamentoJson); 
+        if (!Directory.Exists(pastaArmazenamentoJson))
+            Directory.CreateDirectory(pastaArmazenamentoJson);
         File.WriteAllText(caminho, json);
     }
 
@@ -109,7 +109,7 @@ public class ContextoDados
             exportar.WriteLine($"{id},{nome},{descricao},{qtdEstoque},{cnpj},{fornecedor},{telefoneFornecedor}");
         }
         Notificador.ExibirCorDeFonte("Arquivo exportado para: C://ArquivosJson/dados-controle-de-medicamentos.csv", ConsoleColor.Yellow);
-        Notificador.ExibirMensagem("Arquivo exportado com sucesso", ConsoleColor.Green);     
+        Notificador.ExibirMensagem("Arquivo exportado com sucesso", ConsoleColor.Green);
 
     }
     public void ExportarParaPDF()
@@ -158,160 +158,5 @@ public class ContextoDados
         document.Close();
 
         Notificador.ExibirMensagem("Arquivo exportado com sucesso!", ConsoleColor.Green);
-    }
-    public void ImportarCSV(IRepositorio<Medicamento> repositorioMedicamentos, IRepositorio<Fornecedor> repositorioFornecedor)
-    {
-
-        Console.WriteLine("Digite o Caminho do seu aquivo CSV, Ex: (C:\\Users\\Public)");
-        string caminho = Console.ReadLine()!.Trim('"');
-        if (!File.Exists(caminho))
-        {
-            Notificador.ExibirMensagem("Arquivo não encontrado", ConsoleColor.Red);
-            return;
-        }
-
-
-        using (var leitor = new StreamReader(caminho, Encoding.UTF8))
-        {
-            string linha;
-            int contadorLinha = 0;
-
-            while((linha = leitor.ReadLine()) != null)
-            {
-                contadorLinha++;
-                if (contadorLinha == 1) continue;
-
-                var dados = ConverterLinhaCSV(linha);
-
-                string[] colunas = dados[0].Split(',');
-
-                if(colunas.Length != 7)
-                {
-                    Notificador.ExibirMensagem("O arquivo deve ter 7 campos, sendo: \n Id, Nome, Descrição, Quantidade, CNPJ, Nome(fornecedor), Telefone(Fornecedor)", ConsoleColor.Red);
-                    return;
-                }
-                if (!int.TryParse(colunas[0], out int id))
-                {
-                    Notificador.ExibirMensagem("Id(s) inválido(s), retornando", ConsoleColor.Red);
-                    return;
-                }
-                string nome = colunas[1].Trim();
-                string descricao = colunas[2].Trim();
-                if (!int.TryParse(colunas[3], out int quantidade) || quantidade < 0)
-                {
-                    Notificador.ExibirMensagem("Quantidade em estoque inválida, retornando", ConsoleColor.Red);
-                    return;
-                }
-
-                string CNPJ = colunas[4].Trim();
-                string nomeFornecedor = colunas[5].Trim();
-                string telefone = colunas[6].Trim();
-
-                if ((nome.Length < 3 || nome.Length > 100) || (descricao.Length < 5 || descricao.Length > 255) || !Regex.IsMatch(CNPJ, @"^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$") || !Regex.IsMatch(telefone, @"^\(\d{2}\) \d{4,5}-\d{4}$"))
-                {
-                    Notificador.ExibirMensagem("Dados Inválidos, retornando", ConsoleColor.Red);
-                    return;
-                }
-
-                int idFornecedor = 0;
-                if(Fornecedores.Count == 0)
-                {
-                    Fornecedor fornecedor = new Fornecedor(nomeFornecedor, CNPJ, telefone);
-                    repositorioFornecedor.CadastrarRegistro(fornecedor);
-                    idFornecedor = fornecedor.Id;
-                    
-                } else
-                {
-                    bool temId = false;
-                    foreach (var i in Fornecedores)
-                    {
-                        if (CNPJ == i.CNPJ)
-                        {
-                            i.Nome = nomeFornecedor;
-                            i.Telefone = telefone;
-                            idFornecedor = i.Id;
-                            temId = true;
-                            repositorioFornecedor.EditarRegistro(id, i);
-                            break;
-                        }                                             
-                    }
-                    if(!temId)
-                    {
-                        Fornecedor fornecedor = new Fornecedor(nomeFornecedor, CNPJ, telefone);
-                        repositorioFornecedor.CadastrarRegistro(fornecedor);
-                        idFornecedor = fornecedor.Id;
-                    }
-                }
-                    
-                Fornecedor fornecedor1 = repositorioFornecedor.SelecionarRegistroPorId(idFornecedor);
-                
-                if(Medicamentos.Count == 0)
-                {
-                    Medicamento medicamento = new Medicamento(nome, descricao, fornecedor1, quantidade);
-                    repositorioMedicamentos.CadastrarRegistro(medicamento);
-                    medicamento.Id = id;
-                } else
-                {
-                    bool temId = false;
-                    foreach (var i in Medicamentos)
-                    {
-                        if (id == i.Id)
-                        {
-                            i.NomeMedicamento = nome;
-                            i.Descricao = descricao;
-                            i.Quantidade = quantidade;
-                            temId = true;
-                            repositorioMedicamentos.EditarRegistro(id, i);
-                            break;
-                        }
-                        else if (nome == i.NomeMedicamento)
-                        {
-                            Console.WriteLine();
-                            i.AdicionarEstoque(quantidade);
-                            Notificador.ExibirCorDeFonte($"Já possuímos o remédio {nome}, sua quantidade de {quantidade} foi adicionada ao nosso estoque de {i.Quantidade - quantidade} \n" +
-                                $"Agora o estoque é de {i.Quantidade}", ConsoleColor.DarkCyan);
-                            Console.WriteLine();
-                            repositorioMedicamentos.EditarRegistro(id, i);
-                            break;
-                        }
-                    }
-
-                    if(!temId)
-                    {
-                        Medicamento medicamento = new Medicamento(nome, descricao, fornecedor1, quantidade);
-                        repositorioMedicamentos.CadastrarRegistro(medicamento);
-                    }
-                }
-            }
-            Notificador.ExibirMensagem("Arquivo importado com sucesso", ConsoleColor.Green);
-        }
-    }
-
-    private static string[] ConverterLinhaCSV(string linha)
-    {
-        List<string> dados = new List<string>();
-        var dadoAtual = new StringBuilder();
-        bool entreAspas = false;
-
-        for (int i = 0; i < linha.Length; i++)
-        {
-            char c = linha[i];
-
-            if(c == '"' && (i == 0 || linha[i - 1] != '\\'))
-            {
-                entreAspas = true;
-
-            } else if (c == ',' && entreAspas == true)
-            {
-                dados.Add(dadoAtual.ToString().Trim());
-                dadoAtual.Clear();
-            } else
-            {
-                dadoAtual.Append(c);
-            }
-        }
-
-        dados.Add(dadoAtual.ToString().Trim());
-        return dados.ToArray();
     }
 }

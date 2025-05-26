@@ -2,6 +2,7 @@
 
 namespace ControleDeMedicamentos.ModuloRequisicaoSaida;
 
-public interface IRepositorioRequisicaoSaida : IRepositorio<RequisicaoSaida>
+public interface IRepositorioRequisicaoSaida
 {
+    public void CadastrarRequisicaoSaida(RequisicaoSaida requisicao);
 }

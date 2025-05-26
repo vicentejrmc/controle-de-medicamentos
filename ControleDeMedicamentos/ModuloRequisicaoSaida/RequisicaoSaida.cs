@@ -1,5 +1,6 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloMedicamento;
+using ControleDeMedicamentos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ModuloRequisicaoSaida;
 
