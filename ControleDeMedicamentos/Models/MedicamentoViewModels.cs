@@ -118,19 +118,23 @@ public class DetalhesMedicamentoViewModel
     public string Descricao { get; set; }
     public string NomeFornecedor { get; set; }
     public int Quantidade { get; set; }
+    public bool EmFalta { get; set; }
 
     public DetalhesMedicamentoViewModel(
         int id, 
         string nomeMedicamento, 
         string descricao, 
         string nomeFornecedor, 
-        int quantidade)
+        int quantidade,
+        bool emFalta
+        )
     {
         Id = id;
         NomeMedicamento = nomeMedicamento;
         Descricao = descricao;
         NomeFornecedor = nomeFornecedor;
         Quantidade = quantidade;
+        EmFalta = emFalta;
     }
 
     public override string ToString()

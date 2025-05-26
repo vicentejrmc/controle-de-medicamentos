@@ -33,7 +33,8 @@ public static class MedicamentoExtensions
             medicamento.NomeMedicamento,
             medicamento.Descricao,
             medicamento.Fornecedor.Nome,
-            medicamento.Quantidade
+            medicamento.Quantidade,
+            medicamento.EmFalta
         );
     }
 }

@@ -3,31 +3,103 @@
 
 @model VisualizarMedicamentosViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Visualização de Medicamentos - Controle de Medicamentos</title>
-</head>
-<body>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Medicamentos";
+}
 
-    <h1>Controle de Medicamentos</h1>
+<style>
+    #botaoCadastrar {
+        padding: 10px 20px;
+        width: 220px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        text-align: center;
+    }
 
-    <button><a href="/">Página Inciail</a></button>
-    <button><a href="/medicamentos/cadastrar">Cadastrar Medicamento</a></button>
+    .card {
+        height: 220px;
+    }
 
-    <h3>Visualizando Medicamentos</h3>
+    .cabecalho-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-    <ul>
-        @foreach (DetalhesMedicamentoViewModel m in Model.Registros)
-        {
-            <li>
-                @m.ToString() <a href="/medicamentos/editar/@m.Id">Editar</a> /
-                <a href="/medicamentos/excluir/@m.Id">Excluir</a>
-            </li>
+    .botoes-interacao {
+        display: flex;
+        gap: 5px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+        .botoes-interacao > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90px;
+            height: 30px;
+            border: 1px solid var(--cor-principal);
+            border-radius: 9px;
+            background-color: var(--cor-principal);
+            color: var(--cor-neutra);
+            cursor: pointer;
+            font-size: 16px;
         }
-    </ul>
 
+    .botoes-interacao-estoque {
+        display: flex;
+        gap: 5px;
+    }
 
-</body>
-</html>
+        .botoes-interacao-estoque > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--cor-neutra);
+            border: 1px solid var(--cor-secundaria);
+            border-radius: 6px;
+            padding: 3px 6px;
+            font-size: 15px;
+        }
+</style>
+
+<a href="/medicamentos/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Medicamento</a>
+
+<div class="secao-cards">
+    @foreach (var m in Model.Registros)
+    {
+        <div class="card">
+            <div class="cabecalho-card">
+                <h3>@m.NomeMedicamento</h3>
+
+                <div class="botoes-interacao-estoque">
+                    <a type="button" href="/requisicoes-medicamentos/entrada/@m.Id">+ Estoque</a>
+
+                    @if (m.Quantidade != 0)
+                    {
+                        <a type="button" href="/requisicoes-medicamentos/saida/@m.Id">- Estoque</a>
+                    }
+                </div>
+            </div>
+
+            <p><strong>Descrição:</strong> @m.Descricao</p>
+            <p><strong>Fornecedor:</strong> @m.NomeFornecedor</p>
+            <p><strong>Qtd. em Estoque:</strong> @m.Quantidade</p>
+
+            @if (m.EmFalta)
+            {
+                <strong style="color: var(--cor-secundaria);">Medicamento em falta!</strong>
+            }
+
+            <div class="botoes-interacao">
+                <a type="button" href="/medicamentos/editar/@m.Id">Editar</a>
+                <a type="button" href="/medicamentos/excluir/@m.Id">Excluir</a>
+            </div>
+        </div>
+    }
+</div>

@@ -9,6 +9,10 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         public string Descricao { get; set; }
         public Fornecedor Fornecedor { get; set; }
         public int Quantidade { get; set; }
+        public bool EmFalta
+        {
+            get { return Quantidade < 20; }
+        }
 
         public Medicamento()
         {
