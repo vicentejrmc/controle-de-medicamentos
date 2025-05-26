@@ -3,41 +3,25 @@
 
 @model EditarFuncionarioViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Edição de Funcionario - Controle de Medicamentos</title>
-</head>
-<body>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Edição de Funcionário";
+}
 
-    <h1>Controle de Medicamentos</h1>
+<link rel="stylesheet" href="~/form.css" />
 
+<form action="/funcionarios/editar/@Model.Id" method="post">
+    <label for="nome">Nome do Funcionário:</label>
+    <input type="text" name="nome" value="@Model.Nome" />
 
+    <label for="telefone">Telefone do Funcionário:</label>
+    <input type="text" name="telefone" value="@Model.Telefone" />
 
-    <h3>Edição de Funcionario</h3>
+    <label for="cpf">CPF do Funcionário:</label>
+    <input type="text" name="cpf" value="@Model.CPF" />
 
-    <form action="/funcionarios/editar/@Model.Id" method="post">
-        <!--passando o valor de forma dinamica com #id#-->
-
-        <label>Nome do Funcionario:</label>
-        <br />
-        <input type="text" name="nome" value="@Model.Nome" />
-        <br />
-
-        <label>CPF do Funcionario:</label>
-        <br />
-        <input type="text" name="cpf" value="@Model.CPF" />
-        <br />
-
-        <label>Telefone do Funcionario:</label>
-        <br />
-        <input type="text" name="telefone" value="@Model.Telefone" />
-        <br />
-        <hr />
-
-        <button type="submit">Gravar</button>  <button> <a href="/funcionarios/visualizar">Voltar</a></button>
-    </form>
-
-</body>
-</html>
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/funcionarios/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>

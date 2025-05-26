@@ -3,29 +3,64 @@
 
 @model VisualizarFuncionarioViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Visualização de Funcionários - Controle de Medicamentos</title>
-</head>
-<body>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Funcionários";
+}
 
-    <h1>Controle de Medicamentos</h1>
+<style>
+    #botaoCadastrar {
+        padding: 10px 20px;
+        width: 200px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        text-align: center;
+    }
 
-    <button> <a href="/">Página Incial</a></button>
-    <button> <a href="/funcionarios/cadastrar">Cadastrar Funcionário</a></button>
+    .card {
+        height: 200px;
+    }
 
-    <h3>Visualizando Funcionários</h3>
+    .botoes-interacao {
+        display: flex;
+        gap: 10px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
 
-    <ul>
-        @foreach(DetalhesFuncionarioViewModel f in Model.Registros)
-        {
-            <li>@f.ToString() <a href="/funcionarios/editar/@f.Id">Editar</a> /
-                 <a href="/funcionarios/excluir/@f.Id">Excluir</a> </li>
+        .botoes-interacao > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90px;
+            height: 30px;
+            border: 1px solid var(--cor-principal);
+            border-radius: 9px;
+            background-color: var(--cor-principal);
+            color: var(--cor-neutra);
+            cursor: pointer;
+            font-size: 16px;
         }
-    </ul>
+</style>
 
+<a href="/funcionarios/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Funcionário</a>
 
-</body>
-</html>
+<div class="secao-cards">
+    @foreach (var f in Model.Registros)
+    {
+        <div class="card">
+            <h3>@f.Nome</h3>
+
+            <p><strong>Telefone:</strong> @f.Telefone</p>
+            <p><strong>CPF:</strong> @f.CPF</p>
+
+            <div class="botoes-interacao">
+                <a type="button" href="/funcionarios/editar/@f.Id">Editar</a>
+                <a type="button" href="/funcionarios/excluir/@f.Id">Excluir</a>
+            </div>
+        </div>
+    }
+</div>
