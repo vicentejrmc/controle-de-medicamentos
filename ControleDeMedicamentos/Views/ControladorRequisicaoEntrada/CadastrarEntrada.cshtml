@@ -1,0 +1,35 @@
+﻿@using ControleDeMedicamentos.Models
+@model RequisicaoEntradaViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Requisição de Entrada de Medicamento";
+
+    string nomeMedicamento = ViewBag.NomeMedicamento;
+}
+
+<link rel="stylesheet" href="~/form.css" />
+
+<form action="/requisicoes-medicamentos/entrada/@Model.MedicamentoId" method="post">
+    <label for="medicamentoId">Id do Medicamento:</label>
+    <input type="text" name="nome" value="@Model.MedicamentoId" readonly disabled />
+
+    <label for="nome">Nome do Medicamento:</label>
+    <p style="margin-top: 5px; color: var(--cor-principal); font-size: 18px; font-weight: 600;">@nomeMedicamento</p>
+
+    <label for="quantidadeRequisitada">Quantidade Requisitada:</label>
+    <input type="number" name="quantidadeRequisitada" value="@Model.QuantidadeRequisitada" />
+
+    <label for="funcionarioId">Funcionário Requisitante:</label>
+    <select name="funcionarioId" id="funcionarioId">
+        @foreach (var f in Model.FuncionariosDisponiveis)
+        {
+            <option value="@f.Id">@f.Nome</option>
+        }
+    </select>
+
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/medicamentos/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>

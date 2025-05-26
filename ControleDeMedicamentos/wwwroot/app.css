@@ -11,7 +11,7 @@ body {
     margin: 0;
     background-color: var(--fundo-principal);
     color: var(--cor-neutra);
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Lucida Sans Unicode', sans-serif;
 }
 
 a {
@@ -30,6 +30,7 @@ nav {
 
     nav > h2 {
         margin: 0;
+        margin-right: 15px;
     }
 
     nav > ul {
@@ -42,10 +43,11 @@ nav {
     }
 
 .link-navegacao {
+    margin: auto;
     color: var(--cor-principal);
     text-decoration: none;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
 }
 
     .link-navegacao:hover {
@@ -76,8 +78,8 @@ main {
     border: 1px solid var(--cor-borda);
     border-radius: 15px;
     padding: 0 10px;
-    width: 350px;
-    height: 150px;
+    width: 300px;
+    height: 70px;
     background-color: var(--fundo-secundario);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
