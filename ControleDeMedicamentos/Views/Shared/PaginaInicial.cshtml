@@ -1,35 +1,24 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Página Inicial - Controle de Medicamentos</title>
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Página Inicial";
+}
 
-</head>
-<body>
-    <header>
-        <h2>Controle de Medicamentos</h2>
-    </header>
-
-    <main>
-        <div>
-            <a href="pacientes/visualizar"><h3>Gestão de Pacientes</h3></a>
+<div class="secao-cards">
+    <a href="/funcionarios/visualizar">
+        <div class="card">
+            <h3>Funcionários</h3>
         </div>
+    </a>
 
-        <div>
-            <a href="funcionarios/visualizar"><h3>Gestão de Funcionários</h3></a>
+    <a href="/fornecedores/visualizar">
+        <div class="card">
+            <h3>Fornecedores</h3>
         </div>
+    </a>
 
-        <div>
-            <a href="fornecedores/visualizar"><h3>Gestão de Fornecedores</h3></a>
+    <a href="/pacientes/visualizar">
+        <div class="card">
+            <h3>Pacientes</h3>
         </div>
-
-        <div>
-            <a href="medicamentos/visualizar"><h3>Gestão de Medicamentos</h3></a>
-        </div>
-    </main>
-
-
-   
-
-</body>
-</html>
+    </a>
+</div>

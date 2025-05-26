@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/app.css" />
+
+    <title>@ViewBag.Titulo - Controle de Medicamentos</title>
+</head>
+<body>
+    <nav>
+        <h2>Controle de Medicamentos</h2>
+
+        <ul>
+            <li><a class="link-navegacao" href="/">Página Inicial</a></li>
+            <li><a class="link-navegacao" href="/funcionarios/visualizar">Funcionários</a></li>
+            <li><a class="link-navegacao" href="/fornecedores/visualizar">Fornecedores</a></li>
+            <li><a class="link-navegacao" href="/pacientes/visualizar">Pacientes</a></li>
+            <li><a class="link-navegacao" href="/medicamentos/visualizar">Medicamentos</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h2>@ViewBag.Titulo</h2>
+    </header>
+    <main>
+        @* placeholder do conteúdo que será carregado *@
+        @RenderBody()
+    </main>
+</body>
+</html>

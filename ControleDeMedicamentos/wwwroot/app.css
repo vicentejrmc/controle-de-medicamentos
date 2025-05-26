@@ -1,0 +1,120 @@
+﻿:root {
+    --fundo-principal: #1e1e1e;
+    --fundo-secundario: #2c2c2e;
+    --cor-principal: #DB56EB;
+    --cor-secundaria: #b084d1;
+    --cor-borda: #3a3a3c;
+    --cor-neutra: #ffffff;
+}
+
+body {
+    margin: 0;
+    background-color: var(--fundo-principal);
+    color: var(--cor-neutra);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 200px;
+    background-color: var(--fundo-secundario);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+    nav > h2 {
+        margin: 0;
+    }
+
+    nav > ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        padding-left: 0;
+        list-style: none;
+    }
+
+.link-navegacao {
+    color: var(--cor-principal);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+    .link-navegacao:hover {
+        color: var(--cor-secundaria);
+    }
+
+header {
+    padding: 20px 200px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+main {
+    padding: 0 200px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.secao-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    border: 1px solid var(--cor-borda);
+    border-radius: 15px;
+    padding: 0 10px;
+    width: 350px;
+    height: 150px;
+    background-color: var(--fundo-secundario);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+    .card:hover {
+        transform: scale(1.02);
+        background-color: #3d3d42;
+    }
+
+    .card h3 {
+        color: var(--cor-principal);
+    }
+
+    .card p {
+        color: var(--cor-neutra);
+        margin: 0;
+    }
+
+.botoes-interacao {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+    margin-top: 100px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 20px;
+        justify-content: center;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    main {
+        padding: 20px;
+    }
+}

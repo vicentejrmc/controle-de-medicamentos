@@ -1,0 +1,89 @@
+﻿main {
+    padding: 20px 600px;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--fundo-secundario);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 30px;
+    width: 600px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--texto-neutro);
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    font-size: 18px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    background-color: var(--fundo-principal);
+    color: var(--texto-neutro);
+}
+
+    input[readonly] {
+        background-color: var(--fundo-secundario);
+    }
+
+select {
+    width: 100%;
+    min-width: 613px;
+    min-height: 45px;
+    padding: 1px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    font-size: 18px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    background-color: var(--fundo-principal);
+    color: var(--texto-neutro);
+}
+
+    select option {
+        background-color: var(--fundo-principal);
+    }
+
+#botaoConfirmar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 35px;
+    border: 1px solid var(--cor-principal);
+    border-radius: 9px;
+    background-color: var(--cor-principal);
+    color: var(--cor-neutra);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#botaoVoltar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 35px;
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 9px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-neutra);
+    cursor: pointer;
+    font-size: 16px;
+}
