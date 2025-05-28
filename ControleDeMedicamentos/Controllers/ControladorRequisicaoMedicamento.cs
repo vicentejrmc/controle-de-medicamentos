@@ -9,7 +9,6 @@ using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 using ControleDeMedicamentos.ModuloRequisicaoSaida;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("requisicoes-medicamentos")]
 public class ControladorRequisicaoMedicamento : Controller
