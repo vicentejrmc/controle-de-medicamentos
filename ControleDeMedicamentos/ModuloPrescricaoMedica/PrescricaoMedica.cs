@@ -8,7 +8,7 @@ namespace ControleDeMedicamentos.ModuloPrescricaoMedica;
 
 public class PrescricaoMedica
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     public string CrmMedico { get; set; }
     public DateTime DataEmissao { get; set; }
@@ -19,9 +19,9 @@ public class PrescricaoMedica
     [ExcludeFromCodeCoverage]
     public PrescricaoMedica() { }
 
-    public PrescricaoMedica(string crmMedico, Paciente paciente, List<MedicamentoPrescrito> medicamentoPrescritos)
+    public PrescricaoMedica(int id, string crmMedico, Paciente paciente, List<MedicamentoPrescrito> medicamentoPrescritos)
     {
-        Id = Guid.NewGuid();
+        Id = id;
         DataEmissao = DateTime.Now;
         CrmMedico = crmMedico;
 

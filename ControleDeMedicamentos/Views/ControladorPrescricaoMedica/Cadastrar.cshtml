@@ -1,0 +1,130 @@
+﻿@using ControleDeMedicamentos.ConsoleApp.Model
+
+@model CadastrarPrescricaoViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Prescrição Médica";
+}
+
+<style>
+    th, td {
+        border-bottom: 1px solid #ddd;
+        padding: 5px;
+        text-align: left;
+    }
+
+    #btnAdicionarMedicamento {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    #botaoLimpar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 35px;
+        border: 1px solid var(--cor-secundaria);
+        border-radius: 9px;
+        background-color: transparent;
+        color: var(--cor-neutra);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .campos-medicamento {
+        display: flex;
+        gap: 20px;
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>
+
+<link rel="stylesheet" href="~/form.css" />
+
+<form action="/prescricoes-medicas/cadastrar" method="post">
+    <h2 style="margin-top: 0px;">Informações Básicas</h2>
+
+    <label for="crmMedico">CRM do Médico:</label>
+    <input type="text" name="crmMedico" value=@Model.CrmMedico />
+
+    <label for="pacienteId">Paciente Requisitante:</label>
+    <select name="pacienteId" id="pacienteId">
+        @foreach (var p in Model.PacientesDisponiveis)
+        {
+            <option value="@p.Id" @(p.Id == Model.PacienteId ? "selected" : "")>@p.Nome</option>
+        }
+    </select>
+
+    <h3>Medicamentos</h3>
+
+    <select name="medicamentoId" id="medicamentosDisponiveis">
+        @foreach (var m in Model.MedicamentosDisponiveis)
+        {
+            <option value="@m.Id">@m.Nome</option>
+        }
+    </select>
+
+    <div class="campos-medicamento">
+        <div>
+            <label for="dosagemMedicamento">Dosagem:</label>
+            <input type="text" name="dosagemMedicamento" id="dosagemMedicamento" />
+        </div>
+        <div>
+            <label for="periodoMedicamento">Período de Uso:</label>
+            <input type="text" name="periodoMedicamento" id="periodoMedicamento" />
+        </div>
+        <div>
+            <label for="quantidadeMedicamento">Quantidade (caixas):</label>
+            <input type="number" name="quantidadeMedicamento" id="quantidadeMedicamento" />
+        </div>
+    </div>
+
+    <button name="acaoSubmit" value="adicionarMedicamento" id="btnAdicionarMedicamento">Adicionar Medicamento</button>
+
+    <h3>Medicamentos Selecionados</h3>
+
+    @if (!Model.MedicamentosPrescritos.Any())
+    {
+        <p class="fw-semibold">Ainda não há nenhum medicamento relacionado à prescrição...</p>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicamento</th>
+                    <th>Dosagem</th>
+                    <th>Período</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach (var medicamento in Model.MedicamentosPrescritos)
+                {
+                    <tr>
+                        <td>@medicamento.Medicamento</td>
+                        <td>@medicamento.Dosagem</td>
+                        <td>@medicamento.Periodo</td>
+                        <td>@medicamento.Quantidade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/prescricoes-medicas/visualizar">Voltar</a>
+        <button id="botaoLimpar" name="acaoSubmit" value="limpar">Limpar</button>
+        <button id="botaoConfirmar" name="acaoSubmit" value="confirmar">Confirmar</button>
+    </div>
+</form>

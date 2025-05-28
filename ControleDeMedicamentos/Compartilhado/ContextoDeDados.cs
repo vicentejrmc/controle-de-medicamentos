@@ -24,8 +24,8 @@ public class ContextoDados
     public List<Funcionario> Funcionarios { get; set; }
     public List<Medicamento> Medicamentos { get; set; }
     public List<RequisicaoEntrada> RequisicaoEntradas { get; set; }
-    public List<PrescricaoMedica> PrescricoesMedicas { get; set; }
     public List<RequisicaoSaida> RequisicaoSaidas { get; set; }
+    public List<PrescricaoMedica> PrescricoesMedicas { get; set; }
 
     private string pastaArmazenamentoJson = "C:\\ArquivosJson";
     private string arquivoArmazenamentoJson = "dados-controle-de-medicamentos.json";

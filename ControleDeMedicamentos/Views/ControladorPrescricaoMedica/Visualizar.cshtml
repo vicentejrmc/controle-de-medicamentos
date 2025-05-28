@@ -1,0 +1,62 @@
+﻿﻿@using ControleDeMedicamentos.ConsoleApp.Model
+
+@model VisualizarPrescricoesViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Prescrições";
+}
+
+<style>
+    #botaoCadastrar {
+        padding: 10px 20px;
+        width: 220px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        text-align: center;
+    }
+
+    .card {
+        height: 220px;
+    }
+
+    .botoes-interacao {
+        display: flex;
+        gap: 5px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .botoes-interacao > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 30px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        cursor: pointer;
+        font-size: 16px;
+    }
+</style>
+
+<a href="/prescricoes-medicas/cadastrar" type="button" id="botaoCadastrar">Cadastrar Nova Prescrição</a>
+
+<div class="secao-cards">
+    @foreach (var m in Model.Registros)
+    {
+        <div class="card">
+            <div class="cabecalho-card">
+                <h3>@m.DataEmissao</h3>
+            </div>
+
+            <p><strong>CRM do Médico:</strong> @m.CrmMedico</p>
+            <p><strong>Paciente:</strong> @m.Paciente</p>
+        </div>
+    }
+</div>
