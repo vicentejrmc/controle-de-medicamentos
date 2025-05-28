@@ -8,18 +8,20 @@
     }
 }
 
+
 form {
-    display: flex;
-    flex-direction: column;
+    flex-direction:column;
     background-color: var(--fundo-secundario);
     border: 1px solid var(--cor-borda);
     border-radius: 12px;
+    margin: auto;
     padding: 30px;
-    width: 600px;
+    max-width: 600px;
+    min-width: 300px;
 }
 
 label {
-    display: block;
+    display: flex;
     margin-bottom: 6px;
     font-weight: bold;
     font-size: 18px;

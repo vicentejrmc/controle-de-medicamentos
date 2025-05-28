@@ -1,20 +1,10 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title> Notificação - Controle de Medicamentos</title>
-</head>
-<body>
+﻿@using ControleDeMedicamentos.Models
 
-    <h1>Controle de Medicamentos</h1>
+@model NotificacaoViewModel;
 
-    <hr />
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Notificação";
+}
 
-    <botton><a href="/">Página Incial</a></botton>
-
-    <h3>Notificação</h3>
-
-    <p>@ViewBag.Mensagem</p>
-
-</body>
-</html>
+<p>@Model.Mensagem</p>

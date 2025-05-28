@@ -36,7 +36,7 @@ public class ControladorPrescricaoMedica : Controller
 
         var prescricaoArmazenada = TempData.Peek("Prescricao");
 
-        if (prescricaoArmazenada is null && prescricaoArmazenada is string jsonString)
+        if (prescricaoArmazenada is not null && prescricaoArmazenada is string jsonString)
         {
             cadastrarVM = JsonSerializer.Deserialize<CadastrarPrescricaoViewModel>(jsonString)!;
 
