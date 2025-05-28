@@ -1,42 +1,45 @@
 ﻿using ControleDeMedicamentos.Compartilhado;
 using ControleDeMedicamentos.ModuloMedicamento;
+using ControleDeMedicamentos.ModuloPaciente;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.ModuloPrescricaoMedica;
 
-public class PrescricaoMedica : EntidadeBase<PrescricaoMedica>
+public class PrescricaoMedica
 {
-    public DateTime Data { get; set; }
-    public List<Medicamento> MedicamentosDaPrescricao { get; set; }
-    public string CRMMedico { get; set; }
-    public PrescricaoMedica()
+    public Guid Id { get; set; }
+
+    public string CrmMedico { get; set; }
+    public DateTime DataEmissao { get; set; }
+    public Paciente Paciente { get; set; }
+
+    public List<MedicamentoPrescrito> MedicamentoPrescritos { get; set; }
+
+    [ExcludeFromCodeCoverage]
+    public PrescricaoMedica() { }
+
+    public PrescricaoMedica(string crmMedico, Paciente paciente, List<MedicamentoPrescrito> medicamentoPrescritos)
     {
-        MedicamentosDaPrescricao = new List<Medicamento>();
-    }
-    public PrescricaoMedica(DateTime? data, List<Medicamento> medicamentosDaPrescricao, string crmmMedico) : this()
-    {
-        Data = (DateTime)data!;
-        MedicamentosDaPrescricao = medicamentosDaPrescricao;
-        CRMMedico = crmmMedico;
-    }
-    public override void AtualizarRegistro(PrescricaoMedica resgitroEditado)
-    {
-        Data = resgitroEditado.Data;
-        MedicamentosDaPrescricao = resgitroEditado.MedicamentosDaPrescricao;
-        CRMMedico = resgitroEditado.CRMMedico;
+        Id = Guid.NewGuid();
+        DataEmissao = DateTime.Now;
+        CrmMedico = crmMedico;
+
+        Paciente = paciente;
+        MedicamentoPrescritos = medicamentoPrescritos;
     }
 
-    public override string Validar()
+    public string Validar()
     {
         string erros = "";
 
-        if (string.IsNullOrEmpty(CRMMedico))
+        if (string.IsNullOrEmpty(CrmMedico))
             erros += "Erro! O campo CRM do Medico é obrigatório.\n";
 
-        else if (CRMMedico.Length != 6)
+        else if (CrmMedico.Length != 6)
             erros += "Erro! O campo CRM do Medico deve ter exatamente 6 caracteres.\n";
 
-        if (MedicamentosDaPrescricao == null || MedicamentosDaPrescricao.Count == 0)
+        if (MedicamentoPrescritos == null || MedicamentoPrescritos.Count == 0)
             erros += "Erro! O campo Medicamentos da Prescrição é obrigatório.\n";
 
         return erros;

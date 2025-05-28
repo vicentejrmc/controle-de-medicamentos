@@ -2,14 +2,27 @@
 
 namespace ControleDeMedicamentos.ModuloPrescricaoMedica;
 
-public class RepositorioPrescricaoMedica : RepositorioBasEmArquivo<PrescricaoMedica>, IRepositorioPrescricaoMedica
+public class RepositorioPrescricaoMedica : IRepositorioPrescricaoMedica
 {
-    public RepositorioPrescricaoMedica(ContextoDados contexto) : base(contexto)
+    private ContextoDados contexto;
+    private List<PrescricaoMedica> registros = new List<PrescricaoMedica>();
+
+    public RepositorioPrescricaoMedica(ContextoDados contexto)
     {
+        this.contexto = contexto;
+        registros = contexto.PrescricoesMedicas;
     }
 
-    protected override List<PrescricaoMedica> ObterRegistros()
+    public void CadastrarRegistro(PrescricaoMedica novaPrescricao)
     {
-        return contexto.PrescricoesMedicas;
+        registros.Add(novaPrescricao);
+
+        contexto.SalvarJson();
     }
+
+    public List<PrescricaoMedica> SelecionarRegistros()
+    {
+        return registros;
+    }
+
 }

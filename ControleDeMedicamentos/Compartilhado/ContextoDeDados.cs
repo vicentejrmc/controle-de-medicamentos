@@ -13,9 +13,7 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using ControleDeMedicamentos.Util;
-using System.Text;
-using ControleDeMedicamentos.Util;
-using System.Text.RegularExpressions;
+
 
 namespace ControleDeMedicamentos.Compartilhado;
 
