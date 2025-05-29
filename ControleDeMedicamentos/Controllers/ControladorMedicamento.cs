@@ -41,9 +41,12 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioMedicamento.CadastrarRegistro(novoMedicamento);
 
-            ViewBag.Mensagem = $"O Medicamento {novoMedicamento.NomeMedicamento} foi cadastraro com sucesso!";
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+             "Medicamento Cadastrado!",
+             "O Medicamento foi Cadastrado com sucesso!"
+                 );
 
-            return View("Notificacao");
+            return View("Notificacao", notificacaoVM);
         }
 
         [HttpGet("editar/{id:int}")]
@@ -91,9 +94,12 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioMedicamento.EditarRegistro(id, medicamentoEditado);
 
-            ViewBag.Mensagem = $"O Medicamento {medicamentoEditado.NomeMedicamento}, foi editado com Sucesso!";
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+            "Medicamento Editado!",
+            "O Medicamento foi Editado com sucesso!"
+                );
 
-            return View("Notificacao");
+            return View("Notificacao", notificacaoVM);
         }
 
         [HttpGet("excluir/{id:int}")]
@@ -118,9 +124,12 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioMedicamento.ExcluirRegistro(id);
 
-            ViewBag.Mensagem = $"O Registro foi Excluido com sucesso!";
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+             "Medicamento Excluído!",
+             "O Medicamento foi excluído com sucesso!"
+                 );
 
-            return View("Notificacao");
+            return View("Notificacao", notificacaoVM);
         }
 
 

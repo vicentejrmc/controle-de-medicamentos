@@ -28,9 +28,12 @@ public class ControladorFuncionario : Controller
 
         repositorioFuncionario.CadastrarRegistro(novoFuncionario);
 
-        ViewBag.Mensagem = $"O Registro \"{cadastrarVM.Nome}\" foi cadastrado com sucesso!";
+       NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+        "Funcionario Cadastrado!",
+        "O Funcionário foi Cadastrado com sucesso!"
+            );
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("editar/{id:int}")]
@@ -61,9 +64,12 @@ public class ControladorFuncionario : Controller
 
         repositorioFuncionario.EditarRegistro(id, funcionarioEditado);
 
-        ViewBag.Mensagem = $"O Registro do funcionario {editarVM.Nome} foi realizado com sucesso!";
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+        "Funcionario Editado!",
+        "O Funcionário foi Editado com sucesso!"
+            );
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("excluir/{id:int}")]
@@ -90,9 +96,12 @@ public class ControladorFuncionario : Controller
 
         repositorioFuncionario.ExcluirRegistro(id);
 
-        ViewBag.Mensagem = "O Registro do Funcionario foi Excluido com sucesso!";
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+        "Funcionario Excluído!",
+        "O Funcionário foi Excluído com sucesso!"
+            );
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("visualizar")]

@@ -34,9 +34,12 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioPaciente.CadastrarRegistro(novoPaciente);
 
-            ViewBag.Mensagem = $"O Registro \"{cadastrarVM.Nome}\" foi cadastrado com sucesso!";
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+            "Paciente Cadastrado!",
+            "O Paciente foi Cadastrado com sucesso!"
+                );
 
-            return View("Notificacao");
+            return View("Notificacao", notificacaoVM);
         }
 
         [HttpGet("editar/{id:int}")]
@@ -70,9 +73,12 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
-            ViewBag.Mensagem =  $"O Registro \"{editarVM.Nome}\" foi Editado com sucesso!";
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+            "Paciente Editado!",
+            "O Paciente foi Editado com sucesso!"
+                );
 
-            return View("Notificacao");
+            return View("Notificacao", notificacaoVM);
         }
 
         [HttpGet("excluir/{id:int}")]  // Sempre que tiver um parametro de rota, ele pode ser usado como argumento do método.
@@ -102,9 +108,12 @@ namespace ControleDeMedicamentos.Controllers
 
             repositorioPaciente.ExcluirRegistro(id);
 
-            ViewBag.Mensagem = $"O registro foi Excluido com sucesso!";
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+            "Paciente Excluído!",
+            "O Paciente foi excluído com sucesso!"
+                );
 
-            return View("Notificacao");
+            return View("Notificacao", notificacaoVM);
         }
 
         [HttpGet("visualizar")]
