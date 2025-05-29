@@ -49,7 +49,7 @@ public class CadastrarPrescricaoViewModel
     {
         foreach (var m in medicamentos)
         {
-            var selecionarMedicamentoVM = new SelecionarMedicamentoViewModel(m.Id, m.NomeMedicamento);
+            var selecionarMedicamentoVM = new SelecionarMedicamentoViewModel(m.Id, m.Nome);
 
             MedicamentosDisponiveis.Add(selecionarMedicamentoVM);
         }

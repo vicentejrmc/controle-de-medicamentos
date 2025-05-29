@@ -62,7 +62,7 @@ namespace ControleDeMedicamentos.Controllers
 
             var editarVM = new EditarMedicamentoViewModel(
                 id,
-                medicamentoSelecionado.NomeMedicamento,
+                medicamentoSelecionado.Nome,
                 medicamentoSelecionado.Descricao,
                 medicamentoSelecionado.Fornecedor.Id,
                 fornecedores,
@@ -111,7 +111,7 @@ namespace ControleDeMedicamentos.Controllers
 
             var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(id);
 
-            var excluirVM = new ExcluirMedicamentoViewModel(id, medicamentoSelecionado.NomeMedicamento); 
+            var excluirVM = new ExcluirMedicamentoViewModel(id, medicamentoSelecionado.Nome); 
 
             return View("Excluir", excluirVM);
         }

@@ -7,7 +7,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 {
     public class Medicamento : EntidadeBase<Medicamento>
     {
-        public string NomeMedicamento { get; set; }
+        public string Nome { get; set; }
         public string Descricao { get; set; }
         public Fornecedor Fornecedor { get; set; }
         public int Quantidade { get; set; }
@@ -26,9 +26,9 @@ namespace ControleDeMedicamentos.ModuloMedicamento
         }
 
 
-        public Medicamento(string nomeMedicamento, string descricao, Fornecedor fornecedor, int quantidade) : this()
+        public Medicamento(string nome, string descricao, Fornecedor fornecedor, int quantidade) : this()
         {
-            NomeMedicamento = nomeMedicamento;
+            Nome = nome;
             Descricao = descricao;
             Quantidade = quantidade;
             Fornecedor = fornecedor;
@@ -36,7 +36,7 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
         public override void AtualizarRegistro(Medicamento resgitroEditado)
         {
-            NomeMedicamento = resgitroEditado.NomeMedicamento;
+            Nome = resgitroEditado.Nome;
             Descricao = resgitroEditado.Descricao;
         }
 
@@ -46,10 +46,10 @@ namespace ControleDeMedicamentos.ModuloMedicamento
 
             //Validação de fornecedor implementada na entrada de cadastro de medicamento
 
-            if (string.IsNullOrWhiteSpace(NomeMedicamento))
+            if (string.IsNullOrWhiteSpace(Nome))
                 erros += "Erro! O campo Nome do Medicamento é obrigatório\n";
 
-            else if (NomeMedicamento.Length < 3 || NomeMedicamento.Length > 100)
+            else if (Nome.Length < 3 || Nome.Length > 100)
                 erros += "Erro! O campo Nome do Medicamento deve ter entre 3 e 100 caracteres\n";
 
             if (string.IsNullOrWhiteSpace(Descricao))

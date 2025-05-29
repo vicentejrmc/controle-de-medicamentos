@@ -98,7 +98,7 @@ public class ContextoDados
         foreach (var med in Medicamentos)
         {
             string id = med.Id.ToString();
-            string nome = med.NomeMedicamento.ToString();
+            string nome = med.Nome.ToString();
             string descricao = med.Descricao;
             string qtdEstoque = med.Quantidade.ToString();
             string cnpj = med.Fornecedor.CNPJ.ToString();
@@ -138,7 +138,7 @@ public class ContextoDados
         {
             var cor = med.Quantidade < 20 ? ColorConstants.RED : ColorConstants.BLACK;
             tabela.AddCell(new Paragraph(med.Id.ToString()).SetFontColor(cor));
-            tabela.AddCell(new Paragraph(med.NomeMedicamento).SetFontColor(cor));
+            tabela.AddCell(new Paragraph(med.Nome).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.Descricao).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.Quantidade.ToString()).SetFontColor(cor));
             tabela.AddCell(new Paragraph(med.Fornecedor.CNPJ).SetFontColor(cor));

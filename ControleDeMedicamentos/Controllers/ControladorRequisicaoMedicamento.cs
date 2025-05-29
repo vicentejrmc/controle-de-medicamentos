@@ -38,7 +38,7 @@ public class ControladorRequisicaoMedicamento : Controller
 
         var cadastrarVM = new CadastrarRequisicaoEntradaViewModel(medicamentoId, funcionarios);
 
-        ViewBag.NomeMedicamento = medicamentoSelecionado.NomeMedicamento;
+        ViewBag.NomeMedicamento = medicamentoSelecionado.Nome;
 
         return View("CadastrarEntrada", cadastrarVM);
     }
@@ -73,7 +73,7 @@ public class ControladorRequisicaoMedicamento : Controller
 
         var cadastrarVM = new CadastrarRequisicaoSaidaViewModel(medicamentoId, pacientes);
 
-        ViewBag.NomeMedicamento = medicamentoSelecionado.NomeMedicamento;
+        ViewBag.NomeMedicamento = medicamentoSelecionado.Nome;
 
         return View(cadastrarVM);
     }

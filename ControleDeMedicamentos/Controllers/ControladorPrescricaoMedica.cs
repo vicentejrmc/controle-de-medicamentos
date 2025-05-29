@@ -77,7 +77,7 @@ public class ControladorPrescricaoMedica : Controller
 
             var detalhesMedicamentoPrescritoVM = new DetalhesMedicamentoPrescritoViewModel(
                 cadastrarVM.MedicamentoId,
-                medicamentoSelecionado.NomeMedicamento,
+                medicamentoSelecionado.Nome,
                 cadastrarVM.DosagemMedicamento,
                 cadastrarVM.PeriodoMedicamento,
                 cadastrarVM.QuantidadeMedicamento

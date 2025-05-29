@@ -19,7 +19,7 @@ public static class MedicamentoExtensions
         }
 
         return new Medicamento(
-            formularioVM.NomeMedicamento,
+            formularioVM.Nome,
             formularioVM.Descricao,
             fornecedorSelecionado,
             formularioVM.Quantidade
@@ -30,7 +30,7 @@ public static class MedicamentoExtensions
     {
         return new DetalhesMedicamentoViewModel(
             medicamento.Id,
-            medicamento.NomeMedicamento,
+            medicamento.Nome,
             medicamento.Descricao,
             medicamento.Fornecedor.Nome,
             medicamento.Quantidade,

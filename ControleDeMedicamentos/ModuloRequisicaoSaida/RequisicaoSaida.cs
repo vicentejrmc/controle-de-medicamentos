@@ -45,7 +45,7 @@ public class RequisicaoSaida : EntidadeBase<RequisicaoSaida>
         List<string> strings = new List<string>();
         foreach (var item in MedicamentosRequisitados)
         {
-            medicamentosstring.Add(item.NomeMedicamento);
+            medicamentosstring.Add(item.Nome);
         }
     }
 }

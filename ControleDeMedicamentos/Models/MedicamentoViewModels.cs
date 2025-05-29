@@ -6,7 +6,7 @@ namespace ControleDeMedicamentos.Models;
 
 public abstract class FormularioMedicamentoViewModel
 {
-    public string NomeMedicamento { get; set; }
+    public string Nome { get; set; }
     public string Descricao { get; set; }
     public int Quantidade { get; set; }
     public int FornecedorId { get; set; }
@@ -58,14 +58,14 @@ public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel
 
     public EditarMedicamentoViewModel(
         int id, 
-        string nomeMedicamento, 
+        string nome, 
         string descricao, 
         int fornecedorId,
         List<Fornecedor> fornecedores, 
         int quantidade)
     {
         Id = id;
-        NomeMedicamento = nomeMedicamento;
+        Nome = nome;
         Descricao = descricao;
         Quantidade = quantidade;
         FornecedorId = fornecedorId;
@@ -114,7 +114,7 @@ public class DetalhesMedicamentoViewModel
     private string nome;
 
     public int Id { get; set; }
-    public string NomeMedicamento { get; set; }
+    public string Nome { get; set; }
     public string Descricao { get; set; }
     public string NomeFornecedor { get; set; }
     public int Quantidade { get; set; }
@@ -122,7 +122,7 @@ public class DetalhesMedicamentoViewModel
 
     public DetalhesMedicamentoViewModel(
         int id, 
-        string nomeMedicamento, 
+        string nome, 
         string descricao, 
         string nomeFornecedor, 
         int quantidade,
@@ -130,7 +130,7 @@ public class DetalhesMedicamentoViewModel
         )
     {
         Id = id;
-        NomeMedicamento = nomeMedicamento;
+        Nome = nome;
         Descricao = descricao;
         NomeFornecedor = nomeFornecedor;
         Quantidade = quantidade;
@@ -139,6 +139,6 @@ public class DetalhesMedicamentoViewModel
 
     public override string ToString()
     {
-        return $"Id: {Id} Nome: {NomeMedicamento} Descrição: {Descricao} Fornecedor: {NomeFornecedor} Quantidade: {Quantidade}";
+        return $"Id: {Id} Nome: {Nome} Descrição: {Descricao} Fornecedor: {NomeFornecedor} Quantidade: {Quantidade}";
     }
 }
