@@ -1,6 +1,7 @@
-﻿using ControleDeMedicamentos.ModuloRequisicaoEntrada;
-using ControleDeMedicamentos.ModuloFuncionario;
+﻿using ControleDeMedicamentos.ModuloFuncionario;
 using ControleDeMedicamentos.ModuloPaciente;
+using ControleDeMedicamentos.ModuloPrescricaoMedica;
+using ControleDeMedicamentos.ModuloRequisicaoEntrada;
 
 namespace ControleDeMedicamentos.Models
 {
@@ -72,5 +73,58 @@ namespace ControleDeMedicamentos.Models
             Id = id;
             Nome = nome;
         }
+    }
+}
+
+public class SelecionarPrescricaoViewModel
+{
+    public Guid Id { get; set; }
+    public string NomePaciente { get; set; }
+    public DateTime DataEmissao { get; set; }
+    public List<SelecionarMedicamentoPrescritoViewModel> MedicamentoPrescritos { get; set; }
+
+    public SelecionarPrescricaoViewModel() { }
+
+    public SelecionarPrescricaoViewModel(
+        Guid id,
+        string nomePaciente,
+        DateTime dataEmissao,
+        List<MedicamentoPrescrito> medicamentoPrescritos
+    ) : this()
+    {
+        Id = id;
+        NomePaciente = nomePaciente;
+        DataEmissao = dataEmissao;
+
+        MedicamentoPrescritos = new List<SelecionarMedicamentoPrescritoViewModel>();
+
+        foreach (var m in medicamentoPrescritos)
+        {
+            var selecionarVM = new SelecionarMedicamentoPrescritoViewModel(m.Medicamento.Nome);
+
+            MedicamentoPrescritos.Add(selecionarVM);
+        }
+    }
+
+    public override string ToString()
+    {
+        var nomesMedicamentos = string.Join(", ", MedicamentoPrescritos);
+
+        return string.Join(" - ", $"Emissão: {DataEmissao.ToShortDateString()}", $"[{nomesMedicamentos}]");
+    }
+}
+
+public class SelecionarMedicamentoPrescritoViewModel
+{
+    public string Nome { get; set; }
+
+    public SelecionarMedicamentoPrescritoViewModel(string nome)
+    {
+        Nome = nome;
+    }
+
+    public override string ToString()
+    {
+        return Nome;
     }
 }

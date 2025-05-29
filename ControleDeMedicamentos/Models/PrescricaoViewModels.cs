@@ -120,12 +120,21 @@ public class DetalhesPrescricaoViewModel
     public string CrmMedico { get; set; }
     public string Paciente { get; set; }
     public DateTime DataEmissao { get; set; }
+    public List<SelecionarMedicamentoPrescritoViewModel> MedicamentoPrescritos { get; set; }
 
-    public DetalhesPrescricaoViewModel(int id, string crmMedico, string paciente, DateTime dataEmissao)
+    public DetalhesPrescricaoViewModel(int id, string crmMedico, string paciente, DateTime dataEmissao, List<MedicamentoPrescrito> medicamentoPrescritos)
     {
         Id = id;
         CrmMedico = crmMedico;
         Paciente = paciente;
         DataEmissao = dataEmissao;
+        MedicamentoPrescritos = new List<SelecionarMedicamentoPrescritoViewModel>();
+
+        foreach(var m in medicamentoPrescritos)
+        {
+            var selecionarVM = new SelecionarMedicamentoPrescritoViewModel(m.Medicamento.Nome);
+
+            MedicamentoPrescritos.Add(selecionarVM);
+        }
     }
 }
