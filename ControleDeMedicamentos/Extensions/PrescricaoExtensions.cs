@@ -3,7 +3,6 @@ using ControleDeMedicamentos.ModuloMedicamento;
 using ControleDeMedicamentos.ModuloPaciente;
 using ControleDeMedicamentos.ModuloPrescricaoMedica;
 
-
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 
 public static class PrescricaoExtensions

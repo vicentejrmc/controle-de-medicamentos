@@ -19,6 +19,10 @@
         text-align: center;
     }
 
+    .emFalta{
+        color: var(--cor-secundaria);
+    }
+
     .card {
         height: 220px;
     }
@@ -29,12 +33,20 @@
         align-items: center;
     }
 
+    .botoes-emfalta {
+        display: flex;
+        gap: 5px;
+        justify-content: end;
+        align-items: center;
+        margin: 15px;
+    }
+
     .botoes-interacao {
         display: flex;
         gap: 5px;
         justify-content: end;
         align-items: center;
-        margin-top: 30px;
+        margin: 30px;
     }
 
         .botoes-interacao > a {
@@ -93,13 +105,21 @@
 
             @if (m.EmFalta)
             {
-                <strong style="color: var(--cor-alerta);">Medicamento em falta!</strong>
-            }
+                <strong class="emFalta">Medicamento em falta!</strong>
 
-            <div class="botoes-interacao">
+                 <div class="botoes-interacao">
+                <a style="margin-top: -23px;" type="button" href="/medicamentos/editar/@m.Id">Editar</a>
+                <a style="margin-top: -23px;" type="button" href="/medicamentos/excluir/@m.Id">Excluir</a>
+            </div>
+            }
+            else
+            {
+                <div class="botoes-interacao">
                 <a type="button" href="/medicamentos/editar/@m.Id">Editar</a>
                 <a type="button" href="/medicamentos/excluir/@m.Id">Excluir</a>
             </div>
+            }
+       
         </div>
     }
 </div>
