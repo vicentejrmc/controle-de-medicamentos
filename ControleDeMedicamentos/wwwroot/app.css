@@ -51,8 +51,12 @@ nav {
 }
 
     .link-navegacao:hover {
-        color: var(--cor-secundaria);
-        border: 1px solid var(--cor-neutra)
+        font-size: 15px;
+        color: var(--cor-neutra);
+        background-color: var(--cor-principal);
+        padding: 2px;
+        border: 1px solid var(--cor-neutra);
+        border-radius: 5px;
     }
 
 header {
